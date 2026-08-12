@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Türk Nizam Teşkilatı</title>
-  <!-- FontAwesome İkonları -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -17,13 +16,11 @@
       <span class="site-title">Türk Nizam Teşkilatı</span>
     </div>
 
-    <!-- Masaüstü Menü (Mobilde Kesinlikle Gizlidir) -->
     <nav class="desktop-nav">
-      <a href="#ana-sayfa">Ana Sayfa</a>
-      <a href="#tuzuk">Tüzük</a>
+      <a href="#ana-sayfa" class="nav-link">Ana Sayfa</a>
+      <a href="#tuzuk" class="nav-link">Tüzük</a>
     </nav>
 
-    <!-- Mobil Hamburger Butonu -->
     <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menü">
       <i class="fa-solid fa-bars"></i>
     </button>
@@ -32,64 +29,157 @@
   <!-- Karartma Arka Planı -->
   <div class="drawer-overlay" id="drawerOverlay"></div>
 
-  <!-- Mobil Yan Menü (Sağdan Açılan) -->
+  <!-- Mobil Yan Menü -->
   <nav class="drawer-menu" id="drawerMenu">
     <div class="drawer-header">
       <h3>Kurumsal Menü</h3>
       <button class="close-drawer" id="closeDrawerBtn">&times;</button>
     </div>
     <ul>
-      <li><a href="#tuzuk" class="drawer-link"><i class="fa-solid fa-book-bookmark"></i> Teşkilat Tüzüğü</a></li>
+      <li><a href="#tuzuk" class="drawer-link nav-link"><i class="fa-solid fa-book-bookmark"></i> Teşkilat Tüzüğü</a></li>
     </ul>
   </nav>
 
-  <!-- Ana İçerik -->
+  <!-- Ana İçerik Alanı (SPA Yapısı) -->
   <main class="main-content">
     
-    <!-- Karşılama Kartı -->
-    <section class="card hero-card" id="ana-sayfa">
-      <h2>Türk Nizam Teşkilatı</h2>
-      <p>Birliğimiz, vizyonumuz ve geleceğimiz için tek çatı altındayız.</p>
-    </section>
+    <!-- 1. ANA SAYFA SEKMESİ -->
+    <div id="ana-sayfa" class="page-section active">
+      <section class="card hero-card">
+        <h2>Türk Nizam Teşkilatı</h2>
+        <p>Birliğimiz, vizyonumuz ve geleceğimiz için tek çatı altındayız.</p>
+      </section>
 
-    <!-- Anlık Site Verileri -->
-    <section class="card stats-card">
-      <div class="stats-row">
-        <div class="stat-box">
-          <i class="fa-solid fa-users"></i>
-          <span id="onlineCount">1</span>
-          <small>Çevrimiçi</small>
+      <section class="card stats-card">
+        <div class="stats-row">
+          <div class="stat-box">
+            <i class="fa-solid fa-users"></i>
+            <span id="onlineCount">1</span>
+            <small>Çevrimiçi</small>
+          </div>
+          <div class="stat-box">
+            <i class="fa-solid fa-user-check"></i>
+            <span id="totalMembers">1</span>
+            <small>Kayıtlı Üye</small>
+          </div>
         </div>
-        <div class="stat-box">
-          <i class="fa-solid fa-user-check"></i>
-          <span id="totalMembers">0</span>
-          <small>Kayıtlı Üye</small>
+      </section>
+
+      <section class="card auth-card">
+        <span class="badge-guest">Misafir Üye</span>
+        <p>Sohbet ve Forum alanlarına katılmak için oturum açmanız gerekmektedir.</p>
+        <div class="auth-buttons">
+          <button class="btn btn-primary" id="openLoginBtn">Giriş Yap</button>
+          <button class="btn btn-secondary" id="openRegisterBtn">Kayıt Ol</button>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
-    <!-- Tüzük Kartı (Yönlendirme Hedefi) -->
-    <section class="card tuzuk-card" id="tuzuk">
-      <div class="card-title-group">
-        <i class="fa-solid fa-book-bookmark"></i>
-        <h3>Teşkilat Tüzüğü</h3>
-      </div>
-      <p class="tuzuk-text">Teşkilatımızın temel ilkeleri milli birlik, dürüstlük ve vatan sevgisi üzerine kuruludur. Tüm üyelerimiz hiyerarşik düzene ve etik kurallara uymakla yükümlüdür.</p>
-    </section>
+    <!-- 2. TÜZÜK SEKMESİ -->
+    <div id="tuzuk" class="page-section">
+      <section class="card tuzuk-card">
+        <div class="card-title-group">
+          <i class="fa-solid fa-book-bookmark"></i>
+          <h3>Teşkilat Tüzüğü</h3>
+        </div>
+        <p class="tuzuk-text">Teşkilatımızın temel ilkeleri milli birlik, dürüstlük ve vatan sevgisi üzerine kuruludur. Tüm üyelerimiz hiyerarşik düzene ve etik kurallara uymakla yükümlüdür.</p>
+      </section>
+    </div>
 
-    <!-- Oturum Açma Yönlendirme Kartı -->
-    <section class="card auth-card">
-      <span class="badge-guest">Misafir Üye</span>
-      <p>Sohbet ve Forum alanlarına katılmak için oturum açmanız gerekmektedir.</p>
-      <div class="auth-buttons">
-        <button class="btn btn-primary" id="openLoginBtn">Giriş Yap</button>
-        <button class="btn btn-secondary" id="openRegisterBtn">Kayıt Ol</button>
+    <!-- 3. FORUM SEKMESİ -->
+    <div id="forum" class="page-section">
+      <section class="card">
+        <h2><i class="fa-solid fa-comments"></i> Forum</h2>
+        <p>Tartışma başlıkları çok yakında burada listelenecektir.</p>
+      </section>
+    </div>
+
+    <!-- 4. SOHBET SEKMESİ -->
+    <div id="sohbet" class="page-section">
+      <section class="card">
+        <h2><i class="fa-solid fa-paper-plane"></i> Canlı Sohbet</h2>
+        <p>Genel sohbet odasına erişmek için giriş yapmalısınız.</p>
+      </section>
+    </div>
+
+    <!-- 5. PROFİL SEKMESİ (YENİ VE KAPSAMLI) -->
+    <div id="profil" class="page-section">
+      <div class="profile-card card">
+        
+        <!-- Afiş / Banner -->
+        <div class="profile-banner-wrapper">
+          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" id="bannerPreview" class="profile-banner" alt="Profil Afişi">
+          <label for="bannerInput" class="edit-banner-btn" title="Afişi Değiştir">
+            <i class="fa-solid fa-camera"></i>
+          </label>
+          <input type="file" id="bannerInput" accept="image/*" style="display: none;">
+        </div>
+
+        <!-- Profil Fotoğrafı ve Durum Göstergesi -->
+        <div class="profile-header-content">
+          <div class="avatar-container">
+            <img src="Screenshot_20260813-013040_Gallery.jpg" id="avatarPreview" class="profile-avatar" alt="Profil Fotoğrafı">
+            <span class="status-dot status-online" id="statusDot"></span>
+            <label for="avatarInput" class="edit-avatar-btn" title="Fotoğraf/GIF Değiştir">
+              <i class="fa-solid fa-pen"></i>
+            </label>
+            <input type="file" id="avatarInput" accept="image/*,image/gif" style="display: none;">
+          </div>
+
+          <div class="profile-identity">
+            <h3 class="user-display-name">Kullanıcı Adı <span class="user-rank-badge">Saha Üyesi</span></h3>
+            <p class="user-tag">@kullanici_adi</p>
+          </div>
+        </div>
+
+        <!-- Aktiflik / Durum Değiştirme -->
+        <div class="status-selector-wrapper">
+          <label><i class="fa-solid fa-circle-dot"></i> Durum Set Et:</label>
+          <select id="statusSelect" class="status-select">
+            <option value="online">🟢 Çevrimiçi</option>
+            <option value="dnd">🔴 Rahatsız Etmeyin</option>
+            <option value="idle">🟡 Dışarıda</option>
+            <option value="invisible">⚪ Gizli / Çevrimdışı</option>
+          </select>
+        </div>
+
+        <!-- Bilgi Listesi (Katılım, Son Aktiflik) -->
+        <div class="profile-meta-grid">
+          <div class="meta-item">
+            <i class="fa-solid fa-calendar-check"></i>
+            <div>
+              <small>Kayıt Tarihi</small>
+              <strong>13 Ağustos 2026</strong>
+            </div>
+          </div>
+          <div class="meta-item">
+            <i class="fa-solid fa-clock"></i>
+            <div>
+              <small>Son Aktiflik</small>
+              <strong id="lastActiveText">Şimdi aktif</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hakkımda / Açıklama Düzenleme -->
+        <div class="profile-bio-section">
+          <div class="bio-header">
+            <h4><i class="fa-solid fa-align-left"></i> Hakkımda</h4>
+            <button id="editBioBtn" class="btn-text-edit"><i class="fa-solid fa-pen-to-square"></i> Düzenle</button>
+          </div>
+          <p id="bioDisplay" class="bio-text">Vatanını en çok seven, görevini en iyi yapandır. Türk Nizam Teşkilatı üyesi.</p>
+          <div id="bioEditArea" class="bio-edit-area" style="display: none;">
+            <textarea id="bioInput" rows="3" maxlength="200" class="bio-textarea"></textarea>
+            <button id="saveBioBtn" class="btn btn-primary btn-sm">Kaydet</button>
+          </div>
+        </div>
+
       </div>
-    </section>
+    </div>
 
   </main>
 
-  <!-- Arka Planı Blurlayan Oturum Açma Modalı -->
+  <!-- Modal -->
   <div id="authModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="closeModalBtn">&times;</span>
@@ -108,24 +198,24 @@
     </div>
   </div>
 
-  <!-- Mobil Alt Navigasyon (Nokta Efektli) -->
+  <!-- Mobil Alt Navigasyon -->
   <nav class="bottom-nav">
-    <a href="#ana-sayfa" class="nav-item active">
+    <a href="#ana-sayfa" class="nav-item nav-link active">
       <i class="fa-solid fa-house"></i>
       <span>Ana Sayfa</span>
       <div class="active-dot"></div>
     </a>
-    <a href="#forum" class="nav-item">
+    <a href="#forum" class="nav-item nav-link">
       <i class="fa-solid fa-comments"></i>
       <span>Forum</span>
       <div class="active-dot"></div>
     </a>
-    <a href="#sohbet" class="nav-item">
+    <a href="#sohbet" class="nav-item nav-link">
       <i class="fa-solid fa-paper-plane"></i>
       <span>Sohbet</span>
       <div class="active-dot"></div>
     </a>
-    <a href="#profil" class="nav-item">
+    <a href="#profil" class="nav-item nav-link">
       <i class="fa-solid fa-user"></i>
       <span>Profil</span>
       <div class="active-dot"></div>
@@ -134,5 +224,5 @@
 
   <script src="app.js"></script>
 </body>
-        </html>
-        
+  </html>
+  
