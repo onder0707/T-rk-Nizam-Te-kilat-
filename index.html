@@ -13,12 +13,12 @@
   <header class="header">
     <div class="logo-container">
       <img src="Screenshot_20260813-013040_Gallery.jpg" alt="Teşkilat Logosu" class="site-logo">
-      <span class="site-title">Türk Nizam Teşkilatı</span>
+      <span class="site-title" data-lang-tr="Türk Nizam Teşkilatı" data-lang-en="Turkish Order Organization">Türk Nizam Teşkilatı</span>
     </div>
 
     <nav class="desktop-nav">
-      <a href="#ana-sayfa" class="nav-link">Ana Sayfa</a>
-      <a href="#tuzuk" class="nav-link">Tüzük</a>
+      <a href="#ana-sayfa" class="nav-link" data-lang-tr="Ana Sayfa" data-lang-en="Home">Ana Sayfa</a>
+      <a href="#tuzuk" class="nav-link" data-lang-tr="Tüzük" data-lang-en="Statute">Tüzük</a>
     </nav>
 
     <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menü">
@@ -32,11 +32,11 @@
   <!-- Mobil Yan Menü -->
   <nav class="drawer-menu" id="drawerMenu">
     <div class="drawer-header">
-      <h3>Kurumsal Menü</h3>
+      <h3 data-lang-tr="Kurumsal Menü" data-lang-en="Corporate Menu">Kurumsal Menü</h3>
       <button class="close-drawer" id="closeDrawerBtn">&times;</button>
     </div>
     <ul>
-      <li><a href="#tuzuk" class="drawer-link nav-link"><i class="fa-solid fa-book-bookmark"></i> Teşkilat Tüzüğü</a></li>
+      <li><a href="#tuzuk" class="drawer-link nav-link"><i class="fa-solid fa-book-bookmark"></i> <span data-lang-tr="Teşkilat Tüzüğü" data-lang-en="Organization Statute">Teşkilat Tüzüğü</span></a></li>
     </ul>
   </nav>
 
@@ -46,8 +46,8 @@
     <!-- 1. ANA SAYFA SEKMESİ -->
     <div id="ana-sayfa" class="page-section active">
       <section class="card hero-card">
-        <h2>Türk Nizam Teşkilatı</h2>
-        <p>Birliğimiz, vizyonumuz ve geleceğimiz için tek çatı altındayız.</p>
+        <h2 data-lang-tr="Türk Nizam Teşkilatı" data-lang-en="Turkish Order Organization">Türk Nizam Teşkilatı</h2>
+        <p data-lang-tr="Birliğimiz, vizyonumuz ve geleceğimiz için tek çatı altındayız." data-lang-en="We are under one roof for our unity, vision and future.">Birliğimiz, vizyonumuz ve geleceğimiz için tek çatı altındayız.</p>
       </section>
 
       <section class="card stats-card">
@@ -55,22 +55,22 @@
           <div class="stat-box">
             <i class="fa-solid fa-users"></i>
             <span id="onlineCount">1</span>
-            <small>Çevrimiçi</small>
+            <small data-lang-tr="Çevrimiçi" data-lang-en="Online">Çevrimiçi</small>
           </div>
           <div class="stat-box">
             <i class="fa-solid fa-user-check"></i>
             <span id="totalMembers">1</span>
-            <small>Kayıtlı Üye</small>
+            <small data-lang-tr="Kayıtlı Üye" data-lang-en="Registered Members">Kayıtlı Üye</small>
           </div>
         </div>
       </section>
 
       <section class="card auth-card">
-        <span class="badge-guest">Misafir Üye</span>
-        <p>Sohbet ve Forum alanlarına katılmak için oturum açmanız gerekmektedir.</p>
+        <span class="badge-guest" data-lang-tr="Misafir Üye" data-lang-en="Guest Member">Misafir Üye</span>
+        <p data-lang-tr="Sohbet ve Forum alanlarına katılmak için oturum açmanız gerekmektedir." data-lang-en="You need to log in to participate in Chat and Forum areas.">Sohbet ve Forum alanlarına katılmak için oturum açmanız gerekmektedir.</p>
         <div class="auth-buttons">
-          <button class="btn btn-primary" id="openLoginBtn">Giriş Yap</button>
-          <button class="btn btn-secondary" id="openRegisterBtn">Kayıt Ol</button>
+          <button class="btn btn-primary" id="openLoginBtn" data-lang-tr="Giriş Yap" data-lang-en="Login">Giriş Yap</button>
+          <button class="btn btn-secondary" id="openRegisterBtn" data-lang-tr="Kayıt Ol" data-lang-en="Register">Kayıt Ol</button>
         </div>
       </section>
     </div>
@@ -80,9 +80,9 @@
       <section class="card tuzuk-card">
         <div class="card-title-group">
           <i class="fa-solid fa-book-bookmark"></i>
-          <h3>Teşkilat Tüzüğü</h3>
+          <h3 data-lang-tr="Teşkilat Tüzüğü" data-lang-en="Organization Statute">Teşkilat Tüzüğü</h3>
         </div>
-        <p class="tuzuk-text">Teşkilatımızın temel ilkeleri milli birlik, dürüstlük ve vatan sevgisi üzerine kuruludur. Tüm üyelerimiz hiyerarşik düzene ve etik kurallara uymakla yükümlüdür.</p>
+        <p class="tuzuk-text" data-lang-tr="Teşkilatımızın temel ilkeleri milli birlik, dürüstlük ve vatan sevgisi üzerine kuruludur. Tüm üyelerimiz hiyerarşik düzene ve etik kurallara uymakla yükümlüdür." data-lang-en="The fundamental principles of our organization are built on national unity, honesty, and patriotism. All members are obliged to comply with hierarchy and ethical rules.">Teşkilatımızın temel ilkeleri milli birlik, dürüstlük ve vatan sevgisi üzerine kuruludur. Tüm üyelerimiz hiyerarşik düzene ve etik kurallara uymakla yükümlüdür.</p>
       </section>
     </div>
 
@@ -90,87 +90,159 @@
     <div id="forum" class="page-section">
       <section class="card">
         <h2><i class="fa-solid fa-comments"></i> Forum</h2>
-        <p>Tartışma başlıkları çok yakında burada listelenecektir.</p>
+        <p data-lang-tr="Tartışma başlıkları çok yakında burada listelenecektir." data-lang-en="Discussion topics will be listed here very soon.">Tartışma başlıkları çok yakında burada listelenecektir.</p>
       </section>
     </div>
 
     <!-- 4. SOHBET SEKMESİ -->
     <div id="sohbet" class="page-section">
       <section class="card">
-        <h2><i class="fa-solid fa-paper-plane"></i> Canlı Sohbet</h2>
-        <p>Genel sohbet odasına erişmek için giriş yapmalısınız.</p>
+        <h2><i class="fa-solid fa-paper-plane"></i> <span data-lang-tr="Canlı Sohbet" data-lang-en="Live Chat">Canlı Sohbet</span></h2>
+        <p data-lang-tr="Genel sohbet odasına erişmek için giriş yapmalısınız." data-lang-en="You must log in to access the general chat room.">Genel sohbet odasına erişmek için giriş yapmalısınız.</p>
       </section>
     </div>
 
-    <!-- 5. PROFİL SEKMESİ (YENİ VE KAPSAMLI) -->
+    <!-- 5. PROFİL SEKMESİ -->
     <div id="profil" class="page-section">
       <div class="profile-card card">
         
-        <!-- Afiş / Banner -->
+        <!-- Afiş / Banner (Görsel veya Video) -->
         <div class="profile-banner-wrapper">
-          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" id="bannerPreview" class="profile-banner" alt="Profil Afişi">
-          <label for="bannerInput" class="edit-banner-btn" title="Afişi Değiştir">
+          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" id="bannerPreviewImg" class="profile-banner" alt="Profil Afişi">
+          <video id="bannerPreviewVideo" class="profile-banner" autoplay loop muted playsinline style="display: none;"></video>
+          
+          <label for="bannerInput" class="edit-banner-btn" title="Afiş/Video Değiştir">
             <i class="fa-solid fa-camera"></i>
           </label>
-          <input type="file" id="bannerInput" accept="image/*" style="display: none;">
+          <input type="file" id="bannerInput" accept="image/*,video/mp4,video/webm" style="display: none;">
         </div>
 
-        <!-- Profil Fotoğrafı ve Durum Göstergesi -->
+        <!-- Profil Fotoğrafı / Video -->
         <div class="profile-header-content">
           <div class="avatar-container">
-            <img src="Screenshot_20260813-013040_Gallery.jpg" id="avatarPreview" class="profile-avatar" alt="Profil Fotoğrafı">
-            <span class="status-dot status-online" id="statusDot"></span>
-            <label for="avatarInput" class="edit-avatar-btn" title="Fotoğraf/GIF Değiştir">
+            <img src="Screenshot_20260813-013040_Gallery.jpg" id="avatarPreviewImg" class="profile-avatar" alt="Profil Fotoğrafı">
+            <video id="avatarPreviewVideo" class="profile-avatar" autoplay loop muted playsinline style="display: none;"></video>
+            
+            <label for="avatarInput" class="edit-avatar-btn" title="Fotoğraf/GIF/Video Değiştir">
               <i class="fa-solid fa-pen"></i>
             </label>
-            <input type="file" id="avatarInput" accept="image/*,image/gif" style="display: none;">
+            <input type="file" id="avatarInput" accept="image/*,image/gif,video/mp4,video/webm" style="display: none;">
           </div>
 
           <div class="profile-identity">
-            <h3 class="user-display-name">Kullanıcı Adı <span class="user-rank-badge">Saha Üyesi</span></h3>
+            <h3 class="user-display-name">Kullanıcı Adı <span class="user-rank-badge" data-lang-tr="Saha Üyesi" data-lang-en="Field Member">Saha Üyesi</span></h3>
             <p class="user-tag">@kullanici_adi</p>
           </div>
         </div>
 
-        <!-- Aktiflik / Durum Değiştirme -->
-        <div class="status-selector-wrapper">
-          <label><i class="fa-solid fa-circle-dot"></i> Durum Set Et:</label>
-          <select id="statusSelect" class="status-select">
-            <option value="online">🟢 Çevrimiçi</option>
-            <option value="dnd">🔴 Rahatsız Etmeyin</option>
-            <option value="idle">🟡 Dışarıda</option>
-            <option value="invisible">⚪ Gizli / Çevrimdışı</option>
-          </select>
-        </div>
-
-        <!-- Bilgi Listesi (Katılım, Son Aktiflik) -->
+        <!-- Bilgi Listesi (Kayıt Tarihi, Son Aktiflik) -->
         <div class="profile-meta-grid">
           <div class="meta-item">
             <i class="fa-solid fa-calendar-check"></i>
             <div>
-              <small>Kayıt Tarihi</small>
+              <small data-lang-tr="Kayıt Tarihi" data-lang-en="Join Date">Kayıt Tarihi</small>
               <strong>13 Ağustos 2026</strong>
             </div>
           </div>
           <div class="meta-item">
             <i class="fa-solid fa-clock"></i>
             <div>
-              <small>Son Aktiflik</small>
-              <strong id="lastActiveText">Şimdi aktif</strong>
+              <small data-lang-tr="Son Aktiflik" data-lang-en="Last Active">Son Aktiflik</small>
+              <strong id="lastActiveText" data-lang-tr="Şimdi aktif" data-lang-en="Active now">Şimdi aktif</strong>
             </div>
           </div>
         </div>
 
-        <!-- Hakkımda / Açıklama Düzenleme -->
+        <!-- Hakkımda -->
         <div class="profile-bio-section">
           <div class="bio-header">
-            <h4><i class="fa-solid fa-align-left"></i> Hakkımda</h4>
-            <button id="editBioBtn" class="btn-text-edit"><i class="fa-solid fa-pen-to-square"></i> Düzenle</button>
+            <h4><i class="fa-solid fa-align-left"></i> <span data-lang-tr="Hakkımda" data-lang-en="About Me">Hakkımda</span></h4>
+            <button id="editBioBtn" class="btn-text-edit"><i class="fa-solid fa-pen-to-square"></i> <span data-lang-tr="Düzenle" data-lang-en="Edit">Düzenle</span></button>
           </div>
           <p id="bioDisplay" class="bio-text">Vatanını en çok seven, görevini en iyi yapandır. Türk Nizam Teşkilatı üyesi.</p>
           <div id="bioEditArea" class="bio-edit-area" style="display: none;">
             <textarea id="bioInput" rows="3" maxlength="200" class="bio-textarea"></textarea>
-            <button id="saveBioBtn" class="btn btn-primary btn-sm">Kaydet</button>
+            <button id="saveBioBtn" class="btn btn-primary btn-sm" data-lang-tr="Kaydet" data-lang-en="Save">Kaydet</button>
+          </div>
+        </div>
+
+        <!-- YENİ: AYARLAR VE TEKNİK BİLGİLER PANELİ -->
+        <div class="settings-accordion">
+          <button class="settings-toggle-btn" id="toggleSettingsBtn">
+            <span><i class="fa-solid fa-gears"></i> <span data-lang-tr="Ayarlar ve Teknik Bilgiler" data-lang-en="Settings & Technical Info">Ayarlar ve Teknik Bilgiler</span></span>
+            <i class="fa-solid fa-chevron-down toggle-icon"></i>
+          </button>
+          
+          <div class="settings-content" id="settingsContent" style="display: none;">
+            
+            <!-- Koyu Tema (Dark Mode) -->
+            <div class="setting-item">
+              <div class="setting-info">
+                <i class="fa-solid fa-moon"></i>
+                <div>
+                  <strong data-lang-tr="Koyu Tema (Dark Mode)" data-lang-en="Dark Mode">Koyu Tema (Dark Mode)</strong>
+                  <small data-lang-tr="Gece görünümüne geçiş yapın" data-lang-en="Switch to night mode view">Gece görünümüne geçiş yapın</small>
+                </div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider round"></span>
+              </label>
+            </div>
+
+            <!-- Yazı Boyutu Ayarlama -->
+            <div class="setting-item">
+              <div class="setting-info">
+                <i class="fa-solid fa-font"></i>
+                <div>
+                  <strong data-lang-tr="Yazı Boyutu" data-lang-en="Font Size">Yazı Boyutu</strong>
+                  <small data-lang-tr="Metin boyutlarını ölçekleyin" data-lang-en="Scale text sizes">Metin boyutlarını ölçekleyin</small>
+                </div>
+              </div>
+              <select id="fontSizeSelect" class="setting-select">
+                <option value="normal" selected data-lang-tr="Normal" data-lang-en="Normal">Normal</option>
+                <option value="small" data-lang-tr="Küçük" data-lang-en="Small">Küçük</option>
+                <option value="large" data-lang-tr="Büyük" data-lang-en="Large">Büyük</option>
+              </select>
+            </div>
+
+            <!-- Dil Desteği -->
+            <div class="setting-item">
+              <div class="setting-info">
+                <i class="fa-solid fa-language"></i>
+                <div>
+                  <strong data-lang-tr="Uygulama Dili" data-lang-en="App Language">Uygulama Dili</strong>
+                  <small data-lang-tr="Arayüz dilini değiştirin" data-lang-en="Change interface language">Arayüz dilini değiştirin</small>
+                </div>
+              </div>
+              <select id="languageSelect" class="setting-select">
+                <option value="tr" selected>🇹🇷 Türkçe</option>
+                <option value="en">🇬🇧 English</option>
+              </select>
+            </div>
+
+            <!-- Teknik Sistem Bilgileri -->
+            <div class="tech-info-box">
+              <h5 data-lang-tr="Teknik Bilgiler & Sistem" data-lang-en="Technical & System Info"><i class="fa-solid fa-server"></i> Teknik Bilgiler & Sistem</h5>
+              <div class="tech-row">
+                <span data-lang-tr="Sürüm:" data-lang-en="Version:">Sürüm:</span>
+                <code>v1.2.0 (SPA Architecture)</code>
+              </div>
+              <div class="tech-row">
+                <span data-lang-tr="Sunucu Yanıtı:" data-lang-en="Server Ping:">Sunucu Yanıtı:</span>
+                <span class="status-green"><i class="fa-solid fa-signal"></i> 14 ms (Aktif)</span>
+              </div>
+              <div class="tech-row">
+                <span data-lang-tr="Veri İşleme Engine:" data-lang-en="Engine:">Engine:</span>
+                <span>Vanilla JS V8</span>
+              </div>
+              
+              <div class="tech-actions">
+                <button class="btn btn-secondary btn-sm" id="clearCacheBtn"><i class="fa-solid fa-broom"></i> <span data-lang-tr="Önbellek Temizle" data-lang-en="Clear Cache">Önbellek Temizle</span></button>
+                <button class="btn btn-secondary btn-sm" id="reportIssueBtn"><i class="fa-solid fa-bug"></i> <span data-lang-tr="Hata Bildir" data-lang-en="Report Bug">Hata Bildir</span></button>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -183,7 +255,7 @@
   <div id="authModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="closeModalBtn">&times;</span>
-      <h3 id="modalTitle">Oturum Aç</h3>
+      <h3 id="modalTitle" data-lang-tr="Oturum Aç" data-lang-en="Login">Oturum Aç</h3>
       <form id="authForm" onsubmit="return false;">
         <div class="input-group">
           <i class="fa-solid fa-user"></i>
@@ -193,7 +265,7 @@
           <i class="fa-solid fa-lock"></i>
           <input type="password" placeholder="Şifre" required>
         </div>
-        <button type="submit" class="btn btn-primary btn-full">Giriş Yap</button>
+        <button type="submit" class="btn btn-primary btn-full" data-lang-tr="Giriş Yap" data-lang-en="Login">Giriş Yap</button>
       </form>
     </div>
   </div>
@@ -202,27 +274,27 @@
   <nav class="bottom-nav">
     <a href="#ana-sayfa" class="nav-item nav-link active">
       <i class="fa-solid fa-house"></i>
-      <span>Ana Sayfa</span>
+      <span data-lang-tr="Ana Sayfa" data-lang-en="Home">Ana Sayfa</span>
       <div class="active-dot"></div>
     </a>
     <a href="#forum" class="nav-item nav-link">
       <i class="fa-solid fa-comments"></i>
-      <span>Forum</span>
+      <span data-lang-tr="Forum" data-lang-en="Forum">Forum</span>
       <div class="active-dot"></div>
     </a>
     <a href="#sohbet" class="nav-item nav-link">
       <i class="fa-solid fa-paper-plane"></i>
-      <span>Sohbet</span>
+      <span data-lang-tr="Sohbet" data-lang-en="Chat">Sohbet</span>
       <div class="active-dot"></div>
     </a>
     <a href="#profil" class="nav-item nav-link">
       <i class="fa-solid fa-user"></i>
-      <span>Profil</span>
+      <span data-lang-tr="Profil" data-lang-en="Profile">Profil</span>
       <div class="active-dot"></div>
     </a>
   </nav>
 
   <script src="app.js"></script>
 </body>
-  </html>
-  
+          </html>
+          
