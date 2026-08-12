@@ -5,28 +5,155 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Türk Nizam Gençlik Hareketi</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .bg-official {
+            background-color: #0b0f17;
+            background-image: radial-gradient(circle at 50% 30%, rgba(185, 28, 28, 0.08) 0%, transparent 70%);
+        }
+    </style>
 </head>
-<body class="bg-gray-950 text-white font-sans">
+<body class="bg-official text-gray-100 min-h-screen flex items-center justify-center p-4 font-sans">
 
-    <!-- Üst Menü -->
-    <nav class="flex justify-between items-center p-4 bg-gray-900 border-b border-red-800">
-        <h1 class="text-xl font-bold text-red-600 tracking-wider">TÜRK NİZAM</h1>
-        <div class="space-x-4 text-sm font-semibold">
-            <a href="#" class="hover:text-red-500">Ana Sayfa</a>
-            <a href="#" class="hover:text-red-500">Tüzük</a>
-            <a href="#" class="hover:text-red-500">Teşkilat</a>
-            <a href="#" class="hover:text-red-500">Forum</a>
-            <a href="#" class="hover:text-red-500">Chat</a>
+    <div class="w-full max-w-xl space-y-6">
+
+        <!-- RESMİ ÜYE KİMLİK KARTI (ORTALANMIŞ) -->
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-5 shadow-2xl relative overflow-hidden">
+            <div class="border-b border-red-900/40 pb-3 mb-4 flex justify-between items-center">
+                <div>
+                    <h1 class="text-base font-black tracking-widest text-red-600 uppercase">TÜRK NİZAM GENÇLİK HAREKETİ</h1>
+                    <p class="text-[10px] text-gray-400 font-mono tracking-wider">RESMİ ÜYELİK KİMLİĞİ</p>
+                </div>
+                <div class="text-xs font-bold text-gray-500 font-mono">T.N.G.H.</div>
+            </div>
+
+            <!-- Kimlik Gövdesi (TC Kimlik Düzeni) -->
+            <div class="flex gap-4 items-center">
+                
+                <!-- Sol: Vesikalık Fotoğraf Yükleme Alanı -->
+                <div class="relative group w-24 h-28 bg-gray-950 border border-gray-700 rounded-lg flex flex-col items-center justify-center overflow-hidden shrink-0">
+                    <img id="cardPhoto" src="" class="w-full h-full object-cover hidden">
+                    <div id="photoPlaceholder" class="text-center p-2">
+                        <svg class="w-8 h-8 mx-auto text-gray-600 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        <span class="text-[9px] text-gray-500 block">Fotoğraf Ekle</span>
+                    </div>
+                    <input type="file" id="inputPhoto" accept="image/*" onchange="fotoYukle(event)" class="absolute inset-0 opacity-0 cursor-pointer">
+                </div>
+
+                <!-- Sağ: Üye Bilgileri -->
+                <div class="flex-grow space-y-2 text-xs font-mono">
+                    <div>
+                        <span class="text-[10px] text-gray-500 block uppercase">Ad Soyad / Kullanıcı Adı:</span>
+                        <span id="cardName" class="font-bold text-white text-sm">----</span>
+                    </div>
+                    <div>
+                        <span class="text-[10px] text-gray-500 block uppercase">E-Posta:</span>
+                        <span id="cardEmail" class="text-gray-300">----</span>
+                    </div>
+                    <div>
+                        <span class="text-[10px] text-gray-500 block uppercase">İlgi / Faaliyet Alanı:</span>
+                        <span id="cardArea" class="text-red-500 font-bold">----</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 pt-2 border-t border-gray-800/60 flex justify-between text-[9px] text-gray-500 font-mono">
+                <span>DURUM: MÜRACAAT</span>
+                <span>TÜRK NİZAM GENÇLİK HAREKETİ</span>
+            </div>
         </div>
-    </nav>
 
-    <!-- Hero Karşılama Ekranı -->
-    <section class="text-center py-20 px-4">
-        <h2 class="text-3xl font-extrabold text-white mb-4">VATAN, MİLLET VE CUMHURİYET İÇİN</h2>
-        <p class="text-gray-400 max-w-md mx-auto mb-6">Türk gençliğinin sarsılmaz iradesi ve Atatürk ilkeleri doğrultusunda geleceği inşa ediyoruz.</p>
-        <button class="bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-6 rounded-lg shadow-lg">Teşkilata Katıl</button>
-    </section>
+        <!-- GİRİŞ / KAYIT FORMU -->
+        <div class="bg-gray-900 border border-gray-800 p-6 rounded-xl shadow-xl">
+            
+            <!-- Sekmeler -->
+            <div class="flex border-b border-gray-800 mb-6">
+                <button id="tabGirisBtn" onclick="formDegistir('giris')" class="flex-1 py-2 text-xs font-bold text-red-600 border-b-2 border-red-600">Giriş Yap</button>
+                <button id="tabKayitBtn" onclick="formDegistir('kayit')" class="flex-1 py-2 text-xs font-bold text-gray-500 border-b-2 border-transparent">Kayıt Ol</button>
+            </div>
 
+            <!-- Giriş Formu -->
+            <form id="formGiris" class="space-y-4" onsubmit="event.preventDefault(); textGiris();">
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">E-Posta Adresi</label>
+                    <input type="email" required class="w-full bg-gray-950 border border-gray-800 rounded p-2.5 text-sm text-white focus:border-red-600 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Parola</label>
+                    <input type="password" required class="w-full bg-gray-950 border border-gray-800 rounded p-2.5 text-sm text-white focus:border-red-600 outline-none">
+                </div>
+                <button class="w-full bg-red-700 hover:bg-red-800 text-white font-bold py-2.5 rounded text-xs transition">Giriş Yap</button>
+            </form>
+
+            <!-- Kayıt Formu -->
+            <form id="formKayit" class="space-y-4 hidden" onsubmit="event.preventDefault(); textKayit();">
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Ad Soyad veya Kullanıcı Adı</label>
+                    <input type="text" id="inputName" oninput="kartGuncelle()" required class="w-full bg-gray-950 border border-gray-800 rounded p-2.5 text-sm text-white focus:border-red-600 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">E-Posta Adresi</label>
+                    <input type="email" id="inputEmail" oninput="kartGuncelle()" required class="w-full bg-gray-950 border border-gray-800 rounded p-2.5 text-sm text-white focus:border-red-600 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Parola</label>
+                    <input type="password" required class="w-full bg-gray-950 border border-gray-800 rounded p-2.5 text-sm text-white focus:border-red-600 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Uzmanlık / İlgi Alanınız</label>
+                    <input type="text" id="inputArea" oninput="kartGuncelle()" class="w-full bg-gray-950 border border-gray-800 rounded p-2.5 text-sm text-white focus:border-red-600 outline-none">
+                </div>
+                <button class="w-full bg-red-700 hover:bg-red-800 text-white font-bold py-2.5 rounded text-xs transition">Kayıt Başvurusunu Gönder</button>
+            </form>
+
+        </div>
+    </div>
+
+    <script>
+        function kartGuncelle() {
+            const name = document.getElementById('inputName').value;
+            const email = document.getElementById('inputEmail').value;
+            const area = document.getElementById('inputArea').value;
+
+            document.getElementById('cardName').innerText = name.trim() !== "" ? name : "----";
+            document.getElementById('cardEmail').innerText = email.trim() !== "" ? email : "----";
+            document.getElementById('cardArea').innerText = area.trim() !== "" ? area : "----";
+        }
+
+        function fotoYukle(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const img = document.getElementById('cardPhoto');
+                img.src = reader.result;
+                img.classList.remove('hidden');
+                document.getElementById('photoPlaceholder').classList.add('hidden');
+            }
+            if(event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        }
+
+        function formDegistir(tip) {
+            const girisForm = document.getElementById('formGiris');
+            const kayitForm = document.getElementById('formKayit');
+            const girisBtn = document.getElementById('tabGirisBtn');
+            const kayitBtn = document.getElementById('tabKayitBtn');
+
+            if (tip === 'giris') {
+                girisForm.classList.remove('hidden');
+                kayitForm.classList.add('hidden');
+                girisBtn.className = "flex-1 py-2 text-xs font-bold text-red-600 border-b-2 border-red-600";
+                kayitBtn.className = "flex-1 py-2 text-xs font-bold text-gray-500 border-b-2 border-transparent";
+            } else {
+                kayitForm.classList.remove('hidden');
+                girisForm.classList.add('hidden');
+                kayitBtn.className = "flex-1 py-2 text-xs font-bold text-red-600 border-b-2 border-red-600";
+                girisBtn.className = "flex-1 py-2 text-xs font-bold text-gray-500 border-b-2 border-transparent";
+            }
+        }
+
+        function textGiris() { alert('Giriş altyapısı aktifleştiriliyor.'); }
+        function textKayit() { alert('Kayıt başvurusu alındı.'); }
+    </script>
 </body>
-</html>
-  
+                </html>
+                
