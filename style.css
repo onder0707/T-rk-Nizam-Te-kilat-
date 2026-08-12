@@ -1,239 +1,81 @@
-/* --- GENEL SIFIRLAMA VE BAZ AYARLAR --- */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-}
+/* --- TEMEL AYARLAR --- */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
 
-body {
-  background-color: #f8f9fa; /* Göz yormayan kırık beyaz arka plan */
-  color: #212121;
-  padding-top: 70px;  /* Üst barın altında kalmaması için */
-  padding-bottom: 75px; /* Alt barın altında kalmaması için */
-}
+body { background-color: #f8f9fa; padding-top: 60px; padding-bottom: 65px; color: #333; }
 
-/* --- ÜST BAR (HEADER) --- */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  z-index: 1000;
+/* --- HEADER VE NAVİGASYON --- */
+.header { 
+    position: fixed; top: 0; width: 100%; height: 60px; background: #fff; 
+    display: flex; align-items: center; justify-content: space-between; 
+    padding: 0 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); z-index: 1000; 
 }
+.logo-container { display: flex; align-items: center; gap: 10px; }
+.site-logo { height: 35px; width: 35px; border-radius: 50%; object-fit: cover; }
+.site-title { font-weight: 700; color: #d32f2f; font-size: 1.1rem; }
 
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* PC Menü */
+.desktop-nav { display: none; gap: 25px; }
+.desktop-nav a { 
+    text-decoration: none; color: #555; font-weight: 600; font-size: 0.95rem; 
+    transition: color 0.3s; 
 }
+.desktop-nav a:hover { color: #d32f2f; }
 
-/* Yüklediğin logonun ekrana tam oturması için */
-.site-logo {
-  height: 38px;
-  width: 38px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 1px solid #e0e0e0;
+/* Hamburger */
+.hamburger-btn { background: none; border: none; font-size: 24px; color: #d32f2f; cursor: pointer; }
+
+/* --- MOBİL YAN MENÜ --- */
+.drawer-menu { 
+    position: fixed; top: 60px; right: -260px; width: 250px; height: calc(100vh - 60px); 
+    background: #fff; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+    padding: 25px; box-shadow: -2px 0 10px rgba(0,0,0,0.1); z-index: 999; 
 }
-
-.site-title {
-  font-weight: bold;
-  font-size: 1.05rem;
-  color: #d32f2f; /* Teşkilat kırmızısı */
+.drawer-menu.active { right: 0; }
+.drawer-menu ul { list-style: none; }
+.drawer-menu li { margin: 25px 0; }
+.drawer-menu a { 
+    text-decoration: none; color: #444; display: flex; align-items: center; gap: 12px; 
+    font-weight: 500; font-size: 1rem;
 }
+.drawer-menu i { color: #d32f2f; width: 20px; font-size: 1.1rem; }
 
-.hamburger-btn {
-  background: none;
-  border: none;
-  font-size: 26px;
-  color: #d32f2f;
-  cursor: pointer;
+/* --- İÇERİK KARTLARI --- */
+.main-content { max-width: 600px; margin: 20px auto; padding: 0 15px; }
+.card { 
+    background: #fff; padding: 25px; border-radius: 12px; margin-bottom: 20px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #f0f0f0; 
 }
+.hero-card h2 { color: #d32f2f; margin-bottom: 10px; font-size: 1.3rem; }
+.hero-card p { line-height: 1.6; color: #666; }
 
-/* --- ÜÇ ÇİZGİ YAN MENÜSÜ --- */
-.drawer-menu {
-  position: fixed;
-  top: 60px;
-  right: -260px; /* Varsayılan olarak kapalı durur */
-  width: 250px;
-  height: calc(100vh - 60px);
-  background-color: #ffffff;
-  box-shadow: -2px 0 8px rgba(0,0,0,0.1);
-  transition: right 0.3s ease-in-out;
-  z-index: 999;
-  padding: 20px;
+/* Butonlar */
+.btn { 
+    padding: 12px 25px; border-radius: 8px; border: none; font-weight: 600; 
+    cursor: pointer; transition: transform 0.2s, background 0.2s; 
 }
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: #d32f2f; color: #fff; }
+.btn-secondary { background: transparent; color: #d32f2f; border: 1.5px solid #d32f2f; }
 
-/* JavaScript ile açıldığında bu sınıf eklenecek */
-.drawer-menu.active {
-  right: 0;
+/* --- MOBİL ALT MENÜ (AKTİF EFEKTLİ) --- */
+.bottom-nav { 
+    position: fixed; bottom: 0; width: 100%; height: 65px; background: #fff; 
+    display: flex; justify-content: space-around; align-items: center; 
+    border-top: 1px solid #eee; z-index: 1000; 
 }
-
-.drawer-header h3 {
-  color: #d32f2f;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #f8f9fa;
-  padding-bottom: 8px;
-  font-size: 1.1rem;
+.nav-item { 
+    display: flex; flex-direction: column; align-items: center; 
+    text-decoration: none; color: #999; font-size: 0.75rem; gap: 4px; 
+    transition: color 0.3s;
 }
+.nav-item i { font-size: 20px; }
+.nav-item.active { color: #d32f2f; }
 
-.drawer-menu ul {
-  list-style: none;
-}
-
-.drawer-menu li {
-  margin-bottom: 14px;
-}
-
-.drawer-menu a {
-  text-decoration: none;
-  color: #333333;
-  font-weight: 500;
-  display: block;
-  font-size: 0.95rem;
-}
-
-/* --- ANA İÇERİK VE KARTLAR --- */
-.main-content {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 12px;
-}
-
-.card {
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding: 18px;
-  margin-bottom: 14px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.04);
-  border: 1px solid #eaeaea;
-}
-
-.hero-card h2 {
-  color: #d32f2f;
-  margin-bottom: 6px;
-  font-size: 1.2rem;
-}
-
-.hero-card p {
-  color: #555555;
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-
-/* Giriş/Kayıt Kutusu */
-.auth-card {
-  text-align: center;
-  background-color: #fff8f8;
-  border: 1px solid #ffe0e0;
-}
-
-.auth-card p {
-  margin-bottom: 14px;
-  font-size: 0.88rem;
-  color: #444444;
-}
-
-.auth-buttons {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-
-/* Kırmızı Buton Tasarımları */
-.btn {
-  padding: 10px 18px;
-  border-radius: 6px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  font-size: 0.88rem;
-  transition: background 0.2s;
-}
-
-.btn-primary {
-  background-color: #d32f2f;
-  color: #ffffff;
-}
-
-.btn-primary:active {
-  background-color: #b71c1c;
-}
-
-.btn-secondary {
-  background-color: transparent;
-  color: #d32f2f;
-  border: 1.5px solid #d32f2f;
-}
-
-/* Duyurular */
-.announcements-card h3 {
-  color: #d32f2f;
-  margin-bottom: 10px;
-  font-size: 1.05rem;
-}
-
-.announcement-item h4 {
-  font-size: 0.95rem;
-  color: #212121;
-}
-
-.announcement-item p {
-  font-size: 0.85rem;
-  color: #666666;
-  margin-top: 3px;
-}
-
-/* --- MOBİL ALT MENÜ (BOTTOM NAVIGATION) --- */
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  box-shadow: 0 -2px 6px rgba(0,0,0,0.08);
-  z-index: 1000;
-}
-
-.nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: #757575;
-  font-size: 0.72rem;
-}
-
-.nav-icon {
-  font-size: 18px;
-  margin-bottom: 2px;
-}
-
-.nav-item.active {
-  color: #d32f2f;
-  font-weight: bold;
-}
-
-/* --- PC (MASAÜSTÜ) EKRAN UYUMU --- */
+/* --- PC EKRAN (RESPONSIVE) --- */
 @media (min-width: 768px) {
-  body {
-    padding-bottom: 20px;
-  }
-
-  .bottom-nav {
-    display: none; /* Masaüstünde alt gezinme çubuğunu gizler */
-  }
+    .hamburger-btn { display: none; }
+    .desktop-nav { display: flex; }
+    .bottom-nav { display: none; }
+    body { padding-bottom: 0; }
   }
   
