@@ -10,19 +10,17 @@
 </head>
 <body>
 
-  <!-- Üst Bar (Header) -->
+  <!-- Üst Bar -->
   <header class="header">
     <div class="logo-container">
       <img src="Screenshot_20260813-013040_Gallery.jpg" alt="Teşkilat Logosu" class="site-logo">
       <span class="site-title">Türk Nizam Teşkilatı</span>
     </div>
 
-    <!-- Masaüstü Menü -->
+    <!-- Masaüstü Menü (Mobilde Kesinlikle Gizlidir) -->
     <nav class="desktop-nav">
-      <a href="#hakkimizda">Hakkımızda</a>
+      <a href="#ana-sayfa">Ana Sayfa</a>
       <a href="#tuzuk">Tüzük</a>
-      <a href="#temsilcilikler">Temsilcilikler</a>
-      <a href="#iletisim">İletişim</a>
     </nav>
 
     <!-- Mobil Hamburger Butonu -->
@@ -31,19 +29,17 @@
     </button>
   </header>
 
-  <!-- Mobil Yan Menü (Sağdan Kayan) -->
+  <!-- Karartma Arka Planı -->
   <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  <!-- Mobil Yan Menü (Sağdan Açılan) -->
   <nav class="drawer-menu" id="drawerMenu">
     <div class="drawer-header">
       <h3>Kurumsal Menü</h3>
       <button class="close-drawer" id="closeDrawerBtn">&times;</button>
     </div>
     <ul>
-      <li><a href="#hakkimizda"><i class="fa-solid fa-circle-info"></i> Hakkımızda & Vizyon</a></li>
-      <li><a href="#tuzuk"><i class="fa-solid fa-book-bookmark"></i> Teşkilat Tüzüğü</a></li>
-      <li><a href="#temsilcilikler"><i class="fa-solid fa-sitemap"></i> Bölge Temsilcilikleri</a></li>
-      <li><a href="#gizlilik"><i class="fa-solid fa-shield-halved"></i> Gizlilik & Kullanım</a></li>
-      <li><a href="#iletisim"><i class="fa-solid fa-envelope"></i> İletişim</a></li>
+      <li><a href="#tuzuk" class="drawer-link"><i class="fa-solid fa-book-bookmark"></i> Teşkilat Tüzüğü</a></li>
     </ul>
   </nav>
 
@@ -51,7 +47,7 @@
   <main class="main-content">
     
     <!-- Karşılama Kartı -->
-    <section class="card hero-card">
+    <section class="card hero-card" id="ana-sayfa">
       <h2>Türk Nizam Teşkilatı</h2>
       <p>Birliğimiz, vizyonumuz ve geleceğimiz için tek çatı altındayız.</p>
     </section>
@@ -72,8 +68,18 @@
       </div>
     </section>
 
-    <!-- Giriş / Kayıt Yönlendirme Kartı -->
+    <!-- Tüzük Kartı (Yönlendirme Hedefi) -->
+    <section class="card tuzuk-card" id="tuzuk">
+      <div class="card-title-group">
+        <i class="fa-solid fa-book-bookmark"></i>
+        <h3>Teşkilat Tüzüğü</h3>
+      </div>
+      <p class="tuzuk-text">Teşkilatımızın temel ilkeleri milli birlik, dürüstlük ve vatan sevgisi üzerine kuruludur. Tüm üyelerimiz hiyerarşik düzene ve etik kurallara uymakla yükümlüdür.</p>
+    </section>
+
+    <!-- Oturum Açma Yönlendirme Kartı -->
     <section class="card auth-card">
+      <span class="badge-guest">Misafir Üye</span>
       <p>Sohbet ve Forum alanlarına katılmak için oturum açmanız gerekmektedir.</p>
       <div class="auth-buttons">
         <button class="btn btn-primary" id="openLoginBtn">Giriş Yap</button>
@@ -97,32 +103,36 @@
           <i class="fa-solid fa-lock"></i>
           <input type="password" placeholder="Şifre" required>
         </div>
-        <button type="submit" class="btn btn-primary btn-full">Devam Et</button>
+        <button type="submit" class="btn btn-primary btn-full">Giriş Yap</button>
       </form>
     </div>
   </div>
 
-  <!-- Mobil Alt Navigasyon (Uygulama Menüsü) -->
+  <!-- Mobil Alt Navigasyon (Nokta Efektli) -->
   <nav class="bottom-nav">
     <a href="#ana-sayfa" class="nav-item active">
       <i class="fa-solid fa-house"></i>
       <span>Ana Sayfa</span>
+      <div class="active-dot"></div>
     </a>
     <a href="#forum" class="nav-item">
       <i class="fa-solid fa-comments"></i>
       <span>Forum</span>
+      <div class="active-dot"></div>
     </a>
     <a href="#sohbet" class="nav-item">
       <i class="fa-solid fa-paper-plane"></i>
       <span>Sohbet</span>
+      <div class="active-dot"></div>
     </a>
     <a href="#profil" class="nav-item">
       <i class="fa-solid fa-user"></i>
       <span>Profil</span>
+      <div class="active-dot"></div>
     </a>
   </nav>
 
   <script src="app.js"></script>
 </body>
         </html>
-            
+        
