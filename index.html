@@ -43,19 +43,57 @@
 
   <!-- Ana İçerik -->
   <main class="main-content">
+    
+    <!-- Karşılama Kartı -->
     <section class="card hero-card">
       <h2>Türk Nizam Teşkilatına Hoş Geldiniz</h2>
       <p>Birliğimiz, vizyonumuz ve geleceğimiz için tek çatı altındayız.</p>
     </section>
 
+    <!-- İstatistikler Kartı -->
+    <section class="card stats-card">
+      <h3>Teşkilat Verileri</h3>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <span>81 İl Temsilciliği</span>
+          <p>Tüm illerde aktif yapılanma</p>
+        </div>
+        <div class="stat-item">
+          <i class="fa-solid fa-user-check"></i>
+          <span id="stat-members">0</span>
+          <p>Aktif Üye Sayısı</p>
+        </div>
+        <div class="stat-item">
+          <i class="fa-solid fa-user-tie"></i>
+          <span id="stat-leaders">0</span>
+          <p>Atanan Başkan</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Giriş / Kayıt Yönlendirmesi -->
     <section class="card auth-card">
       <p>Sohbet ve Forum alanlarına katılmak için oturum açmanız gerekmektedir.</p>
       <div class="auth-buttons">
-        <button class="btn btn-primary">Giriş Yap</button>
-        <button class="btn btn-secondary">Kayıt Ol</button>
+        <button class="btn btn-primary" id="openLoginBtn">Giriş Yap</button>
+        <button class="btn btn-secondary" id="openRegisterBtn">Kayıt Ol</button>
       </div>
     </section>
   </main>
+
+  <!-- Giriş / Kayıt Pop-up (Modal) -->
+  <div id="authModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModalBtn">&times;</span>
+      <h3>Oturum Aç</h3>
+      <form>
+        <input type="text" placeholder="Kullanıcı Adı">
+        <input type="password" placeholder="Şifre">
+        <button class="btn btn-primary">Giriş Yap</button>
+      </form>
+    </div>
+  </div>
 
   <!-- Mobil Alt Menü -->
   <nav class="bottom-nav">
@@ -80,4 +118,4 @@
   <script src="app.js"></script>
 </body>
   </html>
-  
+                                           
