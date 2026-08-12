@@ -1,81 +1,74 @@
 /* --- TEMEL AYARLAR --- */
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+body { background-color: #f8f9fa; color: #212121; padding-top: 75px; padding-bottom: 80px; }
 
-body { background-color: #f8f9fa; padding-top: 60px; padding-bottom: 65px; color: #333; }
-
-/* --- HEADER VE NAVİGASYON --- */
+/* --- HEADER --- */
 .header { 
-    position: fixed; top: 0; width: 100%; height: 60px; background: #fff; 
-    display: flex; align-items: center; justify-content: space-between; 
-    padding: 0 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); z-index: 1000; 
+    position: fixed; top: 0; left: 0; width: 100%; height: 65px; background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: space-between; 
+    padding: 0 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); z-index: 1000; 
 }
 .logo-container { display: flex; align-items: center; gap: 10px; }
-.site-logo { height: 35px; width: 35px; border-radius: 50%; object-fit: cover; }
+.site-logo { height: 40px; width: 40px; border-radius: 50%; border: 1.5px solid #d32f2f; }
 .site-title { font-weight: 700; color: #d32f2f; font-size: 1.1rem; }
 
-/* PC Menü */
-.desktop-nav { display: none; gap: 25px; }
-.desktop-nav a { 
-    text-decoration: none; color: #555; font-weight: 600; font-size: 0.95rem; 
-    transition: color 0.3s; 
+/* --- ANIMASYON: Fade-in / Slide-up --- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-.desktop-nav a:hover { color: #d32f2f; }
 
-/* Hamburger */
-.hamburger-btn { background: none; border: none; font-size: 24px; color: #d32f2f; cursor: pointer; }
-
-/* --- MOBİL YAN MENÜ --- */
-.drawer-menu { 
-    position: fixed; top: 60px; right: -260px; width: 250px; height: calc(100vh - 60px); 
-    background: #fff; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-    padding: 25px; box-shadow: -2px 0 10px rgba(0,0,0,0.1); z-index: 999; 
-}
-.drawer-menu.active { right: 0; }
-.drawer-menu ul { list-style: none; }
-.drawer-menu li { margin: 25px 0; }
-.drawer-menu a { 
-    text-decoration: none; color: #444; display: flex; align-items: center; gap: 12px; 
-    font-weight: 500; font-size: 1rem;
-}
-.drawer-menu i { color: #d32f2f; width: 20px; font-size: 1.1rem; }
-
-/* --- İÇERİK KARTLARI --- */
-.main-content { max-width: 600px; margin: 20px auto; padding: 0 15px; }
 .card { 
-    background: #fff; padding: 25px; border-radius: 12px; margin-bottom: 20px; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #f0f0f0; 
+    background: #ffffff; border-radius: 14px; padding: 22px; margin-bottom: 16px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03); border: 1px solid #eaeaea;
+    animation: fadeInUp 0.6s ease-out forwards; /* Kartlar süzülerek gelir */
 }
-.hero-card h2 { color: #d32f2f; margin-bottom: 10px; font-size: 1.3rem; }
-.hero-card p { line-height: 1.6; color: #666; }
 
-/* Butonlar */
+/* --- İSTATİSTİKLER KARTI --- */
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
+.stat-item { text-align: center; background: #fff8f8; padding: 12px 5px; border-radius: 10px; }
+.stat-item i { color: #d32f2f; font-size: 1.2rem; margin-bottom: 5px; display: block; }
+.stat-item span { font-weight: 700; font-size: 1rem; color: #333; display: block; }
+.stat-item p { font-size: 0.65rem; color: #777; }
+
+/* --- BUTONLAR (Mikro Etkileşimler) --- */
 .btn { 
-    padding: 12px 25px; border-radius: 8px; border: none; font-weight: 600; 
-    cursor: pointer; transition: transform 0.2s, background 0.2s; 
+    padding: 12px 24px; border-radius: 8px; font-weight: 700; border: none; 
+    cursor: pointer; transition: all 0.2s ease; 
 }
-.btn:active { transform: scale(0.98); }
+.btn:active { transform: scale(0.95); } /* Basınca küçülür */
 .btn-primary { background: #d32f2f; color: #fff; }
+.btn-primary:hover { background: #b71c1c; }
 .btn-secondary { background: transparent; color: #d32f2f; border: 1.5px solid #d32f2f; }
 
-/* --- MOBİL ALT MENÜ (AKTİF EFEKTLİ) --- */
+/* --- MODAL (Giriş Penceresi) --- */
+.modal { 
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.4); backdrop-filter: blur(5px); z-index: 2000;
+    align-items: center; justify-content: center;
+}
+.modal-content { 
+    background: #fff; padding: 25px; border-radius: 16px; width: 90%; max-width: 350px;
+    text-align: center; position: relative;
+}
+.modal input { 
+    width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; 
+}
+.close-btn { position: absolute; top: 10px; right: 15px; font-size: 20px; cursor: pointer; }
+
+/* --- MOBİL ALT MENÜ --- */
 .bottom-nav { 
     position: fixed; bottom: 0; width: 100%; height: 65px; background: #fff; 
     display: flex; justify-content: space-around; align-items: center; 
     border-top: 1px solid #eee; z-index: 1000; 
 }
-.nav-item { 
-    display: flex; flex-direction: column; align-items: center; 
-    text-decoration: none; color: #999; font-size: 0.75rem; gap: 4px; 
-    transition: color 0.3s;
-}
-.nav-item i { font-size: 20px; }
-.nav-item.active { color: #d32f2f; }
+.nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #999; font-size: 0.75rem; gap: 4px; }
+.nav-item.active { color: #d32f2f; font-weight: 600; }
 
-/* --- PC EKRAN (RESPONSIVE) --- */
+/* --- RESPONSIVE --- */
 @media (min-width: 768px) {
-    .hamburger-btn { display: none; }
-    .desktop-nav { display: flex; }
-    .bottom-nav { display: none; }
-    body { padding-bottom: 0; }
-  }
-  
+    .hamburger-btn, .bottom-nav { display: none; }
+    .desktop-nav { display: flex; gap: 25px; }
+    .desktop-nav a { text-decoration: none; color: #444; font-weight: 600; }
+                                                           }
+                     
