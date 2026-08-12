@@ -4,44 +4,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Türk Nizam Teşkilatı</title>
+  <!-- İkon Kütüphanesi -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Üst Bar (Header) -->
+  <!-- Üst Bar -->
   <header class="header">
     <div class="logo-container">
       <img src="Screenshot_20260813-013040_Gallery.jpg" alt="Teşkilat Logosu" class="site-logo">
       <span class="site-title">Türk Nizam Teşkilatı</span>
     </div>
-    <!-- Sağ üstteki üç çizgi menü butonu -->
-    <button class="hamburger-btn" id="hamburgerBtn">☰</button>
+
+    <!-- Masaüstü Açık Menü -->
+    <nav class="desktop-nav">
+      <a href="#hakkimizda">Hakkımızda</a>
+      <a href="#tuzuk">Tüzük</a>
+      <a href="#temsilcilikler">Temsilcilikler</a>
+      <a href="#iletisim">İletişim</a>
+    </nav>
+
+    <!-- Mobil Hamburger Butonu -->
+    <button class="hamburger-btn" id="hamburgerBtn"><i class="fa-solid fa-bars"></i></button>
   </header>
 
-  <!-- Üç Çizgiye Tıklanınca Açılacak Yan Menü -->
+  <!-- Mobil Yan Menü -->
   <nav class="drawer-menu" id="drawerMenu">
-    <div class="drawer-header">
-      <h3>Kurumsal Menü</h3>
-    </div>
+    <div class="drawer-header"><h3>Kurumsal Menü</h3></div>
     <ul>
-      <li><a href="#hakkimizda">Hakkımızda & Vizyon</a></li>
-      <li><a href="#tuzuk">Teşkilat Tüzüğü</a></li>
-      <li><a href="#temsilcilikler">Bölge Temsilcilikleri</a></li>
-      <li><a href="#gizlilik">Gizlilik & Kullanım Şartları</a></li>
-      <li><a href="#iletisim">İletişim</a></li>
+      <li><a href="#hakkimizda"><i class="fa-solid fa-circle-info"></i> Hakkımızda & Vizyon</a></li>
+      <li><a href="#tuzuk"><i class="fa-solid fa-book-bookmark"></i> Teşkilat Tüzüğü</a></li>
+      <li><a href="#temsilcilikler"><i class="fa-solid fa-sitemap"></i> Bölge Temsilcilikleri</a></li>
+      <li><a href="#gizlilik"><i class="fa-solid fa-shield-halved"></i> Gizlilik & Kullanım</a></li>
+      <li><a href="#iletisim"><i class="fa-solid fa-envelope"></i> İletişim</a></li>
     </ul>
   </nav>
 
-  <!-- Ana İçerik Alanı -->
+  <!-- Ana İçerik -->
   <main class="main-content">
-
-    <!-- Karşılama / Slogan Kartı -->
     <section class="card hero-card">
       <h2>Türk Nizam Teşkilatına Hoş Geldiniz</h2>
       <p>Birliğimiz, vizyonumuz ve geleceğimiz için tek çatı altındayız.</p>
     </section>
 
-    <!-- Giriş / Kayıt Yönlendirme Kartı -->
     <section class="card auth-card">
       <p>Sohbet ve Forum alanlarına katılmak için oturum açmanız gerekmektedir.</p>
       <div class="auth-buttons">
@@ -49,38 +55,29 @@
         <button class="btn btn-secondary">Kayıt Ol</button>
       </div>
     </section>
-
-    <!-- Son Duyurular Paneli -->
-    <section class="card announcements-card">
-      <h3>Son Duyurular</h3>
-      <div class="announcement-item">
-        <h4>Teşkilat Web Sitemiz Yayında!</h4>
-        <p>Resmi web sitemiz hizmete girmiştir. Tüm üyelerimize hayırlı olsun.</p>
-      </div>
-    </section>
-
   </main>
 
-  <!-- Mobil Alt Gezinme Çubuğu (Bottom Navigation) -->
+  <!-- Mobil Alt Menü -->
   <nav class="bottom-nav">
     <a href="#ana-sayfa" class="nav-item active">
-      <span class="nav-icon">🏠</span>
-      <span class="nav-text">Ana Sayfa</span>
+      <i class="fa-solid fa-house"></i>
+      <span>Ana Sayfa</span>
     </a>
     <a href="#forum" class="nav-item">
-      <span class="nav-icon">📋</span>
-      <span class="nav-text">Forum</span>
+      <i class="fa-solid fa-comments"></i>
+      <span>Forum</span>
     </a>
     <a href="#sohbet" class="nav-item">
-      <span class="nav-icon">💬</span>
-      <span class="nav-text">Sohbet</span>
+      <i class="fa-solid fa-paper-plane"></i>
+      <span>Sohbet</span>
     </a>
     <a href="#profil" class="nav-item">
-      <span class="nav-icon">👤</span>
-      <span class="nav-text">Profil</span>
+      <i class="fa-solid fa-user"></i>
+      <span>Profil</span>
     </a>
   </nav>
 
   <script src="app.js"></script>
 </body>
-</html>
+  </html>
+  
