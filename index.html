@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giriş Paneli - T.N.H.</title>
     <style>
-        /* TEMEL TEMALANDIRMA (Koyu Tema) */
+        /* --- TEMEL TEMALANDIRMA (Orijinal Koyu Mavi Tema) --- */
         :root {
-            --bg-color: #101015; /* Çok koyu gri-siyah */
-            --card-bg: #1a1a20; /* Kart arka planı */
-            --text-color-primary: #e0e0e0; /* Açık gri metin */
-            --text-color-secondary: #909090; /* Soluk metin */
-            --accent-color: #d32f2f; /* Vurgu Kırmızısı */
-            --input-bg: #121217; /* Giriş kutusu arka planı */
-            --input-border: #2a2a30; /* Giriş kutusu kenarlığı */
-            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* 2. SS'deki renk kodları */
+            --bg-color: #1a1a2e; /* Orijinal koyu mavi arka plan */
+            --card-bg: #1e1e36; /* Kart arka planı */
+            --input-bg: #10101f; /* Giriş kutusu arka planı */
+            --text-color-primary: #e0e0e0; 
+            --text-color-secondary: #8a8a99; /* Daha modern, soluk mavi-gri */
+            --accent-color: #e53935; /* Orijinal kırmızı vurgu */
+            --border-color: #2a2a44; /* Modern, ince kenarlıklar */
+            --font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
@@ -27,120 +28,119 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            flex-direction: column;
+            overflow: hidden; /* Dış taşırma olmasın */
         }
 
-        /* ANA KONTEYNER */
-        .container {
-            width: 90%;
+        /* --- ANA KONTEYNER (Mobil Telefon Ekranı Simülasyonu) --- */
+        .mobile-screen {
+            width: 90vw;
+            height: calc(100vh - 10px); /* Üstte ve altta 5px boşluk */
+            margin-top: 5px;
             max-width: 400px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            justify-content: flex-start;
+            padding-top: 20px;
+            padding-bottom: 50px; /* Nav bar için yer */
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            position: relative; /* Status bar ve nav bar için */
         }
 
-        /* ORTAK KART STİLİ */
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            box-sizing: border-box;
-        }
-
-        /* --- KİMLİK KARTI STİLLERİ --- */
+        /* --- KİMLİK KARTI (Üst Kutu) --- */
         .id-card {
-            font-size: 11px;
+            width: 90%;
+            margin: 0 auto;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            padding: 15px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
             position: relative;
-            color: var(--text-color-primary);
+            box-sizing: border-box;
+            font-size: 11px;
         }
 
         .id-card-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
+            align-items: center;
+            margin-bottom: 12px;
         }
 
         .id-title-main {
             color: var(--accent-color);
-            font-weight: bold;
+            font-weight: 700;
             font-size: 14px;
             margin: 0;
+            text-transform: uppercase;
         }
 
         .id-title-sub {
             color: var(--text-color-primary);
             font-size: 10px;
             margin: 2px 0 0 0;
-            font-weight: lighter;
+            opacity: 0.8;
         }
 
         .id-abbreviation {
-            color: var(--text-color-primary);
+            color: var(--text-color-secondary);
             font-weight: lighter;
+            font-size: 11px;
         }
 
         .id-body {
             display: flex;
             gap: 15px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
-        /* Fotoğraf Alanı */
+        /* Modernleştirilmiş Fotoğraf Çerçevesi */
         .id-photo-container {
-            width: 70px;
-            height: 85px;
-            border: 1px solid var(--input-border);
+            width: 75px;
+            height: 90px;
+            border: 1px solid var(--border-color);
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             position: relative;
-            background-color: var(--input-bg);
-            border-radius: 4px;
+            background-color: black; /* Resim gelince tam kaplasın */
             overflow: hidden;
+            border-radius: 6px;
         }
 
+        /* Fotoğrafın tam ekran sığması için düzeltme */
         .id-photo-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* Resmi en-boy oranını bozmadan çerçeveyi tamamen dolduracak şekilde sığdırır */
             position: absolute;
             top: 0;
             left: 0;
         }
 
-        .id-photo-placeholder {
-            font-size: 24px;
-            color: var(--text-color-secondary);
-        }
-
-        .id-photo-text {
-            font-size: 8px;
-            color: var(--text-color-secondary);
-            margin-top: 5px;
-            display: block;
-        }
-
-        /* Veri Alanları */
         .id-details {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
         }
 
         .id-field-label {
             color: var(--text-color-secondary);
             text-transform: uppercase;
             font-size: 9px;
-            margin-bottom: 1px;
+            letter-spacing: 0.5px;
         }
 
         .id-field-value {
             color: var(--text-color-primary);
             font-size: 11px;
+            font-weight: 500;
             height: 1.2em;
             display: block;
         }
@@ -150,105 +150,176 @@
             justify-content: space-between;
             font-size: 9px;
             color: var(--text-color-secondary);
-            border-top: 1px solid var(--input-border);
+            border-top: 1px solid var(--border-color);
             padding-top: 8px;
+            opacity: 0.7;
         }
 
-        /* --- FORM KARTI STİLLERİ --- */
+        /* --- FORM KARTI (Alt Kutu) --- */
         .form-card {
-            border-top: 3px solid var(--accent-color);
+            width: 90%;
+            margin: 0 auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
+        /* Modern Sekmeler */
         .tabs {
             display: flex;
-            border-bottom: 1px solid var(--input-border);
-            margin-bottom: 20px;
+            height: 50px;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .tab {
-            padding: 10px 0;
-            cursor: pointer;
             flex: 1;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
             color: var(--text-color-secondary);
-            transition: color 0.3s;
+            transition: color 0.3s, background-color 0.3s;
+            font-weight: 600;
+            font-size: 14px;
         }
 
         .tab.active {
             color: var(--accent-color);
-            border-bottom: 2px solid var(--accent-color);
-            margin-bottom: -1px;
+            background-color: rgba(229, 57, 53, 0.05); /* Çok hafif kırmızı arka plan */
+        }
+
+        /* Form İçeriği */
+        .tab-content {
+            flex: 1;
+            overflow-y: auto; /* Gerektiğinde kaydırılabilir */
+            padding: 20px;
+            display: none; /* Varsayılan olarak gizli */
+        }
+
+        .tab-content.active {
+            display: block; /* Aktif sekme içeriği gösterilir */
         }
 
         .input-group {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
 
         .input-group label {
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             font-size: 12px;
+            font-weight: 500;
             color: var(--text-color-primary);
+            opacity: 0.9;
         }
 
         .input-group input {
             width: 100%;
-            padding: 10px;
-            background-color: var(--input-bg);
-            border: 1px solid var(--input-border);
-            border-radius: 4px;
+            padding: 12px;
+            background-color: var(--card-bg); /* Input içi kart renginde */
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             color: var(--text-color-primary);
             box-sizing: border-box;
-            transition: border-color 0.3s;
+            font-size: 13px;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
         .input-group input:focus {
             outline: none;
             border-color: var(--accent-color);
+            box-shadow: 0 0 5px rgba(229, 57, 53, 0.3);
         }
+
+        /* Örnek yazılar kaldırıldı (placeholder boş) */
 
         .submit-btn {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background-color: var(--accent-color);
             color: white;
             border: none;
-            border-radius: 4px;
-            font-weight: bold;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 10px;
         }
 
         .submit-btn:hover {
             background-color: #b71c1c;
         }
 
-        /* Mobil Navigasyon Çubuğu Taklidi */
+        .submit-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* --- MOBİL NAVİGASYON VE DURUM ÇUBUKLARI --- */
+        .status-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background-color: black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+            box-sizing: border-box;
+            color: #ddd;
+            font-size: 11px;
+            z-index: 10;
+        }
+
+        .status-bar-icons {
+            display: flex;
+            gap: 5px;
+        }
+
         .bottom-nav {
-            position: fixed;
+            position: absolute;
             bottom: 0;
+            left: 0;
             width: 100%;
             height: 50px;
             background-color: black;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 50px;
-            border-top: 1px solid var(--input-border);
+            gap: 60px;
+            border-top: 1px solid var(--border-color);
+            z-index: 10;
         }
 
         .nav-icon {
             color: var(--text-color-secondary);
-            font-size: 18px;
+            font-size: 20px;
+            cursor: pointer;
         }
-
     </style>
 </head>
 <body>
+        <!-- Gerçek Mobil Ekran Simülasyonu -->
+    <div class="mobile-screen">
+        <!-- Durum Çubuğu -->
+        <div class="status-bar">
+            <span>22:26</span>
+            <div class="status-bar-icons">
+                <span>4G+</span>
+                <span>%9</span>
+            </div>
+        </div>
 
-    <div class="container">
-        <!-- 1. KISIM: KİMLİK ÖNİZLEMESİ -->
-        <div class="card id-card">
+        <!-- ÜST KISIM: KİMLİK KARTI -->
+        <div class="id-card">
             <div class="id-card-header">
                 <div>
                     <h1 class="id-title-main">TÜRK NİZAM HAREKETİ</h1>
@@ -258,20 +329,18 @@
             </div>
 
             <div class="id-body">
-                <!-- Fotoğraf Yükleme ve Önizleme -->
+                <!-- Fotoğraf Çerçevesi -->
                 <div class="id-photo-container" onclick="document.getElementById('photoInput').click()">
-                    <span id="placeholder" class="id-photo-placeholder">👤</span>
+                    <!-- Varsayılan bir resim veya boş yer tutucu -->
                     <img id="idPhotoPreview" src="" alt="Vesika" style="display:none;">
-                    <br><span id="photoText" class="id-photo-text">Fotoğraf Ekle</span>
                 </div>
 
-                <!-- Dinamik Bilgiler -->
+                <!-- Dinamik Kimlik Bilgileri -->
                 <div class="id-details">
                     <div class="id-field">
                         <span class="id-field-label">Ad Soyad</span>
                         <span class="id-field-value" id="idNameValue"></span>
                     </div>
-                    <!-- E-POSTA KALDIRILDI -->
                     <div class="id-field">
                         <span class="id-field-label">Uzmanlık Alanı</span>
                         <span class="id-field-value" id="idExpertiseValue"></span>
@@ -285,51 +354,67 @@
             </div>
         </div>
 
-        <!-- 2. KISIM: KAYIT FORMU -->
-        <div class="card form-card">
+        <!-- ALT KISIM: FORM KARTI -->
+        <div class="form-card">
             <div class="tabs">
-                <div class="tab">Giriş Yap</div>
-                <div class="tab active">Kayıt Ol</div>
+                <div class="tab active" id="tabLogin" onclick="switchTab('login')">Giriş Yap</div>
+                <div class="tab" id="tabRegister" onclick="switchTab('register')">Kayıt Ol</div>
             </div>
 
-            <!-- Kayıt Formu -->
-            <form id="registerForm">
-                <div class="input-group">
-                    <label for="fullName">Ad Soyad</label>
-                    <!-- JavaScript tetikleyicisi 'oninput' ile gerçek zamanlı güncelleme -->
-                    <input type="text" id="fullName" name="fullName" placeholder="Örn: Ahmet Yılmaz" required oninput="updateIdCard('idNameValue', this.value)">
-                </div>
+            <!-- GİRİŞ FORMU İÇERİĞİ (Varsayılan aktif) -->
+            <div class="tab-content active" id="contentLogin">
+                <form id="loginForm">
+                    <div class="input-group">
+                        <label for="loginUser">Ad Soyad veya Kullanıcı Adı</label>
+                        <input type="text" id="loginUser" name="loginUser" required>
+                    </div>
 
-                <div class="input-group">
-                    <label for="email">E-Posta Adresi</label>
-                    <!-- Soruluyor ama Kimlikte gözükmüyor -->
-                    <input type="email" id="email" name="email" placeholder="Örn: adiniz@ornek.com" required>
-                </div>
+                    <div class="input-group">
+                        <label for="loginPassword">Parola</label>
+                        <input type="password" id="loginPassword" name="loginPassword" required>
+                    </div>
 
-                <div class="input-group">
-                    <label for="password">Parola</label>
-                    <input type="password" id="password" name="password" placeholder="Parolanız" required>
-                </div>
+                    <button type="submit" class="submit-btn">Giriş Yap</button>
+                </form>
+            </div>
 
-                <div class="input-group">
-                    <label for="expertise">Uzmanlık / İlgi Alanınız</label>
-                    <!-- JavaScript tetikleyicisi 'oninput' ile gerçek zamanlı güncelleme -->
-                    <input type="text" id="expertise" name="expertise" placeholder="Örn: Yazılım, Tarih" required oninput="updateIdCard('idExpertiseValue', this.value)">
-                </div>
+            <!-- KAYIT FORMU İÇERİĞİ -->
+            <div class="tab-content" id="contentRegister">
+                <form id="registerForm">
+                    <div class="input-group">
+                        <label for="regFullName">Ad Soyad</label>
+                        <input type="text" id="regFullName" name="regFullName" placeholder="" required oninput="updateIdCard('idNameValue', this.value)">
+                    </div>
 
-                <!-- Gizli dosya girişi -->
-                <input type="file" id="photoInput" accept="image/*" style="display:none;" onchange="previewPhoto(this)">
+                    <div class="input-group">
+                        <label for="regEmail">E-Posta Adresi</label>
+                        <input type="email" id="regEmail" name="regEmail" placeholder="" required>
+                    </div>
 
-                <button type="submit" class="submit-btn">Kayıt Başvurusunu Gönder</button>
-            </form>
+                    <div class="input-group">
+                        <label for="regPassword">Parola</label>
+                        <input type="password" id="regPassword" name="regPassword" placeholder="" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="regExpertise">Uzmanlık / İlgi Alanınız</label>
+                        <input type="text" id="regExpertise" name="regExpertise" placeholder="" required oninput="updateIdCard('idExpertiseValue', this.value)">
+                    </div>
+
+                    <!-- Gizli dosya girişi -->
+                    <input type="file" id="photoInput" accept="image/*" style="display:none;" onchange="previewPhoto(this)">
+
+                    <button type="submit" class="submit-btn">Kayıt Başvurusunu Gönder</button>
+                </form>
+            </div>
         </div>
-    </div>
 
-    <!-- Mobil Navigasyon Taklidi -->
-    <div class="bottom-nav">
-        <div class="nav-icon">|||</div>
-        <div class="nav-icon">○</div>
-        <div class="nav-icon"><</div>
+        <!-- Mobil Navigasyon Taklidi -->
+        <div class="bottom-nav">
+            <div class="nav-icon">|||</div>
+            <div class="nav-icon">○</div>
+            <div class="nav-icon"><</div>
+        </div>
     </div>
 
     <script>
@@ -338,12 +423,10 @@
             document.getElementById(elementId).innerText = value;
         }
 
-        // Fotoğraf yükleme ve önizleme fonksiyonu
+        // Fotoğraf yükleme ve tam ekran sığdırma fonksiyonu
         function previewPhoto(input) {
             const file = input.files[0];
             const preview = document.getElementById('idPhotoPreview');
-            const placeholder = document.getElementById('placeholder');
-            const photoText = document.getElementById('photoText');
 
             if (file) {
                 const reader = new FileReader();
@@ -351,20 +434,30 @@
                 reader.onload = function(e) {
                     preview.src = e.target.result;
                     preview.style.display = 'block'; // Resmi göster
-                    placeholder.style.display = 'none'; // Yer tutucuyu gizle
-                    photoText.style.display = 'none'; // Yazıyı gizle
                 }
 
                 reader.readAsDataURL(file); // Dosyayı oku
-            } else {
-                // Dosya seçilmezse eski haline getir
-                preview.src = '';
-                preview.style.display = 'none';
-                placeholder.style.display = 'block';
-                photoText.style.display = 'block';
+            }
+        }
+
+        // Giriş Yap/Kayıt Ol sekme değiştirme fonksiyonu
+        function switchTab(tabName) {
+            // Tüm içerikleri gizle
+            document.getElementById('contentLogin').classList.remove('active');
+            document.getElementById('contentRegister').classList.remove('active');
+            // Tüm sekmelerin aktifliğini kaldır
+            document.getElementById('tabLogin').classList.remove('active');
+            document.getElementById('tabRegister').classList.remove('active');
+
+            // Seçilen içeriği göster ve sekmeyi aktif yap
+            if (tabName === 'login') {
+                document.getElementById('contentLogin').classList.add('active');
+                document.getElementById('tabLogin').classList.add('active');
+            } else if (tabName === 'register') {
+                document.getElementById('contentRegister').classList.add('active');
+                document.getElementById('tabRegister').classList.add('active');
             }
         }
     </script>
 </body>
-    </html>
-    
+</html>
