@@ -3,178 +3,368 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Türk Nizam Hareketi</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Giriş Paneli - T.N.H.</title>
     <style>
-        /* Sade karanlık arka plan */
-        .bg-official { background-color: #070a0f; }
-        
-        /* Kart döndürme efektleri */
-        .perspective-1000 { perspective: 1000px; }
-        .preserve-3d { transform-style: preserve-3d; }
-        .backface-hidden { backface-visibility: hidden; }
-        .rotate-y-180 { transform: rotateY(180deg); }
+        /* TEMEL TEMALANDIRMA (Koyu Tema) */
+        :root {
+            --bg-color: #101015; /* Çok koyu gri-siyah */
+            --card-bg: #1a1a20; /* Kart arka planı */
+            --text-color-primary: #e0e0e0; /* Açık gri metin */
+            --text-color-secondary: #909090; /* Soluk metin */
+            --accent-color: #d32f2f; /* Vurgu Kırmızısı */
+            --input-bg: #121217; /* Giriş kutusu arka planı */
+            --input-border: #2a2a30; /* Giriş kutusu kenarlığı */
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color-primary);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        /* ANA KONTEYNER */
+        .container {
+            width: 90%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* ORTAK KART STİLİ */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            box-sizing: border-box;
+        }
+
+        /* --- KİMLİK KARTI STİLLERİ --- */
+        .id-card {
+            font-size: 11px;
+            position: relative;
+            color: var(--text-color-primary);
+        }
+
+        .id-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .id-title-main {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .id-title-sub {
+            color: var(--text-color-primary);
+            font-size: 10px;
+            margin: 2px 0 0 0;
+            font-weight: lighter;
+        }
+
+        .id-abbreviation {
+            color: var(--text-color-primary);
+            font-weight: lighter;
+        }
+
+        .id-body {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        /* Fotoğraf Alanı */
+        .id-photo-container {
+            width: 70px;
+            height: 85px;
+            border: 1px solid var(--input-border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            background-color: var(--input-bg);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .id-photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .id-photo-placeholder {
+            font-size: 24px;
+            color: var(--text-color-secondary);
+        }
+
+        .id-photo-text {
+            font-size: 8px;
+            color: var(--text-color-secondary);
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* Veri Alanları */
+        .id-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .id-field-label {
+            color: var(--text-color-secondary);
+            text-transform: uppercase;
+            font-size: 9px;
+            margin-bottom: 1px;
+        }
+
+        .id-field-value {
+            color: var(--text-color-primary);
+            font-size: 11px;
+            height: 1.2em;
+            display: block;
+        }
+
+        .id-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 9px;
+            color: var(--text-color-secondary);
+            border-top: 1px solid var(--input-border);
+            padding-top: 8px;
+        }
+
+        /* --- FORM KARTI STİLLERİ --- */
+        .form-card {
+            border-top: 3px solid var(--accent-color);
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--input-border);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 0;
+            cursor: pointer;
+            flex: 1;
+            text-align: center;
+            color: var(--text-color-secondary);
+            transition: color 0.3s;
+        }
+
+        .tab.active {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            margin-bottom: -1px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 12px;
+            color: var(--text-color-primary);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 4px;
+            color: var(--text-color-primary);
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #b71c1c;
+        }
+
+        /* Mobil Navigasyon Çubuğu Taklidi */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            border-top: 1px solid var(--input-border);
+        }
+
+        .nav-icon {
+            color: var(--text-color-secondary);
+            font-size: 18px;
+        }
+
     </style>
 </head>
-<body class="bg-official text-gray-100 min-h-screen flex items-center justify-center p-4 font-sans overflow-hidden relative">
+<body>
 
-    <div class="w-full max-w-xl relative z-10 perspective-1000">
-        
-        <!-- KART KAPSAYICI (TILT VE FLIP İÇİN) -->
-        <div id="cardContainer" class="relative w-full transition-transform duration-300 preserve-3d cursor-pointer" onclick="flipCard()">
-            <div id="cardInner" class="relative w-full transition-transform duration-700 preserve-3d">
-                
-                <!-- ÖN YÜZ (2. SS'DEKİ GİBİ SADE) -->
-                <div class="backface-hidden bg-gray-900 border border-gray-800 rounded-xl p-5 shadow-2xl relative overflow-hidden">
-                    <div class="border-b border-gray-800 pb-3 mb-4 flex justify-between items-center">
-                        <div>
-                            <h1 class="text-lg font-bold text-red-600 uppercase">TÜRK NİZAM HAREKETİ</h1>
-                            <p class="text-xs text-gray-400 font-mono">ÜYELİK KİMLİĞİ</p>
-                        </div>
-                        <div class="text-sm font-bold text-gray-400 font-mono">T.N.H.```html
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Türk Nizam Hareketi</title>
-    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
-    <style>
-        /* Sade karanlık arka plan */
-        .bg-official { background-color: #070a0f; }
-        
-        /* Kart döndürme efektleri */
-        .perspective-1000 { perspective: 1000px; }
-        .preserve-3d { transform-style: preserve-3d; }
-        .backface-hidden { backface-visibility: hidden; }
-        .rotate-y-180 { transform: rotateY(180deg); }
-    </style>
-</head>
-<body class="bg-official text-gray-100 min-h-screen flex items-center justify-center p-4 font-sans overflow-hidden relative">
+    <div class="container">
+        <!-- 1. KISIM: KİMLİK ÖNİZLEMESİ -->
+        <div class="card id-card">
+            <div class="id-card-header">
+                <div>
+                    <h1 class="id-title-main">TÜRK NİZAM HAREKETİ</h1>
+                    <p class="id-title-sub">RESMİ ÜYELİK KİMLİĞİ</p>
+                </div>
+                <div class="id-abbreviation">T.N.H.</div>
+            </div>
 
-    <div class="w-full max-w-xl relative z-10 perspective-1000">
-        
-        <!-- KART KAPSAYICI (FLIP İÇİN) -->
-        <div id="cardContainer" class="relative w-full transition-transform duration-300 preserve-3d cursor-pointer" onclick="flipCard()">
-            <div id="cardInner" class="relative w-full transition-transform duration-700 preserve-3d hover:shadow-xl">
-                
-                <!-- ÖN YÜZ (2. SS'DEKİ GİBİ SADE VE TEMİZ) -->
-                <div class="backface-hidden bg-gray-900 border border-gray-800 rounded-xl p-5 shadow-2xl relative overflow-hidden">
-                    
-                    <!-- Mor kutuyu ve yıldızı tamamen sildim -->
-                    
-                    <div class="border-b border-gray-800 pb-3 mb-4 flex justify-between items-center">
-                        <div>
-                            <h1 class="text-lg font-bold text-red-600 uppercase">TÜRK NİZAM HAREKETİ</h1>
-                            <p class="text-xs text-gray-400 font-mono">ÜYELİK KİMLİĞİ</p>
-                        </div>
-                        <div class="text-sm font-bold text-gray-400 font-mono">T.N.H.</div>
-                    </div>
-                    <div class="flex gap-4 items-center relative z-10">
-                        <div class="w-24 h-28 bg-gray-950 border border-gray-800 rounded-lg flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
-                            <span class="text-xs text-gray-600">FOTO YERİ</span>
-                        </div>
-                        <div class="flex-grow space-y-2 text-xs font-mono text-gray-300">
-                            <div><span class="text-gray-500 uppercase">Ad Soyad:</span> <span id="cardName" class="font-bold text-white text-sm">----</span></div>
-                            <div><span class="text-gray-500 uppercase">İlgi Alanı:</span> <span id="cardArea" class="font-bold text-red-500">----</span></div>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-2 border-t border-gray-800 flex justify-between text-[10px] text-gray-500 font-mono relative z-10">
-                        <span class="text-red-500 font-bold uppercase">DURUM: MÜRACAAT</span>
-                        <span class="text-gray-600">TÜRK NİZAM HAREKETİ</span>
-                    </div>
+            <div class="id-body">
+                <!-- Fotoğraf Yükleme ve Önizleme -->
+                <div class="id-photo-container" onclick="document.getElementById('photoInput').click()">
+                    <span id="placeholder" class="id-photo-placeholder">👤</span>
+                    <img id="idPhotoPreview" src="" alt="Vesika" style="display:none;">
+                    <br><span id="photoText" class="id-photo-text">Fotoğraf Ekle</span>
                 </div>
 
-                <!-- ARKA YÜZ (KAYIT SIRA NUMARASI) -->
-                <div class="backface-hidden absolute top-0 left-0 w-full h-full bg-gray-900 border border-gray-800 rounded-xl p-8 flex flex-col items-center justify-center rotate-y-180">
-                    <h2 class="text-gray-500 text-xs tracking-widest uppercase mb-3">Kayıt Sıra Numarası</h2>
-                    <!-- Sıralı kayıt numarasını buraya basacağız -->
-                    <div id="memberCount" class="text-6xl font-black text-white tracking-tighter shadow-lg">0000</div>
-                    <p class="mt-5 text-[10px] text-gray-600 font-mono">Kaydınızın mülkiyet numarasıdır.</p>
+                <!-- Dinamik Bilgiler -->
+                <div class="id-details">
+                    <div class="id-field">
+                        <span class="id-field-label">Ad Soyad</span>
+                        <span class="id-field-value" id="idNameValue"></span>
+                    </div>
+                    <!-- E-POSTA KALDIRILDI -->
+                    <div class="id-field">
+                        <span class="id-field-label">Uzmanlık Alanı</span>
+                        <span class="id-field-value" id="idExpertiseValue"></span>
+                    </div>
                 </div>
+            </div>
+
+            <div class="id-footer">
+                <span>DURUM: MÜRACAAT</span>
+                <span>TÜRK NİZAM HAREKETİ</span>
             </div>
         </div>
 
-        <!-- FORM ALANI -->
-        <div class="bg-gray-900 border border-gray-800 p-6 rounded-xl shadow-xl backdrop-blur-md mt-6 relative z-10">
-            <div class="flex border-b border-gray-800 mb-5">
-                <button id="tabGirisBtn" onclick="formDegistir('giris')" class="flex-1 py-2 text-xs font-bold text-red-600 border-b-2 border-red-600 transition">Giriş Yap</button>
-                <button id="tabKayitBtn" onclick="formDegistir('kayit')" class="flex-1 py-2 text-xs font-bold text-gray-500 border-b-2 border-transparent transition">Kayıt Ol</button>
+        <!-- 2. KISIM: KAYIT FORMU -->
+        <div class="card form-card">
+            <div class="tabs">
+                <div class="tab">Giriş Yap</div>
+                <div class="tab active">Kayıt Ol</div>
             </div>
 
-            <!-- GİRİŞ FORMU -->
-            <form id="formGiris" class="space-y-4">
-                <input type="email" placeholder="E-Posta" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition shadow-inner">
-                <input type="password" placeholder="Parola" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition shadow-inner">
-                <button type="button" class="w-full bg-red-700 hover:bg-red-800 text-white font-bold py-2.5 rounded text-xs transition">Giriş Yap</button>
-            </form>
+            <!-- Kayıt Formu -->
+            <form id="registerForm">
+                <div class="input-group">
+                    <label for="fullName">Ad Soyad</label>
+                    <!-- JavaScript tetikleyicisi 'oninput' ile gerçek zamanlı güncelleme -->
+                    <input type="text" id="fullName" name="fullName" placeholder="Örn: Ahmet Yılmaz" required oninput="updateIdCard('idNameValue', this.value)">
+                </div>
 
-            <!-- KAYIT FORMU (İSTEDİĞİN DÖRT ALAN) -->
-            <form id="formKayit" class="space-y-4 hidden">
-                <input type="text" id="inputName" oninput="kartGuncelle()" placeholder="Ad-Soyad" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition shadow-inner">
-                <input type="email" id="inputEmail" placeholder="E-Posta Adresi" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition shadow-inner">
-                <input type="password" id="inputParola" placeholder="Parola Oluştur" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition shadow-inner">
-                <input type="text" id="inputArea" oninput="kartGuncelle()" placeholder="İlgi Faaliyet Alanı" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition shadow-inner">
-                <button type="button" onclick="kayitMüracaati()" class="w-full bg-red-700 hover:bg-red-800 text-white font-bold py-2.5 rounded text-xs transition">Kayıt Başvurusunu Gönder</button>
+                <div class="input-group">
+                    <label for="email">E-Posta Adresi</label>
+                    <!-- Soruluyor ama Kimlikte gözükmüyor -->
+                    <input type="email" id="email" name="email" placeholder="Örn: adiniz@ornek.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Parola</label>
+                    <input type="password" id="password" name="password" placeholder="Parolanız" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="expertise">Uzmanlık / İlgi Alanınız</label>
+                    <!-- JavaScript tetikleyicisi 'oninput' ile gerçek zamanlı güncelleme -->
+                    <input type="text" id="expertise" name="expertise" placeholder="Örn: Yazılım, Tarih" required oninput="updateIdCard('idExpertiseValue', this.value)">
+                </div>
+
+                <!-- Gizli dosya girişi -->
+                <input type="file" id="photoInput" accept="image/*" style="display:none;" onchange="previewPhoto(this)">
+
+                <button type="submit" class="submit-btn">Kayıt Başvurusunu Gönder</button>
             </form>
         </div>
     </div>
 
+    <!-- Mobil Navigasyon Taklidi -->
+    <div class="bottom-nav">
+        <div class="nav-icon">|||</div>
+        <div class="nav-icon">○</div>
+        <div class="nav-icon"><</div>
+    </div>
+
     <script>
-        // Üye Numarası Sayaç (Örnek olarak)
-        let memberId = 1;
-
-        // Canlı Kimlik Güncelleme
-        function kartGuncelle() {
-            document.getElementById('cardName').innerText = document.getElementById('inputName').value || "----";
-            document.getElementById('cardArea').innerText = document.getElementById('inputArea').value || "----";
+        // Metin alanlarını anında kimlikte güncelleme fonksiyonu
+        function updateIdCard(elementId, value) {
+            document.getElementById(elementId).innerText = value;
         }
 
-        // Kart Döndürme (Flip)
-        function flipCard() {
-            document.getElementById('cardInner').classList.toggle('rotate-y-180');
-        }
+        // Fotoğraf yükleme ve önizleme fonksiyonu
+        function previewPhoto(input) {
+            const file = input.files[0];
+            const preview = document.getElementById('idPhotoPreview');
+            const placeholder = document.getElementById('placeholder');
+            const photoText = document.getElementById('photoText');
 
-        // Formlar Arası Geçiş
-        function formDegistir(tip) {
-            const g = document.getElementById('formGiris'); const k = document.getElementById('formKayit');
-            const gBtn = document.getElementById('tabGirisBtn'); const kBtn = document.getElementById('tabKayitBtn');
-            if(tip === 'giris') { g.classList.remove('hidden'); k.classList.add('hidden'); gBtn.className="flex-1 py-2 text-xs font-bold text-red-600 border-b-2 border-red-600 transition"; kBtn.className="flex-1 py-2 text-xs font-bold text-gray-500 border-b-2 border-transparent transition"; }
-            else { k.classList.remove('hidden'); g.classList.add('hidden'); kBtn.className="flex-1 py-2 text-xs font-bold text-red-600 border-b-2 border-red-600 transition"; gBtn.className="flex-1 py-2 text-xs font-bold text-gray-500 border-b-2 border-transparent transition"; }
-        }
+            if (file) {
+                const reader = new FileReader();
 
-        // Kayıt Müracaatı ve Sıra No
-        function kayitMüracaati() {
-            const countDisplay = document.getElementById('memberCount');
-            // Numaramızı 0001 formatına getiriyoruz
-            let formattedId = memberId.toString().padStart(4, '0');
-            countDisplay.innerText = formattedId;
-            memberId++;
-            // Başvuru alındığına dair geri bildirim
-            document.getElementById('phText').innerText = "BAŞVURU\nALINDI";
-            showToast("Müracaat alındı. Sıra no: " + formattedId);
-        }
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block'; // Resmi göster
+                    placeholder.style.display = 'none'; // Yer tutucuyu gizle
+                    photoText.style.display = 'none'; // Yazıyı gizle
+                }
 
-        // Basit Toast Mesajı
-        function showToast(msg) {
-            const toast = document.createElement('div');
-            toast.innerText = msg;
-            toast.className = "fixed top-4 right-4 bg-red-900 border border-red-500 text-white px-4 py-2 rounded shadow-2xl z-50 text-xs";
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
+                reader.readAsDataURL(file); // Dosyayı oku
+            } else {
+                // Dosya seçilmezse eski haline getir
+                preview.src = '';
+                preview.style.display = 'none';
+                placeholder.style.display = 'block';
+                photoText.style.display = 'block';
+            }
         }
-
-        // Tilt (Eğim) Efekti
-        const card = document.getElementById('cardContainer');
-        document.addEventListener('mousemove', (e) => {
-            const { offsetWidth: w, offsetHeight: h } = card;
-            const { offsetX: x, offsetY: y } = e;
-            const rotY = ((x / w) - 0.5) * 15;
-            const rotX = ((y / h) - 0.5) * -15;
-            card.style.transform = `rotateY(${rotY}deg) rotateX(${rotX}deg)`;
-        });
-        document.addEventListener('mouseleave', () => card.style.transform = 'rotateY(0) rotateX(0)');
     </script>
 </body>
-                    </html>
+    </html>
     
