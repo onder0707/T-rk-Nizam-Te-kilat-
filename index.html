@@ -4,20 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Türk Nizam Teşkilatı</title>
-  <!-- İkon Kütüphanesi -->
+  <!-- FontAwesome İkonları -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Üst Bar -->
+  <!-- Üst Bar (Header) -->
   <header class="header">
     <div class="logo-container">
       <img src="Screenshot_20260813-013040_Gallery.jpg" alt="Teşkilat Logosu" class="site-logo">
       <span class="site-title">Türk Nizam Teşkilatı</span>
     </div>
 
-    <!-- Masaüstü Açık Menü -->
+    <!-- Masaüstü Menü -->
     <nav class="desktop-nav">
       <a href="#hakkimizda">Hakkımızda</a>
       <a href="#tuzuk">Tüzük</a>
@@ -26,12 +26,18 @@
     </nav>
 
     <!-- Mobil Hamburger Butonu -->
-    <button class="hamburger-btn" id="hamburgerBtn"><i class="fa-solid fa-bars"></i></button>
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menü">
+      <i class="fa-solid fa-bars"></i>
+    </button>
   </header>
 
-  <!-- Mobil Yan Menü -->
+  <!-- Mobil Yan Menü (Sağdan Kayan) -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
   <nav class="drawer-menu" id="drawerMenu">
-    <div class="drawer-header"><h3>Kurumsal Menü</h3></div>
+    <div class="drawer-header">
+      <h3>Kurumsal Menü</h3>
+      <button class="close-drawer" id="closeDrawerBtn">&times;</button>
+    </div>
     <ul>
       <li><a href="#hakkimizda"><i class="fa-solid fa-circle-info"></i> Hakkımızda & Vizyon</a></li>
       <li><a href="#tuzuk"><i class="fa-solid fa-book-bookmark"></i> Teşkilat Tüzüğü</a></li>
@@ -46,33 +52,27 @@
     
     <!-- Karşılama Kartı -->
     <section class="card hero-card">
-      <h2>Türk Nizam Teşkilatına Hoş Geldiniz</h2>
+      <h2>Türk Nizam Teşkilatı</h2>
       <p>Birliğimiz, vizyonumuz ve geleceğimiz için tek çatı altındayız.</p>
     </section>
 
-    <!-- İstatistikler Kartı -->
+    <!-- Anlık Site Verileri -->
     <section class="card stats-card">
-      <h3>Teşkilat Verileri</h3>
-      <div class="stats-grid">
-        <div class="stat-item">
-          <i class="fa-solid fa-map-location-dot"></i>
-          <span>81 İl Temsilciliği</span>
-          <p>Tüm illerde aktif yapılanma</p>
+      <div class="stats-row">
+        <div class="stat-box">
+          <i class="fa-solid fa-users"></i>
+          <span id="onlineCount">1</span>
+          <small>Çevrimiçi</small>
         </div>
-        <div class="stat-item">
+        <div class="stat-box">
           <i class="fa-solid fa-user-check"></i>
-          <span id="stat-members">0</span>
-          <p>Aktif Üye Sayısı</p>
-        </div>
-        <div class="stat-item">
-          <i class="fa-solid fa-user-tie"></i>
-          <span id="stat-leaders">0</span>
-          <p>Atanan Başkan</p>
+          <span id="totalMembers">0</span>
+          <small>Kayıtlı Üye</small>
         </div>
       </div>
     </section>
 
-    <!-- Giriş / Kayıt Yönlendirmesi -->
+    <!-- Giriş / Kayıt Yönlendirme Kartı -->
     <section class="card auth-card">
       <p>Sohbet ve Forum alanlarına katılmak için oturum açmanız gerekmektedir.</p>
       <div class="auth-buttons">
@@ -80,22 +80,29 @@
         <button class="btn btn-secondary" id="openRegisterBtn">Kayıt Ol</button>
       </div>
     </section>
+
   </main>
 
-  <!-- Giriş / Kayıt Pop-up (Modal) -->
+  <!-- Arka Planı Blurlayan Oturum Açma Modalı -->
   <div id="authModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="closeModalBtn">&times;</span>
-      <h3>Oturum Aç</h3>
-      <form>
-        <input type="text" placeholder="Kullanıcı Adı">
-        <input type="password" placeholder="Şifre">
-        <button class="btn btn-primary">Giriş Yap</button>
+      <h3 id="modalTitle">Oturum Aç</h3>
+      <form id="authForm" onsubmit="return false;">
+        <div class="input-group">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" placeholder="Kullanıcı Adı" required>
+        </div>
+        <div class="input-group">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" placeholder="Şifre" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Devam Et</button>
       </form>
     </div>
   </div>
 
-  <!-- Mobil Alt Menü -->
+  <!-- Mobil Alt Navigasyon (Uygulama Menüsü) -->
   <nav class="bottom-nav">
     <a href="#ana-sayfa" class="nav-item active">
       <i class="fa-solid fa-house"></i>
@@ -117,5 +124,5 @@
 
   <script src="app.js"></script>
 </body>
-  </html>
-                                           
+        </html>
+            
