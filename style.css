@@ -17,6 +17,14 @@ body {
     padding-bottom: 75px; 
 }
 
+/* --- MİMARİ: SEKMELER / SAYFALAR (SPA) --- */
+.page-section {
+    display: none;
+}
+.page-section.active {
+    display: block;
+}
+
 /* --- HEADER --- */
 .header { 
     position: fixed; 
@@ -39,7 +47,6 @@ body {
     gap: 10px; 
 }
 
-/* Basık Logo Düzeltmesi */
 .site-logo { 
     width: 38px; 
     height: 38px; 
@@ -57,7 +64,6 @@ body {
     font-size: 1.05rem; 
 }
 
-/* Mobilde Masaüstü Menüyü Kesinlikle Gizle */
 .desktop-nav { 
     display: none; 
 }
@@ -71,7 +77,7 @@ body {
     padding: 5px; 
 }
 
-/* --- MOBİL YAN MENÜ VE OVERLAY --- */
+/* --- DRAWER --- */
 .drawer-overlay { 
     position: fixed; 
     top: 0; 
@@ -148,7 +154,7 @@ body {
     color: #d32f2f; 
 }
 
-/* --- ANA İÇERİK VE KARTLAR --- */
+/* --- İÇERİK KARTLARI --- */
 .main-content { 
     max-width: 550px; 
     margin: 0 auto; 
@@ -174,10 +180,8 @@ body {
 .hero-card p { 
     color: #555; 
     font-size: 0.9rem; 
-    line-height: 1.4; 
 }
 
-/* İstatistikler */
 .stats-row { 
     display: flex; 
     gap: 10px; 
@@ -210,7 +214,6 @@ body {
     color: #666; 
 }
 
-/* Tüzük Kartı */
 .tuzuk-card .card-title-group { 
     display: flex; 
     align-items: center; 
@@ -225,7 +228,6 @@ body {
     line-height: 1.5; 
 }
 
-/* Oturum Açma Kartı & Rozet */
 .auth-card { 
     position: relative; 
     padding-top: 25px; 
@@ -241,7 +243,6 @@ body {
     font-weight: 700; 
     padding: 3px 8px; 
     border-radius: 12px; 
-    text-transform: uppercase; 
 }
 
 .auth-card p { 
@@ -281,12 +282,234 @@ body {
     border: 1.5px solid #d32f2f; 
 }
 
-.btn-full { 
-    width: 100%; 
-    margin-top: 10px; 
+.btn-sm {
+    padding: 6px 14px;
+    font-size: 0.78rem;
+    flex: none;
 }
 
-/* --- MODAL (BLUR EFEKTLİ) --- */
+/* --- PROFİL SAYFASI ÖZEL TASARIMI --- */
+.profile-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.profile-banner-wrapper {
+    position: relative;
+    width: 100%;
+    height: 125px;
+    background: #111;
+}
+
+.profile-banner {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.edit-banner-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.profile-header-content {
+    padding: 0 16px;
+    position: relative;
+    margin-top: -40px;
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.avatar-container {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3.5px solid #fff;
+    background: #fff;
+}
+
+.edit-avatar-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #d32f2f;
+    color: #fff;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    cursor: pointer;
+    border: 2px solid #fff;
+}
+
+/* Durum Noktası */
+.status-dot {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+.status-online { background-color: #2ecc71; }
+.status-dnd { background-color: #e74c3c; }
+.status-idle { background-color: #f1c40f; }
+.status-invisible { background-color: #95a5a6; }
+
+.profile-identity {
+    padding-bottom: 5px;
+}
+
+.user-display-name {
+    font-size: 1.1rem;
+    color: #111;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.user-rank-badge {
+    background: #fff0f0;
+    color: #d32f2f;
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    border-radius: 6px;
+    border: 1px solid #ffcdcd;
+}
+
+.user-tag {
+    font-size: 0.78rem;
+    color: #777;
+}
+
+/* Durum Seçici */
+.status-selector-wrapper {
+    margin: 0 16px 15px 16px;
+    background: #f8f9fa;
+    padding: 10px 12px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #444;
+}
+
+.status-select {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    outline: none;
+    background: #fff;
+}
+
+/* Bilgi Grid */
+.profile-meta-grid {
+    display: flex;
+    gap: 10px;
+    margin: 0 16px 15px 16px;
+}
+
+.meta-item {
+    flex: 1;
+    background: #fdfdfd;
+    border: 1px solid #f0f0f0;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.meta-item i {
+    color: #d32f2f;
+    font-size: 0.95rem;
+}
+
+.meta-item small {
+    display: block;
+    font-size: 0.68rem;
+    color: #888;
+}
+
+.meta-item strong {
+    font-size: 0.75rem;
+    color: #222;
+}
+
+/* Hakkımda */
+.profile-bio-section {
+    margin: 0 16px 16px 16px;
+    border-top: 1px dashed #eee;
+    padding-top: 12px;
+}
+
+.bio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.bio-header h4 {
+    font-size: 0.85rem;
+    color: #333;
+}
+
+.btn-text-edit {
+    background: none;
+    border: none;
+    color: #d32f2f;
+    font-size: 0.75rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.bio-text {
+    font-size: 0.82rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+.bio-textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 0.82rem;
+    outline: none;
+    margin-bottom: 6px;
+}
+
+/* MODAL */
 .modal { 
     display: none; 
     position: fixed; 
@@ -334,21 +557,15 @@ body {
     margin-bottom: 10px; 
 }
 
-.input-group i { 
-    color: #888; 
-    font-size: 0.9rem; 
-}
-
 .input-group input { 
     border: none; 
     background: transparent; 
     margin-left: 10px; 
     width: 100%; 
     outline: none; 
-    font-size: 0.9rem; 
 }
 
-/* --- MOBİL ALT NAVIGASYON --- */
+/* --- BOTTOM NAV --- */
 .bottom-nav { 
     position: fixed; 
     bottom: 0; 
@@ -396,18 +613,9 @@ body {
     background-color: #d32f2f; 
 }
 
-/* Masaüstü Ekran İstisnası */
 @media (min-width: 768px) {
-    .hamburger-btn, .bottom-nav { 
-        display: none; 
+    .hamburger-btn, .bottom-nav { display: none; }
+    .desktop-nav { display: flex; gap: 20px; }
+    .desktop-nav a { text-decoration: none; color: #444; font-weight: 600; }
     }
-    .desktop-nav { 
-        display: flex; 
-        gap: 20px; 
-    }
-    .desktop-nav a { 
-        text-decoration: none; 
-        color: #444; 
-        font-weight: 600; 
-    }
-}
+    
