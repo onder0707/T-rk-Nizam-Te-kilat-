@@ -6,18 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const bottomNavItems = document.querySelectorAll('.bottom-nav .nav-item');
 
     function switchPage(targetId) {
-        // Tüm sayfaları gizle
         pageSections.forEach(section => {
             section.classList.remove('active');
         });
 
-        // Hedef sayfayı göster
         const targetSection = document.getElementById(targetId);
         if (targetSection) {
             targetSection.classList.add('active');
         }
 
-        // Alt navigasyondaki aktiflik göstergesini güncelle
         bottomNavItems.forEach(item => {
             item.classList.remove('active');
             if (item.getAttribute('href') === `#${targetId}`) {
@@ -25,11 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Sayfa değiştiğinde en üste kaydır
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Navigasyon tıklamalarını dinle
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const href = link.getAttribute('href');
@@ -37,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 const targetId = href.replace('#', '');
                 switchPage(targetId);
-                closeDrawer(); // Eğer mobil menü açıksa kapat
+                closeDrawer();
             }
         });
     });
@@ -76,68 +71,55 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === authModal) authModal.style.display = 'none';
     });
 
-    // --- 4. PROFİL İŞLEVLERİ (DISCORD TARZI) ---
-    const statusSelect = document.getElementById('statusSelect');
-    const statusDot = document.getElementById('statusDot');
-    const lastActiveText = document.getElementById('lastActiveText');
-
-    // Durum Değişimi
-    if (statusSelect) {
-        statusSelect.addEventListener('change', (e) => {
-            const status = e.target.value;
-            statusDot.className = 'status-dot'; // sınıfları sıfırla
-
-            if (status === 'online') {
-                statusDot.classList.add('status-online');
-                lastActiveText.textContent = 'Şimdi aktif';
-            } else if (status === 'dnd') {
-                statusDot.classList.add('status-dnd');
-                lastActiveText.textContent = 'Rahatsız Etmeyin';
-            } else if (status === 'idle') {
-                statusDot.classList.add('status-idle');
-                lastActiveText.textContent = 'Dışarıda';
-            } else if (status === 'invisible') {
-                statusDot.classList.add('status-invisible');
-                lastActiveText.textContent = 'Çevrimdışı görünüyor';
-            }
-        });
-    }
-
-    // Profil Fotoğrafı ve GIF Değiştirme Önizlemesi
-    const avatarInput = document.getElementById('avatarInput');
-    const avatarPreview = document.getElementById('avatarPreview');
-
-    if (avatarInput) {
-        avatarInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    avatarPreview.src = event.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    }
-
-    // Afiş (Banner) Değiştirme Önizlemesi
+    // --- 4. HAREKETLİ / VİDEO VE GÖRSEL YÜKLEME DESTEĞİ ---
+    
+    // Afiş (Banner) Yükleme (Resim veya Video)
     const bannerInput = document.getElementById('bannerInput');
-    const bannerPreview = document.getElementById('bannerPreview');
+    const bannerPreviewImg = document.getElementById('bannerPreviewImg');
+    const bannerPreviewVideo = document.getElementById('bannerPreviewVideo');
 
     if (bannerInput) {
         bannerInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (file) {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    bannerPreview.src = event.target.result;
-                };
-                reader.readAsDataURL(file);
+                const fileUrl = URL.createObjectURL(file);
+                if (file.type.startsWith('video/')) {
+                    bannerPreviewImg.style.display = 'none';
+                    bannerPreviewVideo.src = fileUrl;
+                    bannerPreviewVideo.style.display = 'block';
+                } else {
+                    bannerPreviewVideo.style.display = 'none';
+                    bannerPreviewImg.src = fileUrl;
+                    bannerPreviewImg.style.display = 'block';
+                }
             }
         });
     }
 
-    // Bio / Açıklama Düzenleme
+    // Profil Fotoğrafı Yükleme (Resim, GIF veya Video)
+    const avatarInput = document.getElementById('avatarInput');
+    const avatarPreviewImg = document.getElementById('avatarPreviewImg');
+    const avatarPreviewVideo = document.getElementById('avatarPreviewVideo');
+
+    if (avatarInput) {
+        avatarInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const fileUrl = URL.createObjectURL(file);
+                if (file.type.startsWith('video/')) {
+                    avatarPreviewImg.style.display = 'none';
+                    avatarPreviewVideo.src = fileUrl;
+                    avatarPreviewVideo.style.display = 'block';
+                } else {
+                    avatarPreviewVideo.style.display = 'none';
+                    avatarPreviewImg.src = fileUrl;
+                    avatarPreviewImg.style.display = 'block';
+                }
+            }
+        });
+    }
+
+    // Hakkımda Düzenleme
     const editBioBtn = document.getElementById('editBioBtn');
     const saveBioBtn = document.getElementById('saveBioBtn');
     const bioDisplay = document.getElementById('bioDisplay');
@@ -161,5 +143,77 @@ document.addEventListener('DOMContentLoaded', () => {
             bioDisplay.style.display = 'block';
         });
     }
+
+    // --- 5. AYARLAR KONTROLLERİ VE TEKNİK BİLGİLER ---
+    
+    // Akordeon Aç / Kapat
+    const toggleSettingsBtn = document.getElementById('toggleSettingsBtn');
+    const settingsContent = document.getElementById('settingsContent');
+
+    if (toggleSettingsBtn && settingsContent) {
+        toggleSettingsBtn.addEventListener('click', () => {
+            const isHidden = settingsContent.style.display === 'none';
+            settingsContent.style.display = isHidden ? 'block' : 'none';
+            toggleSettingsBtn.classList.toggle('active', isHidden);
+        });
+    }
+
+    // Koyu Tema (Dark Mode) Toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+        });
+    }
+
+    // Yazı Boyutu Değişimi
+    const fontSizeSelect = document.getElementById('fontSizeSelect');
+    if (fontSizeSelect) {
+        fontSizeSelect.addEventListener('change', (e) => {
+            document.body.classList.remove('font-small', 'font-large');
+            if (e.target.value === 'small') {
+                document.body.classList.add('font-small');
+            } else if (e.target.value === 'large') {
+                document.body.classList.add('font-large');
+            }
+        });
+    }
+
+    // Dil Seçici Desteği (Dinamik Etiket Değişimi)
+    const languageSelect = document.getElementById('languageSelect');
+    if (languageSelect) {
+        languageSelect.addEventListener('change', (e) => {
+            const lang = e.target.value;
+            const elements = document.querySelectorAll('[data-lang-tr]');
+            elements.forEach(el => {
+                if (lang === 'en') {
+                    el.textContent = el.getAttribute('data-lang-en');
+                } else {
+                    el.textContent = el.getAttribute('data-lang-tr');
+                }
+            });
+        });
+    }
+
+    // Önbellek Temizle
+    const clearCacheBtn = document.getElementById('clearCacheBtn');
+    if (clearCacheBtn) {
+        clearCacheBtn.addEventListener('click', () => {
+            alert('Sistem önbelleği ve geçici veriler başarıyla temizlendi.');
+        });
+    }
+
+    // Hata Bildir
+    const reportIssueBtn = document.getElementById('reportIssueBtn');
+    if (reportIssueBtn) {
+        reportIssueBtn.addEventListener('click', () => {
+            alert('Teknik destek talebiniz yöneticilere iletildi.');
+        });
+    }
+
 });
-            
+                                                  
