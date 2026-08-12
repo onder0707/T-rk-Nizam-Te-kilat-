@@ -4,283 +4,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Türk Nizam Hareketi</title>
-    <!-- ÖZEL YAZI TİPİ (Montserrat) EKLEME -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'],
-                    },
-                },
-            },
-        }
-    </script>
     <style>
-        /* ARKA PLAN DOKUSU VE ANİMASYONLU IŞIK */
-        .bg-official {
-            background-color: #070a0f;
-            /* Silik geometrik desen */
-            background-image: 
-                linear-gradient(rgba(220, 38, 38, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(220, 38, 38, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            position: relative;
-        }
-        /* Nabız gibi parlayan arka plan ışığı */
-        @keyframes radialPulse {
-            0% { opacity: 0.15; transform: scale(1); }
-            50% { opacity: 0.25; transform: scale(1.05); }
-            100% { opacity: 0.15; transform: scale(1); }
-        }
-        .radial-glow {
-            position: absolute;
-            top: 40%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(220, 38, 38, 0.2) 0%, transparent 60%);
-            animation: radialPulse 10s ease-in-out infinite;
-            pointer-events: none; z-index: 0;
-        }
-
+        /* Sade karanlık arka plan */
+        .bg-official { background-color: #070a0f; }
+        
+        /* Kart döndürme efektleri */
         .perspective-1000 { perspective: 1000px; }
         .preserve-3d { transform-style: preserve-3d; }
         .backface-hidden { backface-visibility: hidden; }
         .rotate-y-180 { transform: rotateY(180deg); }
-        
-        @keyframes shine { 0% { left: -100%; } 100% { left: 200%; } }
-        .card-shine::after {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(220, 38, 38, 0.15), transparent);
-            transform: skewX(-25deg); animation: shine 6s infinite;
-        }
-        
-        /* FORMLAR ARASI YUMUŞAK GEÇİŞ VE ODAKLANMA EFEKTİ */
-        .form-fade { transition: opacity 0.4s ease-in-out; }
-        .focus-glow:focus {
-            box-shadow: 0 0 15px rgba(220, 38, 38, 0.6);
-            border-color: #dc2626 !important;
-        }
-
-        /* DİNAMİK BUTON DURUMLARI (GİRİS) */
-        .btn-disabled {
-            background-color: #374151 !important; /* Gri */
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
     </style>
 </head>
-<body class="bg-official text-gray-100 min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden font-sans">
+<body class="bg-official text-gray-100 min-h-screen flex items-center justify-center p-4 font-sans overflow-hidden relative">
 
-    <!-- ARKA PLAN IŞIĞI -->
-    <div class="radial-glow"></div>
-
-    <!-- TOAST BİLDİRİM ALANI -->
-    <div id="toast" class="fixed top-5 right-5 z-50 transform translate-x-full transition-transform duration-500">
-        <div id="toastMsg" class="bg-red-950 border border-red-500 text-white px-6 py-3 rounded-lg shadow-2xl font-bold text-sm"></div>
-    </div>
-
-    <div class="w-full max-w-xl flex-grow flex items-center justify-center relative z-10 perspectiva-1000">
+    <div class="w-full max-w-xl relative z-10 perspective-1000">
         
         <!-- KART KAPSAYICI (TILT VE FLIP İÇİN) -->
-        <div id="cardContainer" class="relative w-full transition-transform duration-300 preserve-3d cursor-pointer shadow-3xl" onclick="flipCard()">
+        <div id="cardContainer" class="relative w-full transition-transform duration-300 preserve-3d cursor-pointer" onclick="flipCard()">
             <div id="cardInner" class="relative w-full transition-transform duration-700 preserve-3d">
                 
-                <!-- ÖN YÜZ -->
-                <div class="backface-hidden bg-gray-900/90 border border-red-900/40 rounded-xl p-5 shadow-2xl relative overflow-hidden card-shine backdrop-blur-md">
-                    <!-- Silik Ayyıldız -->
-                    <div class="absolute right-2 bottom-2 text-red-600/10 text-8xl font-black select-none">☾★</div>
-                    <div class="border-b border-red-900/40 pb-3 mb-4 flex justify-between items-center relative z-10">
+                <!-- ÖN YÜZ (2. SS'DEKİ GİBİ SADE) -->
+                <div class="backface-hidden bg-gray-900 border border-gray-800 rounded-xl p-5 shadow-2xl relative overflow-hidden">
+                    <div class="border-b border-gray-800 pb-3 mb-4 flex justify-between items-center">
                         <div>
-                            <h1 class="text-base font-black tracking-widest text-red-600 uppercase">TÜRK NİZAM HAREKETİ</h1>
-                            <p class="text-[10px] text-gray-400 font-mono tracking-wider">ÜYELİK KİMLİĞİ</p>
+                            <h1 class="text-lg font-bold text-red-600 uppercase">TÜRK NİZAM HAREKETİ</h1>
+                            <p class="text-xs text-gray-400 font-mono">ÜYELİK KİMLİĞİ</p>
                         </div>
-                        <div class="text-xs font-bold text-gray-400 font-mono border border-red-900/50 px-2 py-0.5 rounded">T.N.H.</div>
+                        <div class="text-sm font-bold text-gray-400 font-mono">T.N.H.```html
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Türk Nizam Hareketi</title>
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <style>
+        /* Sade karanlık arka plan */
+        .bg-official { background-color: #070a0f; }
+        
+        /* Kart döndürme efektleri */
+        .perspective-1000 { perspective: 1000px; }
+        .preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+    </style>
+</head>
+<body class="bg-official text-gray-100 min-h-screen flex items-center justify-center p-4 font-sans overflow-hidden relative">
+
+    <div class="w-full max-w-xl relative z-10 perspective-1000">
+        
+        <!-- KART KAPSAYICI (FLIP İÇİN) -->
+        <div id="cardContainer" class="relative w-full transition-transform duration-300 preserve-3d cursor-pointer" onclick="flipCard()">
+            <div id="cardInner" class="relative w-full transition-transform duration-700 preserve-3d hover:shadow-xl">
+                
+                <!-- ÖN YÜZ (2. SS'DEKİ GİBİ SADE VE TEMİZ) -->
+                <div class="backface-hidden bg-gray-900 border border-gray-800 rounded-xl p-5 shadow-2xl relative overflow-hidden">
+                    
+                    <!-- Mor kutuyu ve yıldızı tamamen sildim -->
+                    
+                    <div class="border-b border-gray-800 pb-3 mb-4 flex justify-between items-center">
+                        <div>
+                            <h1 class="text-lg font-bold text-red-600 uppercase">TÜRK NİZAM HAREKETİ</h1>
+                            <p class="text-xs text-gray-400 font-mono">ÜYELİK KİMLİĞİ</p>
+                        </div>
+                        <div class="text-sm font-bold text-gray-400 font-mono">T.N.H.</div>
                     </div>
                     <div class="flex gap-4 items-center relative z-10">
-                        
-                        <!-- Vesikalık ve Yükle Simgesi -->
-                        <div class="relative group w-24 h-28 bg-gray-950 border border-gray-800 rounded-lg flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
-                            <img id="cardPhoto" src="" class="w-full h-full object-cover hidden">
-                            <span id="phText" class="text-[9px] text-gray-500 group-hover:hidden">FOTO YÜKLE</span>
-                            <!-- Hoverda çıkan Yükle simgesi -->
-                            <div class="absolute inset-0 bg-black/60 items-center justify-center hidden group-hover:flex transition-opacity">
-                                <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 16v3a2 2 0 002 2h14a2 2 0 002-2v3M7 11l5-5 5 5M12 6v12"></path></svg>
-                            </div>
+                        <div class="w-24 h-28 bg-gray-950 border border-gray-800 rounded-lg flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
+                            <span class="text-xs text-gray-600">FOTO YERİ</span>
                         </div>
-
-                        <!-- Üye Bilgileri (ÖN YÜZDE AD, E-POSTA, İLGİ ALANI) -->
-                        <div class="flex-grow space-y-1.5 text-xs font-mono">
-                            <div><span class="text-[9px] text-gray-500 uppercase">Ad Soyad:</span><span id="cardName" class="block font-bold text-white text-sm">----</span></div>
-                            <div><span class="text-[9px] text-gray-500 uppercase">E-Posta:</span><span id="cardEmail" class="block text-gray-300">----</span></div>
-                            <div><span class="text-[9px] text-gray-500 uppercase">İlgi Alanı:</span><span id="cardArea" class="block text-red-500 font-bold">----</span></div>
+                        <div class="flex-grow space-y-2 text-xs font-mono text-gray-300">
+                            <div><span class="text-gray-500 uppercase">Ad Soyad:</span> <span id="cardName" class="font-bold text-white text-sm">----</span></div>
+                            <div><span class="text-gray-500 uppercase">İlgi Alanı:</span> <span id="cardArea" class="font-bold text-red-500">----</span></div>
                         </div>
                     </div>
-                    <div class="mt-4 pt-2 border-t border-gray-800/80 flex justify-between text-[9px] text-gray-500 font-mono relative z-10">
-                        <!-- NABIZ GİBİ PARLAYAN DURUM -->
-                        <span class="animate-pulse text-red-500 font-bold">DURUM: MÜRACAAT</span>
-                        <span>TÜRK NİZAM HAREKETİ</span>
+                    <div class="mt-4 pt-2 border-t border-gray-800 flex justify-between text-[10px] text-gray-500 font-mono relative z-10">
+                        <span class="text-red-500 font-bold uppercase">DURUM: MÜRACAAT</span>
+                        <span class="text-gray-600">TÜRK NİZAM HAREKETİ</span>
                     </div>
                 </div>
 
-                <!-- ARKA YÜZ (TAM SS'DEKİ GİBİ SIRA NUMARASI) -->
-                <div class="backface-hidden absolute top-0 left-0 w-full h-full bg-gray-900/95 border border-red-900/40 rounded-xl p-8 flex flex-col items-center justify-center rotate-y-180">
-                    <h2 class="text-gray-500 text-xs tracking-widest uppercase mb-4 font-bold">Üyelik Numarası</h2>
-                    <!-- Sıralı Üye No Display (1000'den başlar) -->
-                    <div id="memberIdDisplay" class="text-6xl font-black text-white tracking-tighter shadow-lg">#0000</div>
-                    <p class="mt-6 text-[10px] text-gray-600 font-mono">Bu kimlik dijital mülkiyetinizdir.</p>
+                <!-- ARKA YÜZ (KAYIT SIRA NUMARASI) -->
+                <div class="backface-hidden absolute top-0 left-0 w-full h-full bg-gray-900 border border-gray-800 rounded-xl p-8 flex flex-col items-center justify-center rotate-y-180">
+                    <h2 class="text-gray-500 text-xs tracking-widest uppercase mb-3">Kayıt Sıra Numarası</h2>
+                    <!-- Sıralı kayıt numarasını buraya basacağız -->
+                    <div id="memberCount" class="text-6xl font-black text-white tracking-tighter shadow-lg">0000</div>
+                    <p class="mt-5 text-[10px] text-gray-600 font-mono">Kaydınızın mülkiyet numarasıdır.</p>
                 </div>
             </div>
         </div>
 
         <!-- FORM ALANI -->
-        <div id="formArea" class="bg-gray-900/90 border border-gray-800 p-6 rounded-xl shadow-xl backdrop-blur-md mt-6 relative z-10">
-            <div class="flex border-b border-gray-800 mb-6">
+        <div class="bg-gray-900 border border-gray-800 p-6 rounded-xl shadow-xl backdrop-blur-md mt-6 relative z-10">
+            <div class="flex border-b border-gray-800 mb-5">
                 <button id="tabGirisBtn" onclick="formDegistir('giris')" class="flex-1 py-2 text-xs font-bold text-red-600 border-b-2 border-red-600 transition">Giriş Yap</button>
                 <button id="tabKayitBtn" onclick="formDegistir('kayit')" class="flex-1 py-2 text-xs font-bold text-gray-500 border-b-2 border-transparent transition">Kayıt Ol</button>
             </div>
 
-            <!-- 1. GİRİŞ FORMU (BENİ HATIRLA DAHİL) -->
-            <form id="formGiris" class="space-y-4 form-fade" oninput="checkForm('giris')">
-                <input type="email" id="girisEmail" required placeholder="E-Posta" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus-glow outline-none transition shadow-inner">
-                
-                <!-- PAROLA GÖSTER/GİZLE -->
-                <div class="relative">
-                    <input type="password" id="girisParola" required placeholder="Parola" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus-glow outline-none transition shadow-inner">
-                    <button type="button" onclick="togglePassword('giris')" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-red-500">
-                        <svg id="eyeGiris" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                    </button>
-                </div>
-
-                <!-- BENİ HATIRLA -->
-                <div class="flex items-center justify-between text-xs text-gray-500">
-                    <div class="flex items-center gap-2">
-                        <input type="checkbox" id="beniHatirla" class="accent-red-600 bg-gray-950 border-gray-800 rounded">
-                        <label for="beniHatirla">Beni Hatırla</label>
-                    </div>
-                    <a href="#" class="hover:text-red-500 transition">Parolamı Unuttum</a>
-                </div>
-
-                <button type="button" id="btnGiris" onclick="showToast('Giriş sistemi hazırlanıyor.')" class="w-full bg-red-700 text-white font-bold py-3 rounded text-xs transition hover:bg-red-800 shadow-lg shadow-red-950/30">Giriş Yap</button>
+            <!-- GİRİŞ FORMU -->
+            <form id="formGiris" class="space-y-4">
+                <input type="email" placeholder="E-Posta" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition shadow-inner">
+                <input type="password" placeholder="Parola" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition shadow-inner">
+                <button type="button" class="w-full bg-red-700 hover:bg-red-800 text-white font-bold py-2.5 rounded text-xs transition">Giriş Yap</button>
             </form>
 
-            <!-- 2. KAYIT FORMU (KİMLİKTEKİ E-POSTA DAHİL) -->
-            <form id="formKayit" class="space-y-4 form-fade hidden" oninput="checkForm('kayit')">
-                <input type="text" id="inputName" oninput="kartGuncelle()" required placeholder="Ad Soyad" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus-glow outline-none transition shadow-inner">
-                <input type="email" id="inputEmail" oninput="kartGuncelle()" required placeholder="E-Posta Adresi" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus-glow outline-none transition shadow-inner">
-                
-                <!-- PAROLA GÖSTER/GİZLE (KAYIT) -->
-                <div class="relative">
-                    <input type="password" id="kayitParola" required placeholder="Parola Oluştur" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus-glow outline-none transition shadow-inner">
-                    <button type="button" onclick="togglePassword('kayit')" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-red-500">
-                        <svg id="eyeKayit" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                    </button>
-                </div>
-
-                <input type="text" id="inputArea" oninput="kartGuncelle()" required placeholder="İlgi / Faaliyet Alanı" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus-glow outline-none transition shadow-inner">
-                
-                <!-- DİNAMİK BUTON (DİZABLED) -->
-                <button type="button" id="btnKayit" onclick="kayitOl()" class="w-full bg-red-700 text-white font-bold py-3 rounded text-xs transition hover:bg-red-800 shadow-lg shadow-red-950/30">Kayıt Başvurusunu Gönder</button>
+            <!-- KAYIT FORMU (İSTEDİĞİN DÖRT ALAN) -->
+            <form id="formKayit" class="space-y-4 hidden">
+                <input type="text" id="inputName" oninput="kartGuncelle()" placeholder="Ad-Soyad" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition shadow-inner">
+                <input type="email" id="inputEmail" placeholder="E-Posta Adresi" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition shadow-inner">
+                <input type="password" id="inputParola" placeholder="Parola Oluştur" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition shadow-inner">
+                <input type="text" id="inputArea" oninput="kartGuncelle()" placeholder="İlgi Faaliyet Alanı" class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition shadow-inner">
+                <button type="button" onclick="kayitMüracaati()" class="w-full bg-red-700 hover:bg-red-800 text-white font-bold py-2.5 rounded text-xs transition">Kayıt Başvurusunu Gönder</button>
             </form>
-
         </div>
     </div>
 
-    <!-- ALT BİLGİ ALANI (FOOTER) -->
-    <footer class="w-full text-center p-6 text-[10px] text-gray-700 font-mono relative z-10">
-        © 2026 Türk Nizam Hareketi. Tüm Hakları Saklıdır.
-    </footer>
-
     <script>
-        // Üye Numarası Sistemi (Sıralı, 1000'den başlar)
-        let memberCount = parseInt(localStorage.getItem('memberCount') || 1000);
-        document.getElementById('memberIdDisplay').innerText = "#" + memberCount;
+        // Üye Numarası Sayaç (Örnek olarak)
+        let memberId = 1;
 
-        // Kart Bilgilerini Canlı Güncelleme
+        // Canlı Kimlik Güncelleme
         function kartGuncelle() {
             document.getElementById('cardName').innerText = document.getElementById('inputName').value || "----";
-            document.getElementById('cardEmail').innerText = document.getElementById('inputEmail').value || "----";
             document.getElementById('cardArea').innerText = document.getElementById('inputArea').value || "----";
         }
 
         // Kart Döndürme (Flip)
-        function flipCard() { document.getElementById('cardInner').classList.toggle('rotate-y-180'); }
-
-        // Parola Göster/Gizle (Göz Simgesi)
-        function togglePassword(formTip) {
-            const idInput = formTip === 'giris' ? 'girisParola' : 'kayitParola';
-            const input = document.getElementById(idInput);
-            if (input.type === "password") { input.type = "text"; } 
-            else { input.type = "password"; }
+        function flipCard() {
+            document.getElementById('cardInner').classList.toggle('rotate-y-180');
         }
 
-        // Modern Toast Bildirim Alayı
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            const msgDiv = document.getElementById('toastMsg');
-            msgDiv.innerText = msg;
-            toast.classList.remove('translate-x-full');
-            setTimeout(() => toast.classList.add('translate-x-full'), 3000);
-        }
-
-        // Kayıt Ol ve Üye No Arttırma
-        function kayitOl() {
-            const btn = document.getElementById('btnKayit');
-            if(btn.classList.contains('btn-disabled')) { showToast('Lütfen tüm alanları doldurun.'); return; }
-            memberCount++;
-            localStorage.setItem('memberCount', memberCount);
-            document.getElementById('memberIdDisplay').innerText = "#" + memberCount;
-            showToast("Müracaat alındı! Sıra no: #" + memberCount);
-        }
-
-        // Formlar Arası Yumuşak Geçiş (Fade)
+        // Formlar Arası Geçiş
         function formDegistir(tip) {
-            const formArea = document.getElementById('formArea');
             const g = document.getElementById('formGiris'); const k = document.getElementById('formKayit');
             const gBtn = document.getElementById('tabGirisBtn'); const kBtn = document.getElementById('tabKayitBtn');
-            
-            // Fade-out efekti
-            formArea.style.opacity = 0;
-
-            setTimeout(() => {
-                if(tip === 'giris') { 
-                    g.classList.remove('hidden'); k.classList.add('hidden'); 
-                    gBtn.className="flex-1 py-2 text-xs font-bold text-red-600 border-b-2 border-red-600 transition"; 
-                    kBtn.className="flex-1 py-2 text-xs font-bold text-gray-500 border-b-2 border-transparent transition"; 
-                } else { 
-                    k.classList.remove('hidden'); g.classList.add('hidden'); 
-                    kBtn.className="flex-1 py-2 text-xs font-bold text-red-600 border-b-2 border-red-600 transition"; 
-                    gBtn.className="flex-1 py-2 text-xs font-bold text-gray-500 border-b-2 border-transparent transition"; 
-                }
-                // Dinamik buton kontrolünü yap
-                checkForm(tip);
-                // Fade-in efekti
-                formArea.style.opacity = 1;
-            }, 400); // form-fade transition süresine uygun
+            if(tip === 'giris') { g.classList.remove('hidden'); k.classList.add('hidden'); gBtn.className="flex-1 py-2 text-xs font-bold text-red-600 border-b-2 border-red-600 transition"; kBtn.className="flex-1 py-2 text-xs font-bold text-gray-500 border-b-2 border-transparent transition"; }
+            else { k.classList.remove('hidden'); g.classList.add('hidden'); kBtn.className="flex-1 py-2 text-xs font-bold text-red-600 border-b-2 border-red-600 transition"; gBtn.className="flex-1 py-2 text-xs font-bold text-gray-500 border-b-2 border-transparent transition"; }
         }
 
-        // Dinamik Buton Durumları (Kayıt Formu İçin)
-        function checkForm(formTip) {
-            if(formTip === 'giris') return; // Giriş butonu her zaman aktif kalabilir
-
-            const name = document.getElementById('inputName').value;
-            const email = document.getElementById('inputEmail').value;
-            const parola = document.getElementById('kayitParola').value;
-            const area = document.getElementById('inputArea').value;
-            const btn = document.getElementById('btnKayit');
-
-            // Eğer tüm alanlar doluysa
-            if(name.trim() && email.trim() && parola.trim() && area.trim()) {
-                btn.classList.remove('btn-disabled');
-            } else {
-                btn.classList.add('btn-disabled');
-            }
+        // Kayıt Müracaatı ve Sıra No
+        function kayitMüracaati() {
+            const countDisplay = document.getElementById('memberCount');
+            // Numaramızı 0001 formatına getiriyoruz
+            let formattedId = memberId.toString().padStart(4, '0');
+            countDisplay.innerText = formattedId;
+            memberId++;
+            // Başvuru alındığına dair geri bildirim
+            document.getElementById('phText').innerText = "BAŞVURU\nALINDI";
+            showToast("Müracaat alındı. Sıra no: " + formattedId);
         }
 
-        // Başlangıçta Kayıt Butonunu Pasif Yap
-        window.onload = () => { checkForm('kayit'); }
+        // Basit Toast Mesajı
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.innerText = msg;
+            toast.className = "fixed top-4 right-4 bg-red-900 border border-red-500 text-white px-4 py-2 rounded shadow-2xl z-50 text-xs";
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
 
         // Tilt (Eğim) Efekti
         const card = document.getElementById('cardContainer');
@@ -294,5 +176,5 @@
         document.addEventListener('mouseleave', () => card.style.transform = 'rotateY(0) rotateX(0)');
     </script>
 </body>
-            </html>
-                
+                    </html>
+    
