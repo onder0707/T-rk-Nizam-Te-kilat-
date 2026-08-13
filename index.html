@@ -5,16 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Türk Nizam Teşkilatı</title>
   <link rel="stylesheet" href="style.css">
-  <!-- FontAwesome İkonları -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-  <!-- Üst Bar (Header) -->
   <header class="header">
     <div class="header-brand" id="brand-link">
       <div class="logo-circle">
-        <i class="fa-solid fa-eagle"></i>
+        <img src="Screenshot_20260813-013040_Gallery.jpg" alt="Logo" class="brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <i class="fa-solid fa-eagle" style="display:none;"></i>
       </div>
       <h1 data-key="appName">Türk Nizam Teşkilatı</h1>
     </div>
@@ -23,7 +22,6 @@
     </button>
   </header>
 
-  <!-- Hamburger Menü (Açılır Panel) -->
   <div class="side-menu" id="side-menu">
     <div class="side-menu-header">
       <span data-key="menuTitle">Menü</span>
@@ -39,10 +37,8 @@
   </div>
   <div class="overlay" id="overlay"></div>
 
-  <!-- Ana İçerik Alanı -->
   <main class="main-content">
 
-    <!-- 1. ANA SAYFA -->
     <section id="page-home" class="page-section active">
       <div class="card header-card">
         <h2 data-key="appName">Türk Nizam Teşkilatı</h2>
@@ -72,7 +68,6 @@
       </div>
     </section>
 
-    <!-- 2. FORUM SAYFASI -->
     <section id="page-forum" class="page-section">
       <div class="card">
         <h2 data-key="forumTitle">Forum</h2>
@@ -80,7 +75,6 @@
       </div>
     </section>
 
-    <!-- 3. SOHBET SAYFASI -->
     <section id="page-chat" class="page-section">
       <div class="card">
         <h2 data-key="chatTitle">Sohbet</h2>
@@ -88,13 +82,12 @@
       </div>
     </section>
 
-    <!-- 4. PROFİL SAYFASI -->
     <section id="page-profile" class="page-section">
-      <!-- Kapak & Biyografi Kartı -->
       <div class="card profile-card">
         <div class="profile-banner">
           <button class="banner-edit-btn"><i class="fa-solid fa-camera"></i></button>
         </div>
+
         <div class="profile-info-header">
           <div class="avatar-container">
             <div class="avatar-img">
@@ -102,12 +95,13 @@
             </div>
             <button class="avatar-edit-btn"><i class="fa-solid fa-pencil"></i></button>
           </div>
+
           <div class="user-titles">
             <div class="name-edit-row">
-              <h3 id="display-name">Kullanıcı Adı</h3>
+              <h3 id="display-name">Önder</h3>
               <button class="icon-btn" id="edit-name-btn" title="İsmi Düzenle"><i class="fa-solid fa-pencil"></i></button>
             </div>
-            <span class="username-handle">@kullanici_adi</span>
+            <span class="username-handle" id="display-handle">@kullanici_adi</span>
           </div>
         </div>
 
@@ -137,7 +131,6 @@
         </div>
       </div>
 
-      <!-- Ayarlar ve Teknik Bilgiler Accordion -->
       <div class="card accordion-card">
         <button class="accordion-header" id="settings-accordion-btn">
           <span><i class="fa-solid fa-gear"></i> <strong data-key="settingsTitle">Ayarlar ve Teknik Bilgiler</strong></span>
@@ -145,7 +138,6 @@
         </button>
 
         <div class="accordion-body" id="settings-accordion-body">
-          <!-- Dark Mode -->
           <div class="setting-row">
             <div class="setting-info">
               <i class="fa-solid fa-moon icon-red"></i>
@@ -160,7 +152,6 @@
             </label>
           </div>
 
-          <!-- Metin Boyutu -->
           <div class="setting-row">
             <div class="setting-info">
               <i class="fa-solid fa-font icon-red"></i>
@@ -176,7 +167,6 @@
             </select>
           </div>
 
-          <!-- Dil Seçimi -->
           <div class="setting-row">
             <div class="setting-info">
               <i class="fa-solid fa-language icon-red"></i>
@@ -187,12 +177,12 @@
             </div>
             <select id="language-select" class="custom-select">
               <option value="tr">Türkçe 🇹🇷</option>
+              <option value="az">Azərbaycan 🇦🇿</option>
               <option value="en">English 🇬🇧</option>
               <option value="fr">Français 🇫🇷</option>
             </select>
           </div>
 
-          <!-- Teknik Sistem Bilgileri -->
           <div class="technical-box">
             <h5 data-key="techInfoTitle">Teknik & Sistem Bilgileri</h5>
             <div class="tech-item">
@@ -216,7 +206,6 @@
       </div>
     </section>
 
-    <!-- 5. TÜZÜK SAYFASI -->
     <section id="page-tuzuk" class="page-section">
       <div class="card">
         <h2><i class="fa-solid fa-book-bookmark icon-red"></i> <span data-key="tuzukTitle">Teşkilat Tüzüğü</span></h2>
@@ -228,7 +217,6 @@
 
   </main>
 
-  <!-- Alt Navigasyon Barı (Bottom Nav) -->
   <nav class="bottom-nav">
     <button class="nav-item active" data-target="page-home">
       <i class="fa-solid fa-house"></i>
@@ -254,5 +242,5 @@
 
   <script src="app.js"></script>
 </body>
-  </html>
-  
+          </html>
+          
