@@ -3,25 +3,25 @@
   --card-bg: #ffffff;
   --text-primary: #1a1a1a;
   --text-secondary: #666666;
-  --primary-red: #c01818;
-  --primary-red-hover: #9e1111;
-  --border-color: #e5e7eb;
-  --input-bg: #f9fafb;
-  --nav-bg: #ffffff;
-  --font-base: 14px;
+  --brand-red: #a81c1c;
+  --brand-red-hover: #861414;
+  --border-color: #e0e0e0;
+  --header-height: 60px;
+  --bottom-nav-height: 60px;
 }
 
 body.dark-mode {
   --bg-color: #121212;
   --card-bg: #1e1e1e;
-  --text-primary: #f0f0f0;
-  --text-secondary: #a0a0a0;
+  --text-primary: #f1f1f1;
+  --text-secondary: #aaaaaa;
   --border-color: #2c2c2c;
-  --input-bg: #2a2a2a;
-  --nav-bg: #181818;
 }
 
-/* Genel Sıfırlamalar */
+body.font-small { font-size: 14px; }
+body.font-normal { font-size: 16px; }
+body.font-large { font-size: 18px; }
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -32,24 +32,18 @@ body.dark-mode {
 body {
   background-color: var(--bg-color);
   color: var(--text-primary);
-  font-size: var(--font-base);
-  padding-top: 60px;
-  padding-bottom: 70px;
-  transition: background-color 0.3s, color 0.3s;
+  padding-top: var(--header-height);
+  padding-bottom: calc(var(--bottom-nav-height) + 15px);
+  min-height: 100vh;
 }
 
-/* Font Boyut Sınıfları */
-body.font-small { --font-base: 12px; }
-body.font-normal { --font-base: 14px; }
-body.font-large { --font-base: 16px; }
-
-/* Header */
+/* --- HEADER & LOGO --- */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 60px;
+  height: var(--header-height);
   background-color: var(--card-bg);
   border-bottom: 1px solid var(--border-color);
   display: flex;
@@ -64,35 +58,54 @@ body.font-large { --font-base: 16px; }
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  max-width: 80%;
 }
 
+/* Sol üst dairesel logo kapsayıcısı (Taşmayı %100 engeller) */
 .logo-circle {
   width: 36px;
   height: 36px;
+  min-width: 36px;
+  min-height: 36px;
   border-radius: 50%;
-  background-color: var(--primary-red);
-  color: #fff;
+  overflow: hidden;
+  background-color: var(--brand-red);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.brand-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.fallback-icon {
+  color: #ffffff;
   font-size: 18px;
 }
 
 .header-brand h1 {
-  font-size: 1.1rem;
-  color: var(--primary-red);
+  font-size: 18px;
   font-weight: 700;
+  color: var(--brand-red);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .menu-btn {
   background: none;
   border: none;
   font-size: 22px;
-  color: var(--primary-red);
+  color: var(--brand-red);
   cursor: pointer;
 }
 
-/* Yan Açılır Menü (Tüzük vs.) */
+/* --- SIDE MENU --- */
 .side-menu {
   position: fixed;
   top: 0;
@@ -100,10 +113,11 @@ body.font-large { --font-base: 16px; }
   width: 280px;
   height: 100%;
   background-color: var(--card-bg);
-  z-index: 300;
-  transition: right 0.3s ease;
-  padding: 20px;
   box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+  z-index: 200;
+  transition: right 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .side-menu.open {
@@ -111,13 +125,12 @@ body.font-large { --font-base: 16px; }
 }
 
 .side-menu-header {
+  padding: 18px;
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-weight: bold;
-  font-size: 1.2rem;
-  padding-bottom: 15px;
-  border-bottom: 1px solid var(--border-color);
 }
 
 .side-menu-header button {
@@ -130,28 +143,28 @@ body.font-large { --font-base: 16px; }
 
 .side-menu-links {
   list-style: none;
-  margin-top: 20px;
+  padding: 10px 0;
 }
 
 .side-menu-links a {
   display: flex;
   align-items: center;
   gap: 12px;
-  text-decoration: none;
+  padding: 12px 20px;
   color: var(--text-primary);
-  font-size: 1rem;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.side-menu-links a:hover {
+  background-color: rgba(0,0,0,0.05);
 }
 
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  z-index: 200;
+  inset: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 150;
   display: none;
 }
 
@@ -159,7 +172,7 @@ body.font-large { --font-base: 16px; }
   display: block;
 }
 
-/* Sayfa Görünümleri (SPA) */
+/* --- MAIN & SPA SECTIONS --- */
 .main-content {
   max-width: 600px;
   margin: 0 auto;
@@ -174,27 +187,25 @@ body.font-large { --font-base: 16px; }
   display: block;
 }
 
-/* Kartlar */
+/* --- CARDS & UI --- */
 .card {
   background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 16px;
   margin-bottom: 16px;
+  border: 1px solid var(--border-color);
 }
 
 .header-card h2 {
-  color: var(--primary-red);
-  font-size: 1.3rem;
+  color: var(--brand-red);
   margin-bottom: 6px;
 }
 
 .header-card p {
   color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-size: 14px;
 }
 
-/* İstatistik Grid */
 .stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -202,129 +213,131 @@ body.font-large { --font-base: 16px; }
 }
 
 .stat-card {
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: 4px;
 }
 
 .icon-red {
-  color: var(--primary-red);
+  color: var(--brand-red);
 }
 
 .stat-number {
-  font-size: 1.4rem;
+  font-size: 22px;
   font-weight: bold;
+  margin: 4px 0;
 }
 
 .stat-label {
-  font-size: 0.85rem;
+  font-size: 12px;
   color: var(--text-secondary);
 }
 
-/* Auth / Misafir Kartı */
 .auth-card {
-  position: relative;
   text-align: center;
 }
 
 .guest-badge {
-  position: absolute;
-  top: -10px;
-  right: 16px;
-  background-color: var(--primary-red);
-  color: white;
-  font-size: 0.7rem;
+  background-color: #fee2e2;
+  color: var(--brand-red);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
   font-weight: bold;
-  padding: 2px 8px;
-  border-radius: 10px;
+  display: inline-block;
+  margin-bottom: 10px;
 }
 
 .auth-card p {
+  font-size: 13px;
   color: var(--text-secondary);
-  margin: 15px 0;
-  font-size: 0.9rem;
+  margin-bottom: 14px;
 }
 
 .auth-buttons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   gap: 10px;
 }
 
-/* Butonlar */
 .btn {
+  flex: 1;
   padding: 10px;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
   border: none;
-  font-size: 0.9rem;
 }
 
 .btn-primary {
-  background-color: var(--primary-red);
-  color: #fff;
+  background-color: var(--brand-red);
+  color: white;
 }
 
 .btn-outline {
-  background: transparent;
-  border: 1px solid var(--primary-red);
-  color: var(--primary-red);
+  background-color: transparent;
+  border: 1px solid var(--brand-red);
+  color: var(--brand-red);
 }
 
-/* Profil Detayları */
+/* --- PROFILE --- */
+.profile-card {
+  padding: 0;
+  overflow: hidden;
+}
+
 .profile-banner {
-  height: 100px;
-  background: linear-gradient(135deg, #800000, #330000);
-  border-radius: 8px 8px 0 0;
+  height: 120px;
+  background-color: var(--brand-red);
   position: relative;
-  margin: -16px -16px 0 -16px;
+  background-size: cover;
+  background-position: center;
 }
 
 .banner-edit-btn, .avatar-edit-btn {
   position: absolute;
-  background: rgba(0,0,0,0.6);
-  color: #fff;
+  background-color: rgba(0,0,0,0.6);
+  color: white;
   border: none;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .banner-edit-btn { top: 10px; right: 10px; }
 
 .profile-info-header {
-  display: flex;
-  align-items: flex-end;
-  gap: 12px;
-  margin-top: -30px;
-  margin-bottom: 16px;
+  padding: 0 16px 16px;
+  position: relative;
 }
 
 .avatar-container {
   position: relative;
+  width: 80px;
+  height: 80px;
+  margin-top: -40px;
+  margin-bottom: 10px;
 }
 
 .avatar-img {
-  width: 70px;
-  height: 70px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  background-color: #ccc;
+  background-color: #e0e0e0;
   border: 3px solid var(--card-bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
-  color: #fff;
+  font-size: 36px;
+  color: #777;
+  overflow: hidden;
 }
 
-.avatar-edit-btn { bottom: 0; right: -4px; background: var(--primary-red); }
+.avatar-edit-btn { bottom: 0; right: -5px; background-color: var(--brand-red); }
 
 .name-edit-row {
   display: flex;
@@ -335,22 +348,22 @@ body.font-large { --font-base: 16px; }
 .icon-btn {
   background: none;
   border: none;
-  color: var(--primary-red);
+  color: var(--brand-red);
   cursor: pointer;
 }
 
 .username-handle {
   color: var(--text-secondary);
-  font-size: 0.85rem;
+  font-size: 13px;
 }
 
 .profile-meta-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  padding: 12px 0;
+  padding: 12px 16px;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
+  gap: 10px;
 }
 
 .meta-item {
@@ -359,58 +372,50 @@ body.font-large { --font-base: 16px; }
   gap: 10px;
 }
 
-.meta-label {
-  display: block;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-}
+.meta-label { font-size: 11px; color: var(--text-secondary); display: block; }
+.meta-value { font-size: 13px; }
 
-.meta-value {
-  font-size: 0.85rem;
-}
-
-.about-section {
-  margin-top: 12px;
-}
+.about-section { padding: 16px; }
 
 .about-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .edit-text-btn {
   background: none;
   border: none;
-  color: var(--primary-red);
-  font-weight: 600;
+  color: var(--brand-red);
   cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-/* Accordion Ayarlar */
+/* --- ACCORDION & SETTINGS --- */
 .accordion-header {
   width: 100%;
-  background: none;
-  border: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: none;
+  border: none;
   color: var(--text-primary);
-  font-size: 1rem;
+  font-size: 15px;
   cursor: pointer;
 }
 
 .accordion-body {
   display: none;
-  margin-top: 16px;
   padding-top: 16px;
+  margin-top: 12px;
   border-top: 1px solid var(--border-color);
 }
 
-.accordion-body.open {
-  display: block;
-}
+.accordion-body.open { display: block; }
 
 .setting-row {
   display: flex;
@@ -426,7 +431,7 @@ body.font-large { --font-base: 16px; }
 }
 
 .setting-info p {
-  font-size: 0.75rem;
+  font-size: 12px;
   color: var(--text-secondary);
 }
 
@@ -434,11 +439,11 @@ body.font-large { --font-base: 16px; }
   padding: 6px 10px;
   border-radius: 6px;
   border: 1px solid var(--border-color);
-  background-color: var(--input-bg);
+  background-color: var(--card-bg);
   color: var(--text-primary);
 }
 
-/* Toggle Switch */
+/* Switch UI */
 .switch {
   position: relative;
   display: inline-block;
@@ -451,75 +456,72 @@ body.font-large { --font-base: 16px; }
 .slider {
   position: absolute;
   cursor: pointer;
-  top: 0; left: 0; right: 0; bottom: 0;
+  inset: 0;
   background-color: #ccc;
-  transition: .4s;
+  transition: .3s;
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 18px; width: 18px;
-  left: 3px; bottom: 3px;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
   background-color: white;
-  transition: .4s;
+  transition: .3s;
 }
 
-input:checked + .slider { background-color: var(--primary-red); }
+input:checked + .slider { background-color: var(--brand-red); }
 input:checked + .slider:before { transform: translateX(20px); }
 .slider.round { border-radius: 24px; }
 .slider.round:before { border-radius: 50%; }
 
-/* Teknik Bilgi Kutusu */
 .technical-box {
-  background-color: var(--input-bg);
-  border-radius: 8px;
+  background-color: rgba(0,0,0,0.03);
   padding: 12px;
-  margin-top: 10px;
-}
-
-.technical-box h5 {
-  color: var(--primary-red);
-  margin-bottom: 8px;
+  border-radius: 8px;
+  margin-top: 12px;
 }
 
 .tech-item {
   display: flex;
   justify-content: space-between;
-  font-size: 0.8rem;
-  margin-bottom: 6px;
+  font-size: 12px;
+  margin-top: 6px;
 }
 
 .ping-active { color: #10b981; font-weight: bold; }
 
 .tech-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   gap: 8px;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .btn-tech {
+  flex: 1;
   padding: 6px;
-  border: 1px solid var(--primary-red);
-  background: transparent;
-  color: var(--primary-red);
+  font-size: 11px;
+  background: none;
+  border: 1px solid var(--brand-red);
+  color: var(--brand-red);
   border-radius: 6px;
-  font-size: 0.75rem;
   cursor: pointer;
 }
 
-/* Alt Navigasyon Barı & Kırmızı Nokta Efekti */
+/* --- BOTTOM NAV --- */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60px;
-  background-color: var(--nav-bg);
+  height: var(--bottom-nav-height);
+  background-color: var(--card-bg);
   border-top: 1px solid var(--border-color);
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   z-index: 100;
 }
 
@@ -529,41 +531,25 @@ input:checked + .slider:before { transform: translateX(20px); }
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  gap: 3px;
   color: var(--text-secondary);
-  font-size: 0.75rem;
-  gap: 2px;
+  font-size: 11px;
   cursor: pointer;
   position: relative;
+  flex: 1;
 }
 
-.nav-item i {
-  font-size: 18px;
-}
+.nav-item i { font-size: 18px; }
 
-/* Aktif Sekme Stili */
-.nav-item.active {
-  color: var(--primary-red);
-  font-weight: bold;
-}
+.nav-item.active { color: var(--brand-red); font-weight: bold; }
 
 .active-dot {
-  display: none;
   width: 4px;
   height: 4px;
-  background-color: var(--primary-red);
+  background-color: var(--brand-red);
   border-radius: 50%;
-  position: absolute;
-  bottom: 6px;
+  display: none;
 }
 
-.nav-item.active .active-dot {
-  display: block;
-}
-
-.tuzuk-text {
-  line-height: 1.6;
-  color: var(--text-primary);
-  margin-top: 10px;
-                      }
-   
+.nav-item.active .active-dot { display: block; }
+  
