@@ -191,7 +191,10 @@ document.addEventListener("DOMContentLoaded", () => {
     item.addEventListener("click", () => switchPage(item.getAttribute("data-target")));
   });
 
-  document.getElementById("brand-link").addEventListener("click", () => switchPage("page-home"));
+  const brandLink = document.getElementById("brand-link");
+  if (brandLink) {
+    brandLink.addEventListener("click", () => switchPage("page-home"));
+  }
 
   // Side Menu
   const menuToggle = document.getElementById("menu-toggle");
@@ -210,15 +213,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  menuToggle.addEventListener("click", () => toggleMenu(true));
-  menuClose.addEventListener("click", () => toggleMenu(false));
-  overlay.addEventListener("click", () => toggleMenu(false));
+  if (menuToggle) menuToggle.addEventListener("click", () => toggleMenu(true));
+  if (menuClose) menuClose.addEventListener("click", () => toggleMenu(false));
+  if (overlay) overlay.addEventListener("click", () => toggleMenu(false));
 
-  menuTuzukLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    toggleMenu(false);
-    switchPage("page-tuzuk");
-  });
+  if (menuTuzukLink) {
+    menuTuzukLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      toggleMenu(false);
+      switchPage("page-tuzuk");
+    });
+  }
 
   // İsim Düzenleme
   const editNameBtn = document.getElementById("edit-name-btn");
@@ -270,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Dil Değiştirme (textContent kullanarak)
+  // Dil Değiştirme
   const langSelect = document.getElementById("language-select");
   function changeLanguage(lang) {
     const keyMap = translations[lang];
@@ -287,4 +292,4 @@ document.addEventListener("DOMContentLoaded", () => {
     langSelect.addEventListener("change", (e) => changeLanguage(e.target.value));
   }
 });
-    
+      
