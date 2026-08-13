@@ -11,6 +11,8 @@
 
   <input type="file" id="banner-file-input" accept="image/png, image/jpeg, image/gif" style="display: none;">
   <input type="file" id="avatar-file-input" accept="image/png, image/jpeg, image/gif" style="display: none;">
+  
+  <input type="file" id="post-image-input" accept="image/png, image/jpeg, image/gif" style="display: none;">
 
   <header class="header">
     <div class="header-brand" id="brand-link">
@@ -70,8 +72,7 @@
         </div>
       </div>
     </section>
-
-    <section id="page-forum" class="page-section">
+        <section id="page-forum" class="page-section">
       <div class="card create-post-card">
         <h3 class="card-title"><i class="fa-solid fa-pen-to-square icon-red"></i> <span data-key="createPostTitle">Yeni Paylaşım Oluştur</span></h3>
         
@@ -102,17 +103,38 @@
           <textarea id="post-input" class="custom-textarea" rows="3" placeholder="Aklınızdan ne geçiyor?"></textarea>
         </div>
 
-        <button class="btn btn-primary full-width" id="submit-post-btn" data-key="shareBtn">Paylaş</button>
+        <div class="media-upload-bar">
+          <button type="button" class="btn-attach-img" id="attach-img-btn">
+            <i class="fa-solid fa-camera icon-red"></i> Fotoğraf / Görsel Ekle
+          </button>
+        </div>
+
+        <div id="image-preview-container" class="image-preview-box" style="display: none;">
+          <img id="image-preview-el" src="" alt="Önizleme">
+          <button type="button" id="remove-img-btn" class="btn-remove-img"><i class="fa-solid fa-xmark"></i> Görseli Kaldır</button>
+        </div>
+
+        <button class="btn btn-primary full-width" id="submit-post-btn" data-key="shareBtn" style="margin-top: 10px;">Paylaş</button>
       </div>
 
-      <div class="category-filter-bar">
-        <button class="cat-chip active" data-cat="all" data-key="catAll">Tümü</button>
-        <button class="cat-chip" data-cat="duyuru" data-key="catDuyuru">Duyuru</button>
-        <button class="cat-chip" data-cat="haber" data-key="catHaber">Haber</button>
-        <button class="cat-chip" data-cat="tartisma" data-key="catTartisma">Tartışma</button>
-        <button class="cat-chip" data-cat="genel" data-key="catGenel">Genel</button>
-        <button class="cat-chip" data-cat="saha" data-key="catSaha">Saha Çalışması</button>
-        <button class="cat-chip" data-cat="soru" data-key="catSoru">Soru / Cevap</button>
+      <div class="filter-sort-wrapper">
+        <div class="category-filter-bar">
+          <button class="cat-chip active" data-cat="all" data-key="catAll">Tümü</button>
+          <button class="cat-chip" data-cat="duyuru" data-key="catDuyuru">Duyuru</button>
+          <button class="cat-chip" data-cat="haber" data-key="catHaber">Haber</button>
+          <button class="cat-chip" data-cat="tartisma" data-key="catTartisma">Tartışma</button>
+          <button class="cat-chip" data-cat="genel" data-key="catGenel">Genel</button>
+          <button class="cat-chip" data-cat="saha" data-key="catSaha">Saha Çalışması</button>
+          <button class="cat-chip" data-cat="soru" data-key="catSoru">Soru / Cevap</button>
+        </div>
+
+        <div class="sort-dropdown-container">
+          <select id="sort-posts-select" class="custom-select sort-select">
+            <option value="newest">En Yeniler</option>
+            <option value="popular">En Popüler</option>
+            <option value="commented">En Çok Yorum Alanlar</option>
+          </select>
+        </div>
       </div>
 
       <div id="posts-container"></div>
@@ -251,10 +273,90 @@
 
     <section id="page-tuzuk" class="page-section">
       <div class="card">
-        <h2><i class="fa-solid fa-book-bookmark icon-red"></i> <span data-key="tuzukTitle">Teşkilat Tüzüğü</span></h2>
-        <p class="tuzuk-text" data-key="tuzukContent">
-          Teşkilatımızın temel ilkeleri milli birlik, dürüstlük ve vatan sevgisi üzerine kuruludur. Tüm üyelerimiz hiyerarşik düzene ve etik kurallara uymakla yükümlüdür.
-        </p>
+        <h2><i class="fa-solid fa-book-bookmark icon-red"></i> <span data-key="tuzukTitle">Türk Nizam Hareketi İç Tüzüğü</span></h2>
+        <p class="tuzuk-subtext">Teşkilatımızın ilke, hiyerarşi ve çalışma esasları aşağıda belirtilmiştir.</p>
+      </div>
+
+      <div class="tuzuk-container">
+        <div class="tuzuk-card">
+          <div class="tuzuk-card-header">
+            <span class="tuzuk-badge">Madde 1</span>
+            <h4>Hareketin Temel Amaç ve Görevleri</h4>
+          </div>
+          <p class="tuzuk-body">Türk Nizam Hareketi’nin temel amaç ve görevleri Türk Devleti ve Milleti’ne teveccüh eden ve edecek olan musibetlerle mücadele etmek, Türk Nizamı’na tehdit teşkil eden unsurlarla mücadele etmek, Türk Kültürü ve Türk Tarihini korumak ve yaşatmak ve “Türk Milleti”nin birliğine zarar veren unsurlarla mücadele etmek ve bunları temin etmek için gerekli her türlü makul eylemi yapmak ve maddi-manevi tüm gerek ve ihtiyaçları gücü yettiğince karşılamaya çalışmaktır.</p>
+        </div>
+
+        <div class="tuzuk-card">
+          <div class="tuzuk-card-header">
+            <span class="tuzuk-badge">Madde 2</span>
+            <h4>Hareketin Esas ve İlkeleri</h4>
+          </div>
+          <p class="tuzuk-body">Türk Nizam Hareketi; Mustafa Kemal Atatürk ve Madde 4’te bahsedilen ögelere saygılı ve Madde 4’te bahsedilen özellikleri taşıyan Milliyetçi, Kemalist, İttihatçı, Türkçü, Turancı vb. her türlü fikir mensubuna açıktır.</p>
+        </div>
+
+        <div class="tuzuk-card">
+          <div class="tuzuk-card-header">
+            <span class="tuzuk-badge">Madde 3</span>
+            <h4>Hareket’in Sınır ve Bağlayıcıları</h4>
+          </div>
+          <p class="tuzuk-body">Milli Nizam Hareketi Türkiye Cumhuriyeti Anayasası ve Adil Türk Hukuku’na bağlıdır. Milli Nizam Hareketi hiçbir şekilde Anayasa’yı kasten ihlâl etmez; yalnızca gerekli haller olgunlaştığı takdirde meşru müdafaa haklarını kullanır lâkin hiçbir şekilde Türk Hukuku kasten karşımıza alınmaz.</p>
+        </div>
+
+        <div class="tuzuk-card">
+          <div class="tuzuk-card-header">
+            <span class="tuzuk-badge">Madde 4</span>
+            <h4>Üyeliğin Şartları</h4>
+          </div>
+          <p class="tuzuk-body">Türk Nizam Hareketi’nin her üyesi Mustafa Kemal Atatürk’e, dinlere ve kutsal kitaplara, 16 Türk Devleti’nin kurucusu ve zirve dönem hükümdarlarına, Türk Milleti’ne hıyanet içinde olmamış Türk tarihi için elzem şahsiyetlere, bağımsız ve özerk Türk Devletleri ile Türk Topluluklarına saygı duymak ve bunlara zarar verebilecek fiillerden kaçınmak zorundadır. Türk Milleti, Türkiye Cumhuriyeti ve Türkiye Cumhuriyeti’nin kurucu değerlerine tam sadık olmalıdır.</p>
+        </div>
+
+        <div class="tuzuk-card">
+          <div class="tuzuk-card-header">
+            <span class="tuzuk-badge">Madde 5</span>
+            <h4>Değiştirilemez Maddeler</h4>
+          </div>
+          <p class="tuzuk-body">Tüzük’ün 1. maddesindeki "Hareket’in Amaç ve Görevleri" hakkındaki hükümler ile Madde 2, Madde 3, Madde 4 ve işbu Madde 5 hükümleri değiştirilemez; değiştirilmesi teklif dahi edilemez.</p>
+        </div>
+
+        <div class="tuzuk-card">
+          <div class="tuzuk-card-header">
+            <span class="tuzuk-badge">Madde 6</span>
+            <h4>Merkez Karar Heyeti’nin Yetki ve Sorumlulukları</h4>
+          </div>
+          <p class="tuzuk-body">Merkez Karar Heyeti (MKH), Hareketin en yüksek karar, yürütme ve disiplin organıdır. Bu heyet; Hareket Lideri (Heyet Başkanı), Hareket 2. Lideri (Heyet İkinci Başkanı), Genel Sekreter, Hukuk Başkanı, Halkla İlişkiler Başkanı, Bilişim ve Teknoloji Başkanı ve üyelerin kendi aralarından seçeceği bir adet "Üye Temsilcisi"nden müteşekkildir. Heyetin sorumluluk ve yetkileri; hareket içi asayişi, düzeni ve hiyerarşiyi tesis etmek; hareketin amaç ve şiarına uygun kararlar almak; üyelik şartlarına aykırı davrananların üyeliğini iptal etmek ve tüzüğün izin verdiği sınırlar dahilinde madde değişikliklerini onaylamaktır.</p>
+        </div>
+
+        <div class="tuzuk-card">
+          <div class="tuzuk-card-header">
+            <span class="tuzuk-badge">Madde 7</span>
+            <h4>Üyelikten Çıkarma ve Disiplin</h4>
+          </div>
+          <p class="tuzuk-body">Türk Nizam Hareketi, mutlak disiplin ve hiyerarşi esasına göre teşkilatlanır. Kararlar Merkez Karar Heyeti tarafından alınır ve tüm alt birimlerce tereddütsüz uygulanır. Her üye, teşkilat silsilesine ve liderliğe saygı duymakla yükümlüdür. Madde 4’te belirtilen mukaddesata, milli ve manevi değerlere dil uzatan, iç disiplini bozan, hiyerarşik yapıyı sarsan veya liderlik makamına itaatsizlik edenler, Merkez Karar Heyeti kararıyla hareketten kesin olarak uzaklaştırılır.</p>
+        </div>
+
+        <div class="tuzuk-card">
+          <div class="tuzuk-card-header">
+            <span class="tuzuk-badge">Madde 8</span>
+            <h4>Karar Alma Mekanizması</h4>
+          </div>
+          <p class="tuzuk-body">Türk Nizam Hareketi’nin iç işleyişi merkeziyetçi yönetim esasına dayanır. Faaliyet planları, resmi açıklamalar, sosyal medya stratejileri ve kurumsal hamleler sadece Merkez Karar Heyeti’nin onayı ve talimatıyla yürütülür. Hiçbir alt birim, temsilcilik veya üye; merkezden bağımsız olarak hareket adına karar alamaz, harici kurum veya kuruluşlarla resmi bağ kuramaz ve kendi başına eylem veya etkinlik planlayamaz.</p>
+        </div>
+
+        <div class="tuzuk-card">
+          <div class="tuzuk-card-header">
+            <span class="tuzuk-badge">Madde 9</span>
+            <h4>İç İşleyiş ve Görev Sorumluluğu</h4>
+          </div>
+          <p class="tuzuk-body">Türk Nizam Hareketi içindeki işbölümü, üyelerin yetkinliklerine göre Merkez Karar Heyeti tarafından belirlenir. Her üye kendisine verilen görevi sadakatle, zamanında ve hareketin gizlilik kurallarına uygun olarak yerine getirmekle mükelleftir. Görevlerin aksatılması veya koordinasyon dışı bireysel hareket edilmesi iç işleyişin ihlali sayılır.</p>
+        </div>
+
+        <div class="tuzuk-card">
+          <div class="tuzuk-card-header">
+            <span class="tuzuk-badge">Madde 10</span>
+            <h4>Teşkilat Yapısı ve Hiyerarşi</h4>
+          </div>
+          <p class="tuzuk-body">Türk Nizam Hareketi, tam disiplin ve hiyerarşi esasına göre teşkilatlanır. Hareketin kararları Merkez Karar Heyeti tarafından alınır ve alt birimlerce tereddütsüz uygulanır. Her üye, teşkilatın silsilesine ve liderlik makamına saygı duymakla yükümlüdür.</p>
+        </div>
       </div>
     </section>
 
@@ -285,5 +387,5 @@
 
   <script src="app.js"></script>
 </body>
-              </html>
-  
+</html>                                                                 </html>
+          
