@@ -39,7 +39,19 @@ const translations = {
     navForum: "Forum",
     navChat: "Sohbet",
     navProfile: "Profil",
-    tuzukContent: "Teşkilatımızın temel ilkeleri milli birlik, dürüstlük ve vatan sevgisi üzerine kuruludur. Tüm üyelerimiz hiyerarşik düzene ve etik kurallara uymakla yükümlüdür."
+    tuzukContent: "Teşkilatımızın temel ilkeleri milli birlik, dürüstlük ve vatan sevgisi üzerine kuruludur. Tüm üyelerimiz hiyerarşik düzene ve etik kurallara uymakla yükümlüdür.",
+    createPostTitle: "Yeni Paylaşım Oluştur",
+    typePost: "Gönderi",
+    typeDiscussion: "Tartışma (Forum)",
+    catSelect: "Kategori Seçin...",
+    catAll: "Tümü",
+    catDuyuru: "Duyuru",
+    catHaber: "Haber",
+    catTartisma: "Tartışma",
+    catGenel: "Genel",
+    catSaha: "Saha Çalışması",
+    catSoru: "Soru / Cevap",
+    shareBtn: "Paylaş"
   },
   az: {
     appName: "Türk Nizam Təşkilatı",
@@ -81,7 +93,19 @@ const translations = {
     navForum: "Forum",
     navChat: "Söhbət",
     navProfile: "Profil",
-    tuzukContent: "Təşkilatımızın əsas prinsipləri milli birlik, dürüstlük və vətən sevgisi üzərində qurulub. Bütün üzvlərimiz iyerarxik qaydalara və etik normalara riayət etməlidirlər."
+    tuzukContent: "Təşkilatımızın əsas prinsipləri milli birlik, dürüstlük və vətən sevgisi üzərində qurulub. Bütün üzvlərimiz iyerarxik qaydalara və etik normalara riayət etməlidirlər.",
+    createPostTitle: "Yeni Paylaşım Yarat",
+    typePost: "Post",
+    typeDiscussion: "Müzakirə (Forum)",
+    catSelect: "Kateqoriya Seçin...",
+    catAll: "Hamısı",
+    catDuyuru: "Elan",
+    catHaber: "Xəbər",
+    catTartisma: "Müzakirə",
+    catGenel: "Ümumi",
+    catSaha: "Sahə İşləri",
+    catSoru: "Sual / Cavab",
+    shareBtn: "Paylaş"
   },
   en: {
     appName: "Turkish Order Organization",
@@ -123,7 +147,19 @@ const translations = {
     navForum: "Forum",
     navChat: "Chat",
     navProfile: "Profile",
-    tuzukContent: "The core principles of our organization are built upon national unity, integrity, and patriotism. All members are obliged to comply with the hierarchy and ethical rules."
+    tuzukContent: "The core principles of our organization are built upon national unity, integrity, and patriotism. All members are obliged to comply with the hierarchy and ethical rules.",
+    createPostTitle: "Create New Post",
+    typePost: "Post",
+    typeDiscussion: "Discussion (Forum)",
+    catSelect: "Select Category...",
+    catAll: "All",
+    catDuyuru: "Announcement",
+    catHaber: "News",
+    catTartisma: "Discussion",
+    catGenel: "General",
+    catSaha: "Field Work",
+    catSoru: "Q & A",
+    shareBtn: "Share"
   },
   fr: {
     appName: "Organisation de l'Ordre Turc",
@@ -165,9 +201,42 @@ const translations = {
     navForum: "Forum",
     navChat: "Chat",
     navProfile: "Profil",
-    tuzukContent: "Les principes fondamentaux de notre organisation reposent sur l'unité nationale, l'intégrité et le patriotisme. Tous les membres sont tenus de respecter la hiérarchie et les règles éthiques."
+    tuzukContent: "Les principes fondamentaux de notre organisation reposent sur l'unité nationale, l'intégrité et le patriotisme. Tous les membres sont tenus de respecter la hiérarchie et les règles éthiques.",
+    createPostTitle: "Créer une publication",
+    typePost: "Post",
+    typeDiscussion: "Discussion (Forum)",
+    catSelect: "Choisir une catégorie...",
+    catAll: "Tous",
+    catDuyuru: "Annonce",
+    catHaber: "Nouvelles",
+    catTartisma: "Discussion",
+    catGenel: "Général",
+    catSaha: "Travail sur le terrain",
+    catSoru: "Questions / Réponses",
+    shareBtn: "Partager"
   }
 };
+
+// Örnek Gönderi Hafızası
+let postsData = [
+  {
+    id: 1,
+    author: "Önder",
+    handle: "@kullanici_adi",
+    type: "discussion", // 'post' veya 'discussion'
+    category: "duyuru",
+    content: "Türk Nizam Teşkilatı yeni dijital platformumuz resmen yayına girmiştir. Tüm üyelerimize hayırlı olsun!",
+    time: "10 dk önce",
+    likes: 5,
+    likedByUser: false,
+    comments: [
+      { author: "Ahmet", text: "Tebrikler, çok güzel görünüyor!" }
+    ]
+  }
+];
+
+let selectedFilterCategory = "all";
+let userAvatarUrl = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   // SPA Router
@@ -225,31 +294,215 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // İsim Düzenleme
+  // --- PROFiL BİLGiLERi VE RESiM/GIF YÜKLEME ---
   const editNameBtn = document.getElementById("edit-name-btn");
   const displayName = document.getElementById("display-name");
-
   if (editNameBtn) {
     editNameBtn.addEventListener("click", () => {
       const newName = prompt("Yeni Adınızı Girin:", displayName.textContent);
-      if (newName && newName.trim() !== "") {
-        displayName.textContent = newName.trim();
-      }
+      if (newName && newName.trim() !== "") displayName.textContent = newName.trim();
     });
   }
 
-  // Hakkımda Düzenleme
   const editAboutBtn = document.getElementById("edit-about-btn");
   const aboutText = document.getElementById("about-text");
-
   if (editAboutBtn) {
     editAboutBtn.addEventListener("click", () => {
       const newAbout = prompt("Hakkımda metnini düzenleyin:", aboutText.textContent);
-      if (newAbout !== null && newAbout.trim() !== "") {
-        aboutText.textContent = newAbout.trim();
+      if (newAbout !== null && newAbout.trim() !== "") aboutText.textContent = newAbout.trim();
+    });
+  }
+
+  // Avatar Yükleme (GIF/Resim)
+  const triggerAvatarBtn = document.getElementById("trigger-avatar-btn");
+  const avatarFileInput = document.getElementById("avatar-file-input");
+  const avatarImgEl = document.getElementById("avatar-img-el");
+
+  if (triggerAvatarBtn) triggerAvatarBtn.addEventListener("click", () => avatarFileInput.click());
+  if (avatarFileInput) {
+    avatarFileInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        userAvatarUrl = URL.createObjectURL(file);
+        avatarImgEl.innerHTML = `<img src="${userAvatarUrl}" alt="Avatar">`;
+        renderPosts(); // Gönderilerdeki avatarları da güncelle
       }
     });
   }
+
+  // Banner Yükleme (GIF/Resim)
+  const triggerBannerBtn = document.getElementById("trigger-banner-btn");
+  const bannerFileInput = document.getElementById("banner-file-input");
+  const profileBannerEl = document.getElementById("profile-banner-el");
+
+  if (triggerBannerBtn) triggerBannerBtn.addEventListener("click", () => bannerFileInput.click());
+  if (bannerFileInput) {
+    bannerFileInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const url = URL.createObjectURL(file);
+        profileBannerEl.style.backgroundImage = `url('${url}')`;
+      }
+    });
+  }
+
+  // --- FORUM & GÖNDERi SİSTEMİ ---
+  const typeBtns = document.querySelectorAll(".type-btn");
+  typeBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      typeBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+  });
+
+  const submitPostBtn = document.getElementById("submit-post-btn");
+  const postInput = document.getElementById("post-input");
+  const postCatSelect = document.getElementById("post-category-select");
+
+  if (submitPostBtn) {
+    submitPostBtn.addEventListener("click", () => {
+      const content = postInput.value.trim();
+      const category = postCatSelect.value;
+      const type = document.querySelector('input[name="postType"]:checked').value;
+
+      if (!content) {
+        alert("Lütfen bir şeyler yazın.");
+        return;
+      }
+      if (category === "all") {
+        alert("Lütfen geçerli bir kategori seçin.");
+        return;
+      }
+
+      const newPost = {
+        id: Date.now(),
+        author: displayName.textContent,
+        handle: document.getElementById("display-handle").textContent,
+        type: type,
+        category: category,
+        content: content,
+        time: "Şimdi",
+        likes: 0,
+        likedByUser: false,
+        comments: []
+      };
+
+      postsData.unshift(newPost);
+      postInput.value = "";
+      renderPosts();
+    });
+  }
+
+  // Kategori Filtre Butonları
+  const catChips = document.querySelectorAll(".cat-chip");
+  catChips.forEach(chip => {
+    chip.addEventListener("click", () => {
+      catChips.forEach(c => c.classList.remove("active"));
+      chip.classList.add("active");
+      selectedFilterCategory = chip.getAttribute("data-cat");
+      renderPosts();
+    });
+  });
+
+  // Gönderileri Ekrana Basma Fonksiyonu
+  function renderPosts() {
+    const container = document.getElementById("posts-container");
+    if (!container) return;
+    container.innerHTML = "";
+
+    const filtered = selectedFilterCategory === "all" 
+      ? postsData 
+      : postsData.filter(p => p.category === selectedFilterCategory);
+
+    if (filtered.length === 0) {
+      container.innerHTML = `<div class="card"><p style="text-align:center; color: var(--text-secondary);">Bu kategoride henüz gönderi yok.</p></div>`;
+      return;
+    }
+
+    filtered.forEach(post => {
+      const postCard = document.createElement("div");
+      postCard.className = "card post-card";
+
+      const avatarHtml = userAvatarUrl 
+        ? `<img src="${userAvatarUrl}" alt="Avatar">`
+        : `<i class="fa-solid fa-user"></i>`;
+
+      const typeBadgeText = post.type === "discussion" ? "Tartışma" : "Gönderi";
+      const catBadgeText = post.category.toUpperCase();
+
+      let commentsHtml = "";
+      post.comments.forEach(c => {
+        commentsHtml += `<div class="comment-item"><span class="comment-author">${c.author}:</span>${c.text}</div>`;
+      });
+
+      postCard.innerHTML = `
+        <div class="post-header">
+          <div class="post-author-info">
+            <div class="post-avatar">${avatarHtml}</div>
+            <div>
+              <span class="post-author-name">${post.author}</span>
+              <span class="post-time">${post.time}</span>
+            </div>
+          </div>
+          <div class="post-badges">
+            <span class="badge badge-type">${typeBadgeText}</span>
+            <span class="badge badge-cat">${catBadgeText}</span>
+          </div>
+        </div>
+        <div class="post-content">${post.content}</div>
+        <div class="post-actions">
+          <button class="action-btn ${post.likedByUser ? 'liked' : ''}" onclick="toggleLike(${post.id})">
+            <i class="fa-${post.likedByUser ? 'solid' : 'regular'} fa-heart"></i>
+            <span>${post.likes}</span>
+          </button>
+          <button class="action-btn" onclick="toggleCommentBox(${post.id})">
+            <i class="fa-regular fa-comment"></i>
+            <span>${post.comments.length} Yorum</span>
+          </button>
+        </div>
+        <div class="comments-container" id="comment-box-${post.id}" style="display:none;">
+          <div id="comments-list-${post.id}">${commentsHtml}</div>
+          <div class="add-comment-row">
+            <input type="text" class="comment-input" id="comment-input-${post.id}" placeholder="Yorum yazın...">
+            <button class="btn btn-primary" style="padding: 4px 10px; font-size: 11px;" onclick="addComment(${post.id})">Gönder</button>
+          </div>
+        </div>
+      `;
+
+      container.appendChild(postCard);
+    });
+  }
+
+  // Global Yardımcı Fonksiyonlar (HTML onclick için)
+  window.toggleLike = function(id) {
+    const post = postsData.find(p => p.id === id);
+    if (post) {
+      post.likedByUser = !post.likedByUser;
+      post.likes += post.likedByUser ? 1 : -1;
+      renderPosts();
+    }
+  };
+
+  window.toggleCommentBox = function(id) {
+    const box = document.getElementById(`comment-box-${id}`);
+    if (box) box.style.display = box.style.display === "none" ? "block" : "none";
+  };
+
+  window.addComment = function(id) {
+    const input = document.getElementById(`comment-input-${id}`);
+    if (!input) return;
+    const text = input.value.trim();
+    if (text) {
+      const post = postsData.find(p => p.id === id);
+      if (post) {
+        post.comments.push({ author: displayName.textContent, text: text });
+        renderPosts();
+      }
+    }
+  };
+
+  // İlk yüklemede gönderileri çiz
+  renderPosts();
 
   // Accordion Ayarlar
   const accordionBtn = document.getElementById("settings-accordion-btn");
@@ -292,4 +545,4 @@ document.addEventListener("DOMContentLoaded", () => {
     langSelect.addEventListener("change", (e) => changeLanguage(e.target.value));
   }
 });
-      
+    
