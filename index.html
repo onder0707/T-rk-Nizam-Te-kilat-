@@ -4,171 +4,245 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Türk Nizam Teşkilatı</title>
-  <link rel="stylesheet" href="style.css">
+  
+  <link rel="stylesheet" href="stil.css">
+  <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
 
   <header class="navbar">
     <div class="logo">
-      <img src="logo.png" alt="Logo" class="logo-img">
-      <span class="site-title">Türk Nizam Teşkilatı</span>
+      <img src="Screenshot_20260813-013040_Gallery.jpg" alt="Teşkilat Arması" class="logo-img">
+      <span class="site-title" id="siteTitleText">Türk Nizam Teşkilatı</span>
     </div>
-    
-    <button class="menu-btn" id="leftMenuBtn" onclick="toggleLeftMenu()">☰</button>
+    <button class="menu-btn" onclick="toggleRightSidebar()" aria-label="Menü">☰</button>
   </header>
 
-  <aside class="sidebar-left" id="leftSidebar">
-    <nav class="menu-links">
-      <a href="#" onclick="showSection('home')">🏠 Ana Sayfa</a>
-      <a href="#" onclick="showSection('forum')">💬 Forum</a>
-      <a href="#" onclick="showSection('chat')">✈️ Sohbet</a>
-      <a href="#" onclick="showSection('profile')">👤 Profil</a>
-      
-      <div id="specialAccessMenu" class="special-access-block" style="display: none;">
-        <hr>
-        <div class="special-badge-title">Özel Yetkili Alanı</div>
-        <a href="#" id="menuPostBtn" onclick="openPostModal()">📝 Duyuru / Paylaşım Yap</a>
-        <a href="#" id="menuAdminBtn" onclick="showSection('adminPanel')">⚙️ Admin Sekmesi</a>
-      </div>
-    </nav>
-  </aside>
-
-  <aside class="sidebar-right" id="rightSidebar">
-    <div class="right-menu-header">
-      <div class="search-box">
-        <input type="text" id="userSearchInput" placeholder="Üye Ara (@kullanici)..." oninput="searchUsers(this.value)">
-        <div id="searchResults" class="search-results-dropdown"></div>
-      </div>
+  <aside class="sidebar-right" id="sidebarRight">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Üye Ara (@kullanici)..." oninput="searchUser(this.value)">
+      <div id="searchResults" class="search-results"></div>
     </div>
 
-    <div class="right-menu-content">
-      <h4>Kurumsal Menü</h4>
+    <div class="right-menu">
+      <h4 id="menuTitleKurumsal">Kurumsal & Temsilcilikler</h4>
       <ul>
-        <li><a href="#" onclick="showSection('about')">ℹ️ Hakkımızda & Vizyon</a></li>
-        <li><a href="#" onclick="showSection('rules')">📕 Teşkilat Tüzüğü</a></li>
-        
+        <li><a href="#" onclick="showTab('home')">ℹ️ <span id="menuAbout">Hakkımızda</span></a></li>
         <li class="has-submenu">
-          <span>📍 Bölge Temsilcilikleri</span>
+          <span id="menuRegions">📍 Bölge Temsilcilikleri</span>
           <ul class="submenu">
-            <li><a href="#" onclick="filterByRegion('Marmara')">Marmara Bölgesi</a></li>
-            <li><a href="#" onclick="filterByRegion('Ege')">Ege Bölgesi</a></li>
-            <li><a href="#" onclick="filterByRegion('Akdeniz')">Akdeniz Bölgesi</a></li>
-            <li><a href="#" onclick="filterByRegion('IcAnadolu')">İç Anadolu Bölgesi</a></li>
-            <li><a href="#" onclick="filterByRegion('Karadeniz')">Karadeniz Bölgesi</a></li>
-            <li><a href="#" onclick="filterByRegion('DoguAnadolu')">Doğu Anadolu Bölgesi</a></li>
-            <li><a href="#" onclick="filterByRegion('Guneydogu')">Güneydoğu Anadolu Bölgesi</a></li>
+            <li><a href="#" onclick="filterRegion('Marmara')">Marmara Bölgesi</a></li>
+            <li><a href="#" onclick="filterRegion('Ege')">Ege Bölgesi</a></li>
+            <li><a href="#" onclick="filterRegion('Akdeniz')">Akdeniz Bölgesi</a></li>
+            <li><a href="#" onclick="filterRegion('IcAnadolu')">İç Anadolu Bölgesi</a></li>
+            <li><a href="#" onclick="filterRegion('Karadeniz')">Karadeniz Bölgesi</a></li>
+            <li><a href="#" onclick="filterRegion('DoguAnadolu')">Doğu Anadolu Bölgesi</a></li>
+            <li><a href="#" onclick="filterRegion('Guneydogu')">Güneydoğu Anadolu Bölgesi</a></li>
           </ul>
         </li>
-
-        <li><a href="#" onclick="showSection('socialMedia')">📲 Sosyal Medya Akışı</a></li>
-        <li><a href="#" onclick="showSection('privacy')">🛡️ Gizlilik & Kullanım</a></li>
-        <li><a href="#" onclick="showSection('contact')">✉️ İletişim</a></li>
       </ul>
     </div>
   </aside>
 
-  <main class="main-content" id="mainContent">
-
-    <section id="homeSection" class="content-section">
+  <main class="main-content">
+    
+    <section id="tab-home" class="tab-page">
       <div class="card">
-        <h2>Türk Nizam Teşkilatına Hoş Geldiniz</h2>
-        <p>Birliğimiz, vizyonumuz ve geleceğimiz için tek çatı altındayız.</p>
+        <h2>Türk Nizam Teşkilatı</h2>
+        <p id="txtHomeDesc">Birliğimiz, vizyonumuz ve geleceğimiz için tek çatı altındayız.</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div class="stat-num" id="onlineCount">1</div>
+          <div class="stat-label" id="lblOnline">Çevrimiçi</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">👤</div>
+          <div class="stat-num" id="memberCount">0</div>
+          <div class="stat-label" id="lblMembers">Kayıtlı Üye</div>
+        </div>
       </div>
 
       <div class="card">
-        <h3>Teşkilat Duyuruları</h3>
-        <div id="homeAnnouncementsList">
-          </div>
+        <h3><span class="card-icon">📕</span> <span id="txtRulesTitle">Teşkilat Tüzüğü</span></h3>
+        <p id="txtRulesDesc">Teşkilatımızın temel ilkeleri milli birlik, dürüstlük ve vatan sevgisi üzerine kuruludur. Tüm üyelerimiz hiyerarşik düzene ve etik kurallara uymakla yükümlüdür.</p>
+      </div>
+
+      <div class="card guest-card">
+        <span class="guest-badge" id="lblGuestBadge">MİSAFİR ÜYE</span>
+        <p id="txtGuestNotice">Sohbet ve Forum alanlarına katılmak için oturum açmanız gerekmektedir.</p>
+        <div class="auth-btns">
+          <button class="btn-danger" onclick="openModal('authModal')">Giriş Yap</button>
+          <button class="btn-outline-danger" onclick="openModal('authModal')">Kayıt Ol</button>
+        </div>
       </div>
     </section>
 
-    <section id="profileSection" class="content-section" style="display: none;">
+    <section id="tab-forum" class="tab-page" style="display:none;">
+      <div class="card">
+        <h2 id="txtForumTitle">Teşkilat Forumu</h2>
+        <div id="forumPosts">
+          <p class="empty-msg">Henüz forum gönderisi bulunmuyor.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-chat" class="tab-page" style="display:none;">
+      <div class="card chat-card">
+        <h2 id="txtChatTitle">Canlı Sohbet Odası</h2>
+        <div id="chatMessages" class="chat-messages">
+          <div class="chat-msg system-msg">Sohbet odasına hoş geldiniz.</div>
+        </div>
+        <div class="chat-input-box">
+          <input type="text" id="chatInput" placeholder="Mesajınızı yazın...">
+          <button class="btn-danger" onclick="sendChatMessage()">Gönder</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-profile" class="tab-page" style="display:none;">
       <div class="profile-card">
-        <div class="profile-header">
-          <img src="avatar-placeholder.png" alt="Profil Fotosu" id="profileAvatar" class="avatar">
-          <div class="profile-info">
-            <h2 id="profileDisplayName">Kullanıcı Adı</h2>
-            <span id="profileUsername">@kullanici_adi</span>
-            
-            <div class="status-selector-box">
-              <label>Durum Set Et:</label>
-              <select id="userStatusSelect" onchange="changeUserStatus(this.value)">
-                <option value="online">🟢 Çevrimiçi</option>
-                <option value="dnd">🔴 Rahatsız Etmeyin</option>
-                <option value="away">🟡 Dışarıda</option>
-                <option value="offline">⚪ Çevrimdışı / Gizli</option>
-              </select>
+        <div class="banner-container" id="bannerContainer">
+          <img src="Screenshot_20260813-013040_Gallery.jpg" id="bannerImg" class="profile-banner">
+          <video id="bannerVideo" class="profile-banner-video" autoplay loop muted style="display:none;"></video>
+          <button class="banner-edit-btn" onclick="triggerFileInput('bannerFileInput')" title="Banner Değiştir">📷</button>
+          <input type="file" id="bannerFileInput" accept="image/*,video/*" style="display:none;" onchange="handleBannerUpload(event)">
+        </div>
+
+        <div class="profile-body">
+          <div class="avatar-wrapper">
+            <img src="Screenshot_20260813-013040_Gallery.jpg" id="profAvatar" class="avatar">
+            <button class="avatar-edit-btn" onclick="triggerFileInput('avatarFileInput')" title="Profil Resmi Değiştir">✏️</button>
+            <input type="file" id="avatarFileInput" accept="image/*" style="display:none;" onchange="handleAvatarUpload(event)">
+          </div>
+
+          <div class="profile-title-row">
+            <h2 id="profName">Kullanıcı Adı</h2>
+            <span class="role-badge" id="profRoleBadge">Saha Üyesi</span>
+          </div>
+          <div class="username-text" id="profUsername">@kullanici_adi</div>
+
+          <div class="status-selector-card">
+            <span class="status-lbl">🔘 <span id="lblStatusSet">Durum Set Et:</span></span>
+            <select id="userStatusSelect" class="status-select" onchange="updateUserStatus(this.value)">
+              <option value="online">🟢 Çevrimiçi</option>
+              <option value="dnd">🔴 Rahatsız Etmeyin</option>
+              <option value="away">🟡 Dışarıda</option>
+              <option value="offline">⚪ Çevrimdışı</option>
+            </select>
+          </div>
+
+          <div class="info-grid">
+            <div class="info-box">
+              <span class="info-icon">📅</span>
+              <div>
+                <small id="lblJoinDate">Kayıt Tarihi</small>
+                <div id="valJoinDate">13 Ağustos 2026</div>
+              </div>
+            </div>
+            <div class="info-box">
+              <span class="info-icon">⏰</span>
+              <div>
+                <small id="lblLastActive">Son Aktiflik</small>
+                <div id="valLastActive">Şimdi aktif</div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="roles-badges-container">
-          <h4>Atanmış Roller & Unvanlar</h4>
-          <div id="profileRolesList" class="badges-flex">
+          <div class="about-section">
+            <div class="about-header">
+              <span>≡ <b id="lblAboutMe">Hakkımda</b></span>
+              <button class="btn-text-edit" onclick="editAboutMe()" id="lblEditAbout">✏️ Düzenle</button>
             </div>
-        </div>
+            <p id="valAboutText">Deneme</p>
+          </div>
 
-        <div id="founderAdminControls" style="display: none; margin-top: 15px;">
-          <button class="btn-primary" onclick="openPermissionModal()">⚙️ Bu Üyeye Özel Yetki Ver / Rol Ata</button>
-        </div>
-      </div>
-    </section>
+          <div class="settings-accordion">
+            <div class="accordion-header" onclick="toggleAccordion('settingsBody')">
+              <span>⚙️ <b id="lblSettingsTitle">Ayarlar & Teknik Bilgiler</b></span>
+              <span class="arrow-icon" id="accordionArrow">❯</span>
+            </div>
+            
+            <div class="accordion-body" id="settingsBody" style="display:none;">
+              <div class="setting-row">
+                <div>
+                  <div class="setting-title">🌙 <span id="lblDarkMode">Dark Mode</span></div>
+                  <small id="lblDarkModeDesc">Gece moduna geçiş yapın</small>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode(this.checked)">
+                  <span class="slider round"></span>
+                </label>
+              </div>
 
-    <section id="socialMediaSection" class="content-section" style="display: none;">
-      <h2>Sosyal Medya Akışı</h2>
-      <div id="socialFeedList">
-        </div>
-    </section>
+              <div class="setting-row">
+                <div>
+                  <div class="setting-title">🔤 <span id="lblFontSize">Yazı Boyutu</span></div>
+                  <small id="lblFontSizeDesc">Metin boyutlarını ölçekleyin</small>
+                </div>
+                <select id="fontSizeSelect" onchange="changeFontSize(this.value)">
+                  <option value="small">Küçük</option>
+                  <option value="normal" selected>Normal</option>
+                  <option value="large">Büyük</option>
+                </select>
+              </div>
 
-    <section id="adminPanelSection" class="content-section" style="display: none;">
-      <h2>Özel Yönetim & Admin Paneli</h2>
-      <div class="card">
-        <h3>Sistem Bilgileri & Yetkili Listesi</h3>
-        <p>Bu alana sadece Kurucunun özel erişim izni verdiği kişiler erişebilir.</p>
-        <div id="adminUserList"></div>
+              <div class="setting-row">
+                <div>
+                  <div class="setting-title">🌐 <span id="lblLanguage">Uygulama Dili</span></div>
+                  <small id="lblLanguageDesc">Arayüz dilini değiştirin</small>
+                </div>
+                <select id="languageSelect" onchange="changeLanguage(this.value)">
+                  <option value="tr">🇹🇷 Türkçe</option>
+                  <option value="en">🇬🇧 English</option>
+                  <option value="fr">🇫🇷 Français</option>
+                </select>
+              </div>
+
+              <div class="tech-info-box">
+                <h4 id="lblTechTitle">Teknik & Sistem Bilgileri</h4>
+                <div class="tech-row"><span>Versiyon:</span> <span>v1.2.0 (SPA Architecture)</span></div>
+                <div class="tech-row"><span>Sunucu Ping:</span> <span class="ping-green">📶 14 ms (Aktif)</span></div>
+                <div class="tech-row"><span>Motor:</span> <span>Vanilla JS V8</span></div>
+
+                <div class="tech-actions">
+                  <button class="btn-tech" onclick="clearAppCache()">🧹 <span id="lblClearCache">Önbelleği Temizle</span></button>
+                  <button class="btn-tech" onclick="reportBug()">🪲 <span id="lblReportBug">Hata Bildir</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
 
   </main>
 
-  <div id="postModal" class="modal" style="display: none;">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closePostModal()">&times;</span>
-      <h3>Yeni İçerik Yayınla</h3>
-      <select id="postTypeSelect">
-        <option value="announcement">📢 Ana Sayfa Duyurusu (Sadece Duyuru Yetkilileri)</option>
-        <option value="social">📲 Sosyal Medya Gönderisi (Sadece Sosyal Yetkilileri)</option>
-      </select>
-      <textarea id="postContentInput" placeholder="Mesajınızı veya duyurunuzu yazın..."></textarea>
-      <button class="btn-success" onclick="submitPost()">Yayınla</button>
-    </div>
-  </div>
+  <nav class="bottom-nav">
+    <a href="#" class="nav-item active" onclick="showTab('home')" id="navHome">
+      <span class="nav-icon">🏠</span>
+      <span class="nav-text" id="lblNavHome">Ana Sayfa</span>
+    </a>
+    <a href="#" class="nav-item" onclick="showTab('forum')" id="navForum">
+      <span class="nav-icon">💬</span>
+      <span class="nav-text" id="lblNavForum">Forum</span>
+    </a>
+    <a href="#" class="nav-item" onclick="showTab('chat')" id="navChat">
+      <span class="nav-icon">✈️</span>
+      <span class="nav-text" id="lblNavChat">Sohbet</span>
+    </a>
+    <a href="#" class="nav-item" onclick="showTab('profile')" id="navProfile">
+      <span class="nav-icon">👤</span>
+      <span class="nav-text" id="lblNavProfile">Profil</span>
+    </a>
+  </nav>
 
-  <div id="permissionModal" class="modal" style="display: none;">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closePermissionModal()">&times;</span>
-      <h3>Üye Yetkilendirme ve Rol Yönetimi</h3>
-      <p id="targetUserLabel">Hedef Üye: </p>
-      
-      <label><b>Rol Ata (25 Rol):</b></label>
-      <select id="roleAssignSelect" class="full-width-select">
-        </select>
-      <button class="btn-secondary" onclick="assignSelectedRole()" style="margin-bottom:15px;">Rolü Ekle</button>
-
-      <hr>
-
-      <label><b>Bireysel Özel Erişim İzinleri:</b></label>
-      <div class="checkbox-group">
-        <label><input type="checkbox" id="permAdminTab"> Admin Sekmesini Görebilsin</label><br>
-        <label><input type="checkbox" id="permAnnounce"> Ana Sayfada Duyuru Paylaşabilsin</label><br>
-        <label><input type="checkbox" id="permSocial"> Sosyal Medya Sekmesinde Paylaşım Yapabilsin</label>
-      </div>
-
-      <button class="btn-success" onclick="saveIndividualPermissions()" style="margin-top:15px;">İzinleri Kaydet</button>
-    </div>
-  </div>
-
-  <script src="app.js"></script>
+  <script src="js/config-state.js"></script>
+  <script src="js/features.js"></script>
+  <script src="uygulama.js"></script>
 </body>
-        </html>
-    
+              </html>
+              
