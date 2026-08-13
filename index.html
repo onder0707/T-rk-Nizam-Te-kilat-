@@ -9,6 +9,9 @@
 </head>
 <body>
 
+  <input type="file" id="banner-file-input" accept="image/png, image/jpeg, image/gif" style="display: none;">
+  <input type="file" id="avatar-file-input" accept="image/png, image/jpeg, image/gif" style="display: none;">
+
   <header class="header">
     <div class="header-brand" id="brand-link">
       <div class="logo-circle">
@@ -69,10 +72,50 @@
     </section>
 
     <section id="page-forum" class="page-section">
-      <div class="card">
-        <h2 data-key="forumTitle">Forum</h2>
-        <p data-key="comingSoon">Çok yakında hizmetinizde.</p>
+      <div class="card create-post-card">
+        <h3 class="card-title"><i class="fa-solid fa-pen-to-square icon-red"></i> <span data-key="createPostTitle">Yeni Paylaşım Oluştur</span></h3>
+        
+        <div class="post-type-selector">
+          <label class="type-btn active">
+            <input type="radio" name="postType" value="post" checked>
+            <i class="fa-solid fa-newspaper"></i> <span data-key="typePost">Gönderi</span>
+          </label>
+          <label class="type-btn">
+            <input type="radio" name="postType" value="discussion">
+            <i class="fa-solid fa-comments"></i> <span data-key="typeDiscussion">Tartışma (Forum)</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <select id="post-category-select" class="custom-select full-width">
+            <option value="all" data-key="catSelect">Kategori Seçin...</option>
+            <option value="duyuru" data-key="catDuyuru">Duyuru</option>
+            <option value="haber" data-key="catHaber">Haber</option>
+            <option value="tartisma" data-key="catTartisma">Tartışma</option>
+            <option value="genel" data-key="catGenel">Genel</option>
+            <option value="saha" data-key="catSaha">Saha Çalışması</option>
+            <option value="soru" data-key="catSoru">Soru / Cevap</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <textarea id="post-input" class="custom-textarea" rows="3" placeholder="Aklınızdan ne geçiyor?"></textarea>
+        </div>
+
+        <button class="btn btn-primary full-width" id="submit-post-btn" data-key="shareBtn">Paylaş</button>
       </div>
+
+      <div class="category-filter-bar">
+        <button class="cat-chip active" data-cat="all" data-key="catAll">Tümü</button>
+        <button class="cat-chip" data-cat="duyuru" data-key="catDuyuru">Duyuru</button>
+        <button class="cat-chip" data-cat="haber" data-key="catHaber">Haber</button>
+        <button class="cat-chip" data-cat="tartisma" data-key="catTartisma">Tartışma</button>
+        <button class="cat-chip" data-cat="genel" data-key="catGenel">Genel</button>
+        <button class="cat-chip" data-cat="saha" data-key="catSaha">Saha Çalışması</button>
+        <button class="cat-chip" data-cat="soru" data-key="catSoru">Soru / Cevap</button>
+      </div>
+
+      <div id="posts-container"></div>
     </section>
 
     <section id="page-chat" class="page-section">
@@ -84,16 +127,16 @@
 
     <section id="page-profile" class="page-section">
       <div class="card profile-card">
-        <div class="profile-banner">
-          <button class="banner-edit-btn"><i class="fa-solid fa-camera"></i></button>
+        <div class="profile-banner" id="profile-banner-el">
+          <button class="banner-edit-btn" id="trigger-banner-btn"><i class="fa-solid fa-camera"></i></button>
         </div>
 
         <div class="profile-info-header">
           <div class="avatar-container">
-            <div class="avatar-img">
-              <i class="fa-solid fa-user"></i>
+            <div class="avatar-img" id="avatar-img-el">
+              <i class="fa-solid fa-user" id="default-avatar-icon"></i>
             </div>
-            <button class="avatar-edit-btn"><i class="fa-solid fa-pencil"></i></button>
+            <button class="avatar-edit-btn" id="trigger-avatar-btn"><i class="fa-solid fa-pencil"></i></button>
           </div>
 
           <div class="user-titles">
@@ -187,7 +230,7 @@
             <h5 data-key="techInfoTitle">Teknik & Sistem Bilgileri</h5>
             <div class="tech-item">
               <span data-key="version">Sürüm:</span>
-              <span>v1.2.0 (SPA Architecture)</span>
+              <span>v1.3.0 (SPA Architecture)</span>
             </div>
             <div class="tech-item">
               <span data-key="serverPing">Sunucu Ping:</span>
@@ -242,5 +285,5 @@
 
   <script src="app.js"></script>
 </body>
-        </html>
+              </html>
   
