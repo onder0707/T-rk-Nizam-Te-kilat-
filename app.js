@@ -1,4 +1,3 @@
-// Dil Çeviri Dosyası (i18n)
 const translations = {
   tr: {
     appName: "Türk Nizam Teşkilatı",
@@ -41,6 +40,48 @@ const translations = {
     navChat: "Sohbet",
     navProfile: "Profil",
     tuzukContent: "Teşkilatımızın temel ilkeleri milli birlik, dürüstlük ve vatan sevgisi üzerine kuruludur. Tüm üyelerimiz hiyerarşik düzene ve etik kurallara uymakla yükümlüdür."
+  },
+  az: {
+    appName: "Türk Nizam Təşkilatı",
+    menuTitle: "Menyu",
+    tuzukTitle: "Təşkilat Nizamnaməsi",
+    heroSlogan: "Birliyimiz, vizyonumuz və gələcəyimiz üçün tək dam altındayıq.",
+    onlineUsers: "Aktiv İstifadəçi",
+    registeredUsers: "Qeydiyyatlı Üzv",
+    guestBadge: "QONAQLI ÜZV",
+    guestNotice: "Söhbət və Forum bölmələrinə qoşulmaq üçün daxil olmalısınız.",
+    loginBtn: "Daxil Ol",
+    registerBtn: "Qeydiyyatdan Keç",
+    forumTitle: "Forum",
+    chatTitle: "Söhbət",
+    comingSoon: "Tezliklə xidmətinizdədir.",
+    joinDate: "Qeydiyyat Tarixi",
+    lastActive: "Son Aktivlik",
+    activeNow: "İndi aktivdir",
+    aboutMe: "Haqqımda",
+    edit: "Düzəliş Et",
+    settingsTitle: "Tənzimləmələr və Texniki Məlumatlar",
+    darkMode: "Qaranlıq Rejim",
+    darkModeDesc: "Gecə rejimi görünüşünə keçin",
+    fontSize: "Mətn Ölçüsü",
+    fontSizeDesc: "Mətn ölçülərini tənzimləyin",
+    fontSmall: "Kiçik",
+    fontNormal: "Normal",
+    fontLarge: "Böyük",
+    appLanguage: "Tətbiq Dili",
+    langDesc: "Interfeys dilini dəyişdirin",
+    techInfoTitle: "Texniki və Sistem Məlumatları",
+    version: "Versiya:",
+    serverPing: "Server Ping:",
+    active: "Aktiv",
+    engine: "Mühərrik:",
+    clearCache: "Keşi Təmizlə",
+    reportBug: "Xətanı Bildir",
+    navHome: "Ana Səhifə",
+    navForum: "Forum",
+    navChat: "Söhbət",
+    navProfile: "Profil",
+    tuzukContent: "Təşkilatımızın əsas prinsipləri milli birlik, dürüstlük və vətən sevgisi üzərində qurulub. Bütün üzvlərimiz iyerarxik qaydalara və etik normalara riayət etməlidirlər."
   },
   en: {
     appName: "Turkish Order Organization",
@@ -129,7 +170,7 @@ const translations = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Sayfa Yönlendirme (SPA Router)
+  // SPA Router
   const navItems = document.querySelectorAll(".nav-item");
   const sections = document.querySelectorAll(".page-section");
 
@@ -138,30 +179,21 @@ document.addEventListener("DOMContentLoaded", () => {
     navItems.forEach(item => item.classList.remove("active"));
 
     const targetSection = document.getElementById(targetId);
-    if (targetSection) {
-      targetSection.classList.add("active");
-    }
+    if (targetSection) targetSection.classList.add("active");
 
     const activeNav = document.querySelector(`.nav-item[data-target="${targetId}"]`);
-    if (activeNav) {
-      activeNav.classList.add("active");
-    }
-    
+    if (activeNav) activeNav.classList.add("active");
+
     window.scrollTo(0, 0);
   }
 
   navItems.forEach(item => {
-    item.addEventListener("click", () => {
-      const target = item.getAttribute("data-target");
-      switchPage(target);
-    });
+    item.addEventListener("click", () => switchPage(item.getAttribute("data-target")));
   });
 
-  document.getElementById("brand-link").addEventListener("click", () => {
-    switchPage("page-home");
-  });
+  document.getElementById("brand-link").addEventListener("click", () => switchPage("page-home"));
 
-  // Side Menu (Hamburger)
+  // Side Menu
   const menuToggle = document.getElementById("menu-toggle");
   const sideMenu = document.getElementById("side-menu");
   const overlay = document.getElementById("overlay");
@@ -192,68 +224,67 @@ document.addEventListener("DOMContentLoaded", () => {
   const editNameBtn = document.getElementById("edit-name-btn");
   const displayName = document.getElementById("display-name");
 
-  editNameBtn.addEventListener("click", () => {
-    const currentName = displayName.innerText;
-    const newName = prompt("Yeni Adınızı Girin:", currentName);
-    if (newName && newName.trim() !== "") {
-      displayName.innerText = newName.trim();
-    }
-  });
+  if (editNameBtn) {
+    editNameBtn.addEventListener("click", () => {
+      const newName = prompt("Yeni Adınızı Girin:", displayName.textContent);
+      if (newName && newName.trim() !== "") {
+        displayName.textContent = newName.trim();
+      }
+    });
+  }
 
   // Hakkımda Düzenleme
   const editAboutBtn = document.getElementById("edit-about-btn");
   const aboutText = document.getElementById("about-text");
 
-  editAboutBtn.addEventListener("click", () => {
-    const currentAbout = aboutText.innerText;
-    const newAbout = prompt("Hakkımda metnini düzenleyin:", currentAbout);
-    if (newAbout !== null && newAbout.trim() !== "") {
-      aboutText.innerText = newAbout.trim();
-    }
-  });
-
-  // Ayarlar Accordion
-  const accordionBtn = document.getElementById("settings-accordion-btn");
-  const accordionBody = document.getElementById("settings-accordion-body");
-
-  accordionBtn.addEventListener("click", () => {
-    accordionBody.classList.toggle("open");
-  });
-
-  // Karanlık Mod
-  const darkModeToggle = document.getElementById("dark-mode-toggle");
-  darkModeToggle.addEventListener("change", (e) => {
-    if (e.target.checked) {
-      document.body.classList.add("dark-mode");
-    } else {
-      document.body.classList.remove("dark-mode");
-    }
-  });
-
-  // Metin Boyutu Ölçekleme
-  const fontSizeSelect = document.getElementById("font-size-select");
-  fontSizeSelect.addEventListener("change", (e) => {
-    document.body.classList.remove("font-small", "font-normal", "font-large");
-    document.body.classList.add(`font-${e.target.value}`);
-  });
-
-  // Dil Değiştirme Sistemi
-  const langSelect = document.getElementById("language-select");
-
-  function changeLanguage(lang) {
-    const keyMap = translations[lang];
-    if (!keyMap) return;
-
-    document.querySelectorAll("[data-key]").forEach(elem => {
-      const key = elem.getAttribute("data-key");
-      if (keyMap[key]) {
-        elem.innerText = keyMap[key];
+  if (editAboutBtn) {
+    editAboutBtn.addEventListener("click", () => {
+      const newAbout = prompt("Hakkımda metnini düzenleyin:", aboutText.textContent);
+      if (newAbout !== null && newAbout.trim() !== "") {
+        aboutText.textContent = newAbout.trim();
       }
     });
   }
 
-  langSelect.addEventListener("change", (e) => {
-    changeLanguage(e.target.value);
-  });
+  // Accordion Ayarlar
+  const accordionBtn = document.getElementById("settings-accordion-btn");
+  const accordionBody = document.getElementById("settings-accordion-body");
+  if (accordionBtn) {
+    accordionBtn.addEventListener("click", () => accordionBody.classList.toggle("open"));
+  }
+
+  // Karanlık Mod
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener("change", (e) => {
+      document.body.classList.toggle("dark-mode", e.target.checked);
+    });
+  }
+
+  // Font Boyutu
+  const fontSizeSelect = document.getElementById("font-size-select");
+  if (fontSizeSelect) {
+    fontSizeSelect.addEventListener("change", (e) => {
+      document.body.classList.remove("font-small", "font-normal", "font-large");
+      document.body.classList.add(`font-${e.target.value}`);
+    });
+  }
+
+  // Dil Değiştirme (textContent kullanarak)
+  const langSelect = document.getElementById("language-select");
+  function changeLanguage(lang) {
+    const keyMap = translations[lang];
+    if (!keyMap) return;
+    document.querySelectorAll("[data-key]").forEach(elem => {
+      const key = elem.getAttribute("data-key");
+      if (keyMap[key]) {
+        elem.textContent = keyMap[key];
+      }
+    });
+  }
+
+  if (langSelect) {
+    langSelect.addEventListener("change", (e) => changeLanguage(e.target.value));
+  }
 });
     
